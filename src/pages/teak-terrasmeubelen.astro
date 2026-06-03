@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  {
+    q: 'Hoe lang gaan teak terrasmeubelen mee?',
+    a: 'Goed onderhouden teak terrasmeubelen gaan 25–50 jaar mee. Teak heeft van nature oliën die het hout beschermen tegen rot, schimmels en insecten. Met jaarlijkse teak-olie behandeling blijft de warme goudbruine kleur behouden.',
+  },
+  {
+    q: 'Moet je teak terrasmeubelen behandelen?',
+    a: 'Niet strikt noodzakelijk — teak is ook zonder behandeling duurzaam. Zonder behandeling kleurt teak grijs, wat ook mooi is. Wil je de warme bruine kleur behouden? Behandel dan 1× per jaar met teak-olie (na schuren met schuurpapier).',
+  },
+  {
+    q: 'Is teak FSC-gecertificeerd?',
+    a: 'Niet altijd — let op het FSC-keurmerk bij aankoop. FSC (Forest Stewardship Council) garandeert dat het hout uit duurzaam beheerde bossen komt. Reputable merken als Jati & Kebon, Gloster en Royal Garden gebruiken FSC-teak.',
+  },
+  {
+    q: 'Wat is het verschil tussen teak A-kwaliteit en B-kwaliteit?',
+    a: 'Teak A-kwaliteit (ook: First Grade) is het hout uit het hartdeel van de boom — de meest olierijke kern. Weinig knoesten, rechte nerf. Teak B-kwaliteit bevat meer knoesten en splinterige delen. Kies altijd voor A-kwaliteit voor buiten.',
+  },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+        { "@type": "ListItem", "position": 2, "name": "Teak terrasmeubelen", "item": "https://www.terrasgigant.nl/teak-terrasmeubelen" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(({ q, a }) => ({
+        "@type": "Question",
+        "name": q,
+        "acceptedAnswer": { "@type": "Answer", "text": a }
+      }))
+    }
+  ]
+});
+---
+
+<Layout
+  title="Teak terrasmeubelen — onderhoud, levensduur & beste merken | Terrasgigant.nl"
+  description="Alles over teak terrasmeubelen: hoe onderhoud je ze, hoe lang gaan ze mee en welke merken zijn het beste? Inclusief kooptips en FSC-informatie."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a>
+      <span>›</span>
+      <span class="text-slate-700">Teak terrasmeubelen</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Teak terrasmeubelen</h1>
+    <p class="text-slate-600 text-lg mb-4 max-w-2xl">
+      Teak is het klassieke buitenhout — warm, duurzaam en tijdloos mooi. Voor wie bereid is wat onderhoud te doen, de meest lonende investering.
+    </p>
+    <div class="flex flex-wrap gap-3 text-sm mb-10">
+      <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full">🌳 25–50 jaar levensduur</span>
+      <span class="bg-amber-100 text-amber-800 px-3 py-1 rounded-full">🌿 FSC-gecertificeerd</span>
+      <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full">⚠️ Jaarlijks onderhoud</span>
+    </div>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-10">
+      <div class="bg-amber-50 border border-amber-200 rounded-2xl p-6">
+        <h2 class="font-bold text-slate-900 mb-3">✓ Voordelen teak</h2>
+        <ul class="space-y-2 text-sm text-slate-700">
+          {['Prachtige warme uitstraling', 'Uitzonderlijk lang leven (25–50 jaar)', 'Nat. oliën: rotvast zonder behandeling', 'FSC-duurzaam verkrijgbaar', 'Verhoogt uitstraling van je tuin', 'Wordt mooier met de jaren'].map(v => (
+            <li class="flex gap-2"><span class="text-amber-500 shrink-0">✓</span>{v}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="bg-red-50 border border-red-200 rounded-2xl p-6">
+        <h2 class="font-bold text-slate-900 mb-3">✗ Nadelen teak</h2>
+        <ul class="space-y-2 text-sm text-slate-700">
+          {['Jaarlijks onderhoud (schuren + oliën)', 'Zwaarder dan aluminium', 'Duurder in aanschaf', 'Kleurt grijs zonder behandeling', 'Mindere kwaliteiten (B-grade) zijn kwetsbaar'].map(v => (
+            <li class="flex gap-2"><span class="text-red-400 shrink-0">✗</span>{v}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mb-10 bg-slate-900 text-white rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div class="flex-1">
+        <div class="font-bold text-lg mb-1">Teak terrasmeubelen kopen</div>
+        <div class="text-slate-400 text-sm">FSC-gecertificeerd teak van Jati & Kebon, Royal Garden en meer.</div>
+      </div>
+      <div class="flex gap-2 shrink-0">
+        <a href="https://www.bol.com/nl/nl/s/?searchtext=teak+terrasmeubelen+FSC" target="_blank" rel="noopener nofollow"
+          class="bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors">Bol.com →</a>
+        <a href="https://www.coolblue.nl/zoeken?query=teak+terrasmeubelen" target="_blank" rel="noopener nofollow"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors">Coolblue →</a>
+      </div>
+    </div>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Teak onderhoud stap voor stap</h2>
+      <p>Teak onderhouden is eenvoudig als je het jaarlijks doet. Hier is hoe:</p>
+      <ol>
+        <li><strong>Schoonmaken:</strong> borstelen met een zeepoplossing en water. Laat 24 uur drogen.</li>
+        <li><strong>Schuren:</strong> met schuurpapier (120 grit) meewerken met de houtnerf. Verwijdert vergrijzing en opent het hout.</li>
+        <li><strong>Teak-olie aanbrengen:</strong> met een borstel of doek in de nerf wrijven. 1–2 lagen, laat tussendoor drogen.</li>
+        <li><strong>Drooglaats:</strong> 24 uur niet gebruiken. Dan klaar voor het nieuwe seizoen.</li>
+      </ol>
+      <p>Totaal werk: 1–2 uur per set per jaar. Dat is de investering voor 50 jaar mooie meubelen.</p>
+
+      <h2>Teak laten vergrijzen: ook een optie</h2>
+      <p>
+        Veel tuinliefhebbers kiezen er bewust voor om teak <em>niet</em> te behandelen. Teak vergrijst dan tot een mooie zilvergrijze kleur — ook zeker stijlvol. Het hout blijft rotvast, alleen de kleur verandert. Wil je terug naar bruin? Schuren en oliën is altijd mogelijk.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen teak</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/aluminium-vs-teak" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium vs Teak →</a>
+        <a href="/teak-vs-polyrattan" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Teak vs Polyrattan →</a>
+        <a href="/terrasmeubelen-onderhoud" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Onderhoudsgids →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Teak terrasmeubelen"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=teak+terrasmeubelen"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=teak+terrasmeubelen"
+  />
+</Layout>

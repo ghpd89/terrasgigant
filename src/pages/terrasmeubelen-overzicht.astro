@@ -1,0 +1,121 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { MEUBEL_TYPEN, MATERIALEN } from '../data/terrasData';
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Terrasmeubelen overzicht", "item": "https://www.terrasgigant.nl/terrasmeubelen-overzicht" }
+    ]}
+  ]
+});
+---
+
+<Layout
+  title="Terrasmeubelen overzicht — alle types en materialen | Terrasgigant.nl"
+  description="Compleet overzicht van alle terrasmeubelen: loungesets, tuinsets, parasols, ligbedden en meer. Per type én per materiaal vergeleken."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Overzicht</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Terrasmeubelen overzicht</h1>
+    <p class="text-slate-600 text-lg mb-10 max-w-2xl">Alle types terrasmeubelen en materialen op één plek — met prijsranges, voor- en nadelen en directe links naar onze beste picks.</p>
+
+    <!-- Alle types -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">Per type terrasmeubel</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50">
+            <tr>
+              <th class="text-left px-5 py-3 font-semibold text-slate-700">Type</th>
+              <th class="text-left px-5 py-3 font-semibold text-slate-700">Prijsrange</th>
+              <th class="text-left px-5 py-3 font-semibold text-slate-700">Geschikt voor</th>
+              <th class="text-left px-5 py-3 font-semibold text-slate-700">Meer info</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {MEUBEL_TYPEN.map(type => (
+              <tr class="hover:bg-slate-50">
+                <td class="px-5 py-3">
+                  <span class="mr-2">{type.icon}</span>
+                  <span class="font-medium text-slate-900">{type.naam}</span>
+                </td>
+                <td class="px-5 py-3 text-slate-600">€{type.prijsVanaf}–{type.prijsTot}</td>
+                <td class="px-5 py-3 text-slate-600 max-w-xs">{type.beschrijving.split('—')[1]?.trim() ?? type.beschrijving}</td>
+                <td class="px-5 py-3">
+                  <a href={`/${type.slug}`} class="text-green-600 hover:underline font-medium">Bekijk →</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Per materiaal -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-slate-900 mb-6">Per materiaal vergeleken</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50">
+            <tr>
+              <th class="text-left px-5 py-3 font-semibold text-slate-700">Materiaal</th>
+              <th class="text-left px-5 py-3 font-semibold text-slate-700">Levensduur</th>
+              <th class="text-left px-5 py-3 font-semibold text-slate-700">Onderhoud</th>
+              <th class="text-left px-5 py-3 font-semibold text-slate-700">Prijs</th>
+              <th class="text-left px-5 py-3 font-semibold text-slate-700">Meer info</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {MATERIALEN.map(mat => (
+              <tr class="hover:bg-slate-50">
+                <td class="px-5 py-3">
+                  <span class="mr-2">{mat.icon}</span>
+                  <span class="font-medium text-slate-900">{mat.naam}</span>
+                </td>
+                <td class="px-5 py-3 text-slate-600">{mat.levensduur}</td>
+                <td class="px-5 py-3 text-slate-600">{mat.onderhoud.split('—')[0].trim()}</td>
+                <td class="px-5 py-3 text-slate-600">{mat.prijsklasse}</td>
+                <td class="px-5 py-3">
+                  <a href={`/${mat.slug}`} class="text-green-600 hover:underline font-medium">Bekijk →</a>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Snelkoppelingen -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Snelkoppelingen</h2>
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+        {[
+          { href: '/beste-terrasmeubelen', label: '🏆 Beste picks 2026' },
+          { href: '/terrasmeubelen-kopen-gids', label: '📖 Koopgids' },
+          { href: '/terras-inrichten', label: '🌿 Terras inrichten' },
+          { href: '/terrasmeubelen-onderhoud', label: '🧹 Onderhoud' },
+          { href: '/terrasmeubelen-opbergen-winter', label: '❄️ Winteropslag' },
+          { href: '/terrasmeubelen-onder-500-euro', label: '💶 Onder €500' },
+          { href: '/aluminium-vs-teak', label: '⚡ Aluminium vs Teak' },
+          { href: '/loungeset-vs-tuinset', label: '🛋️ Lounge vs Tuinset' },
+          { href: '/kleine-tuin-meubelen', label: '🌿 Kleine tuin' },
+        ].map(({ href, label }) => (
+          <a href={href} class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 hover:text-green-700 transition-all">
+            {label}
+          </a>
+        ))}
+      </div>
+    </section>
+  </div>
+</Layout>

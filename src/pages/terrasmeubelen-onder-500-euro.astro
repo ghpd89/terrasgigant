@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const picks = [
+  { prijs: '€149–249', type: 'Bistroset 2 personen', omschrijving: 'Kleine tafel (60×60 cm) met 2 stoelen — perfect voor balkon of klein terras. Aluminium of staal. Keter Alicia bistroset of IKEA TÄRNÖ.', bol: 'bistroset tuin 2 personen budget', cb: 'bistroset 2 personen tuin' },
+  { prijs: '€249–399', type: 'Polyrattan 4-delig', omschrijving: 'Loungeset met bank, 2 fauteuils en salontafel. Keter Corfu of Sunred Logan. Gaat 6–10 jaar mee bij goed onderhoud.', bol: 'loungeset polyrattan 4 delig 400 euro', cb: 'loungeset polyrattan budget' },
+  { prijs: '€199–349', type: 'Tuinset 4 personen', omschrijving: 'Tafel + 4 stoelen van aluminium of staal. Hartman Sophie bistroset (4p) of Royal Garden Novas compact. Stapelbare stoelen.', bol: 'tuinset 4 personen budget aluminium', cb: 'tuinset 4 personen budget' },
+  { prijs: '€79–149', type: 'Parasol + voet', omschrijving: 'Stokparasol 300 cm of kantelparasol 250 cm. Aluminium paal. Inclusief voet. Genoeg schaduw voor een bistroset of tuinset.', bol: 'stokparasol aluminium 3 meter', cb: 'stokparasol tuin 3 meter' },
+];
+
+const faqItems = [
+  { q: 'Zijn goedkope terrasmeubelen de moeite waard?', a: 'Ja, als je de juiste keuze maakt. Polyrattan van €300–500 gaat 8–10 jaar mee. Aluminium onder €500 is lastiger — kwaliteitsaluminium begint pas echt rond €600. Let op het frame-materiaal: vermijd staal, kies aluminium.' },
+  { q: 'Wat is de beste loungeset onder €500?', a: 'De Keter Corfu set (polyrattan, ~€320) en de Sunred Logan set (~€380) zijn de beste keuzes onder €500. Beide met aluminium frame en kwalitatieve kussens. Ze gaan 8–10 jaar mee bij goed onderhoud.' },
+  { q: 'Kan ik ook een aluminium loungeset vinden onder €500?', a: 'Kwalitatief aluminium (2mm+) begint pas rond €600–700. Onder €500 vind je aluminium, maar dan is het dikwijls dunnere kwaliteit (1–1,5 mm). Voor €500 is polyrattan met aluminium frame de betere keuze.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Terrasmeubelen onder €500", "item": "https://www.terrasgigant.nl/terrasmeubelen-onder-500-euro" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Beste terrasmeubelen onder €500 — top picks budget 2026 | Terrasgigant.nl"
+  description="De beste terrasmeubelen voor een budget van €500 of minder. Loungesets, tuinsets en parasols — goede kwaliteit voor elk budget."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Terrasmeubelen onder €500</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Beste terrasmeubelen onder €500</h1>
+    <p class="text-slate-600 text-lg mb-10 max-w-2xl">Je hoeft geen fortuin uit te geven voor een goed ingerichte tuin. Dit zijn de beste terrasmeubelen voor €500 of minder.</p>
+
+    <section class="mb-12">
+      <div class="grid sm:grid-cols-2 gap-4">
+        {picks.map(({ prijs, type, omschrijving, bol, cb }) => (
+          <div class="border border-slate-200 rounded-2xl p-5 bg-white">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">{prijs}</div>
+            <div class="font-bold text-slate-900 mb-2">{type}</div>
+            <p class="text-sm text-slate-600 leading-relaxed mb-4">{omschrijving}</p>
+            <div class="flex gap-2">
+              <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                class="flex-1 text-center bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">Bol.com →</a>
+              <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                class="flex-1 text-center bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">Coolblue →</a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Tips voor budget terrasmeubelen kopen</h2>
+      <ul>
+        <li><strong>Kijk naar het frame:</strong> aluminium frame is beter dan staal, zelfs bij goedkope sets.</li>
+        <li><strong>Controleer kussendikte:</strong> minimaal 6–8 cm voor comfort. Dunnere kussens worden snel plat.</li>
+        <li><strong>Koop in het uitverkoopseizoen:</strong> aug–okt zijn sets het goedkoopst, tot 50% korting.</li>
+        <li><strong>Investeer in een kussenzak:</strong> €20–40, maar verlengt de kussens 3× de levensduur.</li>
+        <li><strong>Vermijd stalen poten:</strong> staal roest na 2–3 jaar ondanks coating.</li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungeset →</a>
+        <a href="/kleine-tuin-meubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Kleine tuin →</a>
+        <a href="/terrasmeubelen-kopen-gids" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Koopgids →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Budget terrasmeubelen"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=terrasmeubelen+loungeset+budget"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=terrasmeubelen+budget"
+  />
+</Layout>

@@ -1,0 +1,119 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqItems = [
+  { q: 'Wat is het verschil tussen een loungeset en tuinset?', a: 'Een loungeset is laag (zithoogte 30–40 cm) en gericht op ontspannen. Een tuinset is op eethoogte (zithoogte 45–50 cm) en gericht op eten. Lounge is voor relaxen, tuinset voor eten.' },
+  { q: 'Kan ik een loungeset ook gebruiken voor eten?', a: 'Niet ideaal — de lage tafels (35–50 cm) zijn te laag voor comfortabel eten. Sommige loungesets hebben hogere tafels (dining-lounge), maar een echte tuintafel op 73–75 cm is comfortabeler voor maaltijden.' },
+  { q: 'Wat is goedkoper: een loungeset of tuinset?', a: 'Vergelijkbare kwaliteit kost vergelijkbaar. Een 4-delige polyrattan loungeset: €300–600. Een tuinset voor 4 personen: €200–500. De loungeset is iets duurder door de kussens.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Loungeset vs Tuinset", "item": "https://www.terrasgigant.nl/loungeset-vs-tuinset" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Loungeset of tuinset — wat past bij jou? | Terrasgigant.nl"
+  description="Loungeset of tuinset kopen? We vergelijken gebruik, hoogte, prijs en comfort zodat jij de juiste keuze maakt voor je tuin."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Loungeset vs Tuinset</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Loungeset of tuinset?</h1>
+    <p class="text-slate-600 text-lg mb-10 max-w-2xl">De twee meest populaire keuzes voor je terras. Welke past het beste bij jouw gebruik?</p>
+
+    <section class="mb-10 overflow-x-auto rounded-2xl border border-slate-200">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50">
+          <tr>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">Criterium</th>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">🛋️ Loungeset</th>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">🍽️ Tuinset</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {[
+            ['Primair gebruik', 'Ontspannen, koffie drinken', 'Buiten eten'],
+            ['Zithoogte', '30–40 cm (laag)', '45–50 cm (normaal)'],
+            ['Tafelhoogte', '35–55 cm', '72–75 cm'],
+            ['Comfortniveau', 'Hoog (kussens)', 'Middel (recht)'],
+            ['Ruimtegebruik', 'Meer ruimte nodig', 'Compacter'],
+            ['Prijs (set)', '€300–2.000', '€150–1.500'],
+            ['Kussens nodig', 'Ja (essentieel)', 'Optioneel'],
+            ['Flexibiliteit', 'Minder (laag)', 'Meer (stoelen verplaatsen)'],
+          ].map(([crit, lounge, tuinset]) => (
+            <tr class="hover:bg-slate-50">
+              <td class="px-5 py-3 font-medium text-slate-700">{crit}</td>
+              <td class="px-5 py-3 text-slate-600">{lounge}</td>
+              <td class="px-5 py-3 text-slate-600">{tuinset}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-10">
+      <div class="bg-blue-50 border-2 border-blue-300 rounded-2xl p-6">
+        <div class="text-2xl mb-2">🛋️</div>
+        <div class="font-bold text-slate-900 mb-2">Kies een loungeset als je...</div>
+        <ul class="text-sm text-slate-600 space-y-1">
+          <li>✓ Meer wil relaxen dan eten buiten</li>
+          <li>✓ Gasten wil ontvangen in een lounge-sfeer</li>
+          <li>✓ Voldoende terrasruimte hebt (10m²+)</li>
+          <li>✓ Comfort en kussens belangrijk vindt</li>
+        </ul>
+        <a href="/beste-loungeset" class="inline-block mt-4 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">Beste loungesets →</a>
+      </div>
+      <div class="bg-green-50 border-2 border-green-300 rounded-2xl p-6">
+        <div class="text-2xl mb-2">🍽️</div>
+        <div class="font-bold text-slate-900 mb-2">Kies een tuinset als je...</div>
+        <ul class="text-sm text-slate-600 space-y-1">
+          <li>✓ Regelmatig buiten eet</li>
+          <li>✓ Efficiënter wil omgaan met ruimte</li>
+          <li>✓ Makkelijk wil opruimen (stapelbare stoelen)</li>
+          <li>✓ Budget-bewust bent</li>
+        </ul>
+        <a href="/beste-tuinset" class="inline-block mt-4 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">Beste tuinsets →</a>
+      </div>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungeset →</a>
+        <a href="/beste-tuinset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste tuinset →</a>
+        <a href="/aluminium-vs-teak" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium vs Teak →</a>
+      </div>
+    </section>
+  </div>
+</Layout>

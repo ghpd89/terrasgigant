@@ -1,0 +1,143 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  {
+    q: 'Hoe lang gaan polyrattan terrasmeubelen mee?',
+    a: 'Kwalitatieve polyrattan terrasmeubelen gaan 10–15 jaar mee. Goedkopere sets (onder €200) kunnen al na 5 jaar verbleken of scheuren. Let op UV-bestendige polyrattan en een goed aluminium frame.',
+  },
+  {
+    q: 'Is polyrattan hetzelfde als wicker?',
+    a: 'Niet precies. Wicker is een vlecht-techniek die zowel met natuurlijk riet als synthetisch materiaal kan. Polyrattan is altijd synthetisch (polyethyleen). Polyrattan is weersbestendiger dan naturel wicker en makkelijker schoon te maken.',
+  },
+  {
+    q: 'Kan polyrattan buiten staan in de zon?',
+    a: 'Ja, mits UV-bestendig. Goedkope polyrattan verkleurt snel in direct zonlicht. Koop altijd UV-bestendige polyrattan (staat in de specs) — kwalitatieve sets behouden hun kleur 10+ jaar.',
+  },
+  {
+    q: 'Hoe onderhoud je polyrattan meubelen?',
+    a: 'Eenvoudig: afspoelen met tuinslang of warm water met zeep. Een zachte borstel helpt bij grof vuil. Nooit schurende schoonmaakmiddelen gebruiken — die beschadigen het vlechtwerk. Afdekken in winter verlengt de levensduur.',
+  },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+        { "@type": "ListItem", "position": 2, "name": "Polyrattan terrasmeubelen", "item": "https://www.terrasgigant.nl/polyrattan-terrasmeubelen" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(({ q, a }) => ({
+        "@type": "Question",
+        "name": q,
+        "acceptedAnswer": { "@type": "Answer", "text": a }
+      }))
+    }
+  ]
+});
+---
+
+<Layout
+  title="Polyrattan terrasmeubelen — voordelen, onderhoud & kooptips | Terrasgigant.nl"
+  description="Alles over polyrattan terrasmeubelen: voordelen ten opzichte van aluminium en teak, onderhoud, levensduur en de beste sets per budget."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a>
+      <span>›</span>
+      <span class="text-slate-700">Polyrattan terrasmeubelen</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Polyrattan terrasmeubelen</h1>
+    <p class="text-slate-600 text-lg mb-8 max-w-2xl">
+      Polyrattan geeft de sfeer van gevlochten riet met de duurzaamheid van synthetisch materiaal. Ideaal voor de lounge-look op je terras.
+    </p>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-10">
+      <div class="bg-slate-50 border border-slate-200 rounded-2xl p-6">
+        <h2 class="font-bold text-slate-900 mb-3">✓ Voordelen polyrattan</h2>
+        <ul class="space-y-2 text-sm text-slate-700">
+          {['Warme, gevlochten uitstraling', 'Makkelijk schoon te maken', 'Lichtgewicht', 'Betaalbaarder dan aluminium', 'Weersbestendig (UV-bestendig)', 'Grote variatie in kleuren en stijlen'].map(v => (
+            <li class="flex gap-2"><span class="text-green-500 shrink-0">✓</span>{v}</li>
+          ))}
+        </ul>
+      </div>
+      <div class="bg-red-50 border border-red-200 rounded-2xl p-6">
+        <h2 class="font-bold text-slate-900 mb-3">✗ Nadelen polyrattan</h2>
+        <ul class="space-y-2 text-sm text-slate-700">
+          {['Kleur kan vervagen na 8–10 jaar', 'Kortere levensduur dan aluminium', 'Goedkope sets verliezen snel kwaliteit', 'Vlechtwerk kan slijten bij verkeerd gebruik'].map(v => (
+            <li class="flex gap-2"><span class="text-red-400 shrink-0">✗</span>{v}</li>
+          ))}
+        </ul>
+      </div>
+    </div>
+
+    <div class="mb-10">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">Beste polyrattan sets per budget</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          { prijs: '€199–399', label: 'Budget', omschrijving: 'Keter Corfu, Sunred Logan — prima prijs-kwaliteit voor 4–6 jaar intensief gebruik.', bol: 'polyrattan loungeset budget 4-delig', cb: 'loungeset polyrattan budget' },
+          { prijs: '€400–800', label: 'Midrange', omschrijving: 'Garden Impressions, Exotan — dikker vlechtwerk, beter frame, mooiere kussens. 10–12 jaar levensduur.', bol: 'polyrattan loungeset garden impressions', cb: 'loungeset polyrattan midrange' },
+          { prijs: '€800–1.500', label: 'Premium', omschrijving: 'Gloster, Royal Garden polyrattan — premium weefsel, Sunbrella kussens. Zo goed als aluminium.', bol: 'polyrattan loungeset premium kwaliteit', cb: 'loungeset polyrattan premium' },
+        ].map(({ prijs, label, omschrijving, bol, cb }) => (
+          <div class="border border-slate-200 rounded-2xl p-5 bg-white">
+            <div class="text-xs font-bold text-slate-500 uppercase tracking-wide mb-1">{prijs}</div>
+            <div class="font-bold text-slate-900 mb-2">{label}</div>
+            <p class="text-xs text-slate-600 leading-relaxed mb-4">{omschrijving}</p>
+            <div class="space-y-1.5">
+              <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                class="flex justify-between bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-1.5 px-3 rounded-lg transition-colors">
+                <span>Bol.com</span><span>→</span>
+              </a>
+              <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                class="flex justify-between bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-1.5 px-3 rounded-lg transition-colors">
+                <span>Coolblue</span><span>→</span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen polyrattan</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/aluminium-vs-polyrattan" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium vs Polyrattan →</a>
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungeset →</a>
+        <a href="/terrasmeubelen-onderhoud" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Onderhoud →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Polyrattan terrasmeubelen"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=polyrattan+terrasmeubelen+loungeset"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=polyrattan+terrasmeubelen"
+  />
+</Layout>

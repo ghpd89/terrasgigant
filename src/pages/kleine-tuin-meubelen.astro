@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  { q: 'Welke meubelen passen op een klein balkon?', a: 'Voor een balkon van 2–4m²: een bistroset (tafel 60×60 cm + 2 stoelen) of 2 fauteuils met een klein tafeltje. Kies lichte kleuren — die maken het visueel groter. Inklapbaar of stapelbaar meubilair is ideaal voor kleine ruimtes.' },
+  { q: 'Hoe maak ik een kleine tuin groter?', a: 'Gebruik verticale ruimte: muurplanten, hoge potten, klimplanten. Kies lichtgekleurde meubels en tegels. Verwijder overbodige spullen. Gebruik spiegels op de schutting (weerbestendig). Zorg voor duidelijke looppaden.' },
+  { q: 'Welke bistroset is het beste voor een klein terras?', a: 'De Hartman Sophie bistroset (aluminium, opvouwbaar) en de IKEA TÄRNÖ zijn populaire keuzes. Zoek op een tafelblad van 60–70 cm diameter — kleiner wordt onpraktisch bij koffie en een krant.' },
+  { q: 'Kan ik een loungeset op een klein terras zetten?', a: 'Op 8–10m² kan een compacte 3-delige loungeset. De Keter Corfu set compact of een 2+1 configuratie past op terrassen van 3×3 meter. Meet eerst op en teken het uit op papier.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Kleine tuin meubelen", "item": "https://www.terrasgigant.nl/kleine-tuin-meubelen" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Kleine tuin meubelen — balkon en kleine terras tips 2026 | Terrasgigant.nl"
+  description="Meubelen voor een kleine tuin of balkon. Compacte loungesets, bistrosets en opklapbare meubels — tips voor ruimtegebrek."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Kleine tuin meubelen</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Meubelen voor kleine tuin of balkon</h1>
+    <p class="text-slate-600 text-lg mb-10 max-w-2xl">Ruimtegebrek hoeft geen probleem te zijn. Met de juiste keuzes maak je zelfs het kleinste balkon of terrasje gezellig.</p>
+
+    <!-- Per oppervlak -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-slate-900 mb-5">Advies per terrasgrootte</h2>
+      <div class="space-y-4">
+        {[
+          {
+            range: '< 4m² (balkon)', icon: '🏢',
+            advies: 'Bistroset (tafel 60×60 cm + 2 stoelen). Inklapbare of stapelbare stoelen. 1 compacte fauteuil met voetenbank. Klaptafel aan de muur.',
+            bol: 'bistroset balkon compact opvouwbaar', cb: 'bistroset balkon klein',
+          },
+          {
+            range: '4–8m² (klein terras)', icon: '🌿',
+            advies: '2-delige loungeset (2 fauteuils + tafeltje) of 3-delige bistroset. Kleine zweefparasol (250 cm). Let op: houd 60 cm loopruimte.',
+            bol: 'loungeset 2 personen compact klein terras', cb: 'loungeset compact klein',
+          },
+          {
+            range: '8–15m² (gemiddeld terras)', icon: '🏡',
+            advies: '4-delige loungeset (compact model) + kleine parasol. Of: tuinset voor 4 personen. Kies onderhoudsloos aluminium.',
+            bol: 'loungeset 4-delig compact terras', cb: 'loungeset 4 personen compact',
+          },
+        ].map(({ range, icon, advies, bol, cb }) => (
+          <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+            <div class="px-6 py-3 bg-green-600 text-white flex items-center gap-2">
+              <span class="text-xl">{icon}</span>
+              <span class="font-bold">{range}</span>
+            </div>
+            <div class="px-6 py-4 flex flex-col sm:flex-row items-start gap-4">
+              <p class="text-sm text-slate-600 flex-1">{advies}</p>
+              <div class="flex gap-2 shrink-0">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                  class="bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">Bol →</a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                  class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">CB →</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Tips om kleine ruimtes groter te laten lijken</h2>
+      <ul>
+        <li><strong>Lichte kleuren:</strong> wit, lichtgrijs of naturel meubels weerkaatsen licht en vergroten optisch de ruimte.</li>
+        <li><strong>Weinig, maar kwalitatief:</strong> beter één goed stuk dan veel kleine rotzooi.</li>
+        <li><strong>Verticale accenten:</strong> hoge potten, klimplanten op een trellis of muurplanken.</li>
+        <li><strong>Multifunctioneel:</strong> een poef met opbergruimte, een klaptafel aan de muur, stapelbare stoelen.</li>
+        <li><strong>Spiegel op schutting:</strong> weersbestendige buitenspiegels verdubbelen optisch de ruimte.</li>
+        <li><strong>Verlichting:</strong> sfeervolle LED-lichtjes maken een balkon 's avonds comfortabeler dan elk groot terras zonder verlichting.</li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen kleine tuin</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/terrasmeubelen-onder-500-euro" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Budget meubelen →</a>
+        <a href="/terras-inrichten" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Terras inrichten →</a>
+        <a href="/beste-parasol" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste parasol →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Meubelen kleine tuin / balkon"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=bistroset+balkon+compact"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=bistroset+balkon"
+  />
+</Layout>

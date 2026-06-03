@@ -1,0 +1,230 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const picks = [
+  {
+    label: 'Budget keuze',
+    type: 'Polyrattan loungeset',
+    prijs: '€299–599',
+    beschrijving: 'Keter, Sunred of IKEA ÄPPLARÖ — prima kwaliteit voor de prijs. Polyrattan frame, comfortabele kussens en weersbestendig. Voor wie een mooie tuin wil zonder grote investering.',
+    bolQuery: 'loungeset polyrattan tuin 4-delig',
+    cbQuery: 'loungeset tuin polyrattan',
+    tagColor: 'slate',
+    tag: '€299–599',
+  },
+  {
+    label: 'Beste keuze',
+    type: 'Aluminium loungeset',
+    prijs: '€600–1.200',
+    beschrijving: 'Hartman, Royal Garden of Garden Impressions — de sweet spot. Aluminium frame (roestvrij), dikke Sunbrella-kussens en een ontwerp dat 15+ jaar mee gaat. Dit is de keuze voor wie écht wil genieten.',
+    bolQuery: 'loungeset aluminium hartman royal garden',
+    cbQuery: 'loungeset aluminium tuin',
+    tagColor: 'green',
+    tag: 'Beste prijs-kwaliteit',
+  },
+  {
+    label: 'Premium keuze',
+    type: 'Teak of luxe aluminium',
+    prijs: '€1.200–3.000',
+    beschrijving: 'Gloster, Jati & Kebon of Manutti — absolute topkwaliteit. Teak met 25+ jaar garantie of zwaar aluminium met Sunbrella-stof. De terrasmeubelen die je écht nooit meer hoeft te vervangen.',
+    bolQuery: 'loungeset teak premium luxe',
+    cbQuery: 'loungeset premium teak aluminium',
+    tagColor: 'amber',
+    tag: 'Beste kwaliteit',
+  },
+];
+
+const faqItems = [
+  {
+    q: 'Welke terrasmeubelen zijn de beste keuze in 2026?',
+    a: 'Voor de meeste kopers is een aluminium loungeset van €600–1.200 de beste keuze: onderhoudsloos, roestvrij en stijlvol. Merken als Hartman, Royal Garden en Garden Impressions bieden uitstekende kwaliteit. Budget-optie: polyrattan voor €300–600.',
+  },
+  {
+    q: 'Welk merk terrasmeubelen is het beste?',
+    a: 'Premium: Gloster, Manutti, Jati & Kebon (teak). Midrange: Hartman, Royal Garden, Garden Impressions (aluminium). Budget: Keter, Sunred, IKEA (polyrattan/kunststof). Voor prijs-kwaliteit zijn Hartman en Royal Garden de beste keuze voor de meeste mensen.',
+  },
+  {
+    q: 'Hoe lang gaan goede terrasmeubelen mee?',
+    a: 'Aluminium: 20-30 jaar. Teak: 25-50 jaar met onderhoud. Polyrattan: 10-15 jaar. Kunststof: 5-10 jaar. De aanschafprijs van premium meubelen verdient zichzelf terug door de lange levensduur — €1.000 gedeeld door 25 jaar is €40 per jaar.',
+  },
+  {
+    q: 'Wat zijn de beste terrasmeubelen voor buiten het hele jaar?',
+    a: 'Aluminium is de beste keuze voor buiten laten staan het hele jaar: roestvrij, niet vervormen door vocht en frost-bestendig. Dek ze af met een tuinhoes. Kussens altijd naar binnen in de winter.',
+  },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+        { "@type": "ListItem", "position": 2, "name": "Beste terrasmeubelen", "item": "https://www.terrasgigant.nl/beste-terrasmeubelen" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(({ q, a }) => ({
+        "@type": "Question",
+        "name": q,
+        "acceptedAnswer": { "@type": "Answer", "text": a }
+      }))
+    }
+  ]
+});
+---
+
+<Layout
+  title="Beste terrasmeubelen 2026 — top picks per budget | Terrasgigant.nl"
+  description="Welke terrasmeubelen zijn de beste keuze? Van budget polyrattan tot premium teak — de beste terrassets per prijsklasse voor 2026."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2 flex-wrap">
+      <a href="/" class="hover:text-green-600">Home</a>
+      <span>›</span>
+      <span class="text-slate-700">Beste terrasmeubelen</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+      Beste terrasmeubelen 2026
+    </h1>
+    <p class="text-slate-600 text-lg mb-4 max-w-2xl">
+      We hebben tientallen sets, stoelen en loungesets vergeleken. Dit zijn de beste terrasmeubelen per budget voor het seizoen 2026.
+    </p>
+    <div class="flex flex-wrap gap-3 text-sm mb-10">
+      <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full">🏆 Vergeleken: 30+ sets</span>
+      <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full">💰 Vanaf €299</span>
+      <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full">🔩 Aluminium, teak & polyrattan</span>
+    </div>
+
+    <!-- Picks -->
+    <section class="mb-12">
+      <div class="grid sm:grid-cols-3 gap-4">
+        {picks.map(({ label, type, prijs, beschrijving, bolQuery, cbQuery, tagColor, tag }) => {
+          const borderClass = tagColor === 'green' ? 'border-green-400 bg-green-50' : tagColor === 'amber' ? 'border-amber-400 bg-amber-50' : 'border-slate-200 bg-white';
+          const tagClass = tagColor === 'green' ? 'text-green-700' : tagColor === 'amber' ? 'text-amber-700' : 'text-slate-500';
+          return (
+            <div class={`rounded-2xl border-2 p-5 flex flex-col ${borderClass}`}>
+              <div class={`text-xs font-bold uppercase tracking-wide mb-1 ${tagClass}`}>{tag}</div>
+              <div class="font-black text-slate-900 text-lg mb-0.5">{label}</div>
+              <div class="text-xs font-semibold text-slate-500 mb-2">{type} · {prijs}</div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4 flex-1">{beschrijving}</p>
+              <div class="mt-auto space-y-2">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bolQuery}`}
+                  target="_blank" rel="noopener nofollow"
+                  class="flex items-center justify-between bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">
+                  <span>Bol.com</span><span>→</span>
+                </a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cbQuery}`}
+                  target="_blank" rel="noopener nofollow"
+                  class="flex items-center justify-between bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">
+                  <span>Coolblue</span><span>→</span>
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Hoe kiezen we de beste terrasmeubelen?</h2>
+      <p>
+        Wij beoordelen terrasmeubelen op vijf criteria: <strong>materiaalkwaliteit</strong> (dikte aluminium, kwaliteit rattan-weefsel), <strong>comfort</strong> (kussens, zithoogte en -diepte), <strong>weerbestendigheid</strong> (roest, UV-bestendigheid, vorstbestendigheid), <strong>montage</strong> (hoe makkelijk is het in elkaar te zetten?) en <strong>prijs-kwaliteitverhouding</strong>.
+      </p>
+
+      <h2>Waarom aluminium de winnaar is voor de meeste tuinen</h2>
+      <p>
+        <strong>Aluminium roest niet</strong> — zelfs niet na 20 regenseizoenen in Nederland. Poedercoating beschermt het frame extra tegen krassen en UV. Een premium aluminium loungeset van Hartman of Royal Garden weegt bovendien maar 15–25 kg en is makkelijk te verplaatsen. Vergeleken met teak (zwaar, jaarlijks onderhoud) en polyrattan (verfading na jaren) is aluminium simpelweg de meest praktische keuze.
+      </p>
+
+      <h2>Beste terrasmeubelen per categorie</h2>
+      <p>
+        <strong>Beste loungeset:</strong> <a href="/beste-loungeset">bekijk onze loungeset-toplijst →</a><br/>
+        <strong>Beste tuinset:</strong> <a href="/beste-tuinset">vergelijk tuinsets voor buiten eten →</a><br/>
+        <strong>Beste parasol:</strong> <a href="/beste-parasol">zweef- en kantelparasols vergeleken →</a><br/>
+        <strong>Beste ligbed:</strong> <a href="/beste-ligbed">zonnebedden voor tuin en terras →</a>
+      </p>
+
+      <h2>Wanneer is teak de betere keuze?</h2>
+      <p>
+        Als je houdt van een <strong>warme, naturel uitstraling</strong> en bereid bent om jaarlijks teak-olie aan te brengen, is teak de mooiste keuze. Teak hout heeft van nature oliën die het beschermen, maar behandeling verlengt de levensduur en houdt de goudbruine kleur mooi. Zonder behandeling wordt teak grijs — ook mooi, maar minder verzorgd.
+      </p>
+    </section>
+
+    <!-- Vergelijkingstabel -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">Materiaalvergelijking op een rij</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead class="bg-slate-50">
+            <tr>
+              <th class="text-left px-4 py-3 font-semibold text-slate-700">Materiaal</th>
+              <th class="text-left px-4 py-3 font-semibold text-slate-700">Levensduur</th>
+              <th class="text-left px-4 py-3 font-semibold text-slate-700">Onderhoud</th>
+              <th class="text-left px-4 py-3 font-semibold text-slate-700">Prijs</th>
+              <th class="text-left px-4 py-3 font-semibold text-slate-700">Geschikt voor</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            {[
+              ['Aluminium', '20–30 jaar', 'Minimaal', '€€–€€€', 'Moderne tuin, weinig tijd'],
+              ['Teak hout', '25–50 jaar', 'Jaarlijks oliën', '€€€', 'Klassieke tuin, houdt van onderhoud'],
+              ['Polyrattan', '10–15 jaar', 'Afspoelen', '€–€€', 'Lounge-stijl, budget-bewust'],
+              ['Kunststof', '5–10 jaar', 'Geen', '€', 'Balkon, tijdelijk gebruik'],
+            ].map(([mat, leven, ond, prijs, voor]) => (
+              <tr class="hover:bg-slate-50">
+                <td class="px-4 py-3 font-medium text-slate-900">{mat}</td>
+                <td class="px-4 py-3 text-slate-600">{leven}</td>
+                <td class="px-4 py-3 text-slate-600">{ond}</td>
+                <td class="px-4 py-3 text-slate-600">{prijs}</td>
+                <td class="px-4 py-3 text-slate-600">{voor}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span>
+                <span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungeset →</a>
+        <a href="/beste-tuinset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste tuinset →</a>
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+        <a href="/terrasmeubelen-kopen-gids" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Koopgids →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Beste terrasmeubelen"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=terrasmeubelen+loungeset"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=terrasmeubelen+loungeset"
+  />
+</Layout>

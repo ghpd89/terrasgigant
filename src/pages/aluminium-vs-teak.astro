@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqItems = [
+  { q: 'Is aluminium of teak beter voor buiten?', a: 'Aluminium is praktischer: onderhoudsloos, roestvrij en lichter. Teak is mooier maar vraagt jaarlijkse oliebehandeling. Voor de meeste mensen is aluminium de betere keuze vanwege het minimale onderhoud.' },
+  { q: 'Welk materiaal gaat langer mee: aluminium of teak?', a: 'Teak wint qua levensduur: 25–50 jaar versus 20–30 jaar voor aluminium. Beide zijn uitstekend. Het verschil is dat teak dit alleen haalt mét onderhoud; aluminium doet het zonder.' },
+  { q: 'Is aluminium goedkoper dan teak?', a: 'Aluminium is in hetzelfde kwaliteitssegment iets goedkoper dan teak. Een goede loungeset: aluminium €600–1.200, teak €900–2.000. De hogere aanschafprijs van teak wordt gecompenseerd door de zeer lange levensduur.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Aluminium vs Teak", "item": "https://www.terrasgigant.nl/aluminium-vs-teak" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Aluminium vs Teak terrasmeubelen — welk materiaal wint? | Terrasgigant.nl"
+  description="Aluminium of teak terrasmeubelen? We vergelijken levensduur, onderhoud, prijs en uitstraling zodat jij de beste keuze maakt."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Aluminium vs Teak</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Aluminium vs Teak terrasmeubelen</h1>
+    <p class="text-slate-600 text-lg mb-10 max-w-2xl">De twee meest populaire materialen voor kwalitatieve terrasmeubelen — maar welke past het best bij jou?</p>
+
+    <!-- Vergelijkingstabel -->
+    <section class="mb-10 overflow-x-auto rounded-2xl border border-slate-200">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50">
+          <tr>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">Criterium</th>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">🔩 Aluminium</th>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">🌳 Teak</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {[
+            ['Levensduur', '20–30 jaar', '25–50 jaar'],
+            ['Onderhoud', 'Minimaal (afspoelen)', 'Jaarlijks schuren + oliën'],
+            ['Gewicht', 'Licht (4–8 kg/stoel)', 'Zwaar (8–15 kg/stoel)'],
+            ['Prijs', '€600–1.200 (loungeset)', '€900–2.000 (loungeset)'],
+            ['Roestbestendig', '✓ Ja', '✓ Ja (van nature)'],
+            ['Winterbestendig', '✓ Ja (met hoes)', '✓ Ja (met behandeling)'],
+            ['Uitstraling', 'Modern/strak', 'Warm/klassiek'],
+            ['Duurzaamheid', 'Recycleerbaar', 'FSC-gecertificeerd verkrijgbaar'],
+          ].map(([crit, alu, teak]) => (
+            <tr class="hover:bg-slate-50">
+              <td class="px-5 py-3 font-medium text-slate-700">{crit}</td>
+              <td class="px-5 py-3 text-slate-600">{alu}</td>
+              <td class="px-5 py-3 text-slate-600">{teak}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+
+    <!-- Conclusie -->
+    <div class="grid sm:grid-cols-2 gap-4 mb-10">
+      <div class="bg-green-50 border-2 border-green-300 rounded-2xl p-6">
+        <div class="text-2xl mb-2">🔩</div>
+        <div class="font-bold text-slate-900 mb-1">Kies aluminium als je...</div>
+        <ul class="text-sm text-slate-600 space-y-1 mt-2">
+          <li>✓ Weinig tijd wil besteden aan onderhoud</li>
+          <li>✓ De meubelen regelmatig wil verplaatsen</li>
+          <li>✓ Een moderne, strakke uitstraling wil</li>
+          <li>✓ Het hele jaar buiten wil laten staan</li>
+        </ul>
+        <a href="https://www.bol.com/nl/nl/s/?searchtext=aluminium+terrasmeubelen" target="_blank" rel="noopener nofollow"
+          class="inline-block mt-4 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">Aluminium op Bol.com →</a>
+      </div>
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-6">
+        <div class="text-2xl mb-2">🌳</div>
+        <div class="font-bold text-slate-900 mb-1">Kies teak als je...</div>
+        <ul class="text-sm text-slate-600 space-y-1 mt-2">
+          <li>✓ Houdt van warme, naturel uitstraling</li>
+          <li>✓ Bereid bent jaarlijks te onderhouden</li>
+          <li>✓ Investeert voor 30–50 jaar</li>
+          <li>✓ Een klassieke tuinstijl hebt</li>
+        </ul>
+        <a href="https://www.bol.com/nl/nl/s/?searchtext=teak+terrasmeubelen+FSC" target="_blank" rel="noopener nofollow"
+          class="inline-block mt-4 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">Teak op Bol.com →</a>
+      </div>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+        <a href="/teak-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Teak meubelen →</a>
+        <a href="/aluminium-vs-polyrattan" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium vs Polyrattan →</a>
+      </div>
+    </section>
+  </div>
+</Layout>

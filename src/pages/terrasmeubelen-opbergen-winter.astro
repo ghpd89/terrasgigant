@@ -1,0 +1,130 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqItems = [
+  { q: 'Kunnen aluminium terrasmeubelen buiten in de winter?', a: 'Ja — aluminium is volledig vorstbestendig en roestvrij. Dek ze af met een goede tuinhoes om vuil en bladeren te voorkomen. Kussens altijd naar binnen. Een hoes kost €15–60 en verlengt de levensduur flink.' },
+  { q: 'Wanneer moet ik mijn terrasmeubelen opbergen?', a: 'In Nederland: eind september – begin oktober. Als de nachtemperaturen structureel onder 10°C komen. De meeste schade aan meubels komt niet van kou maar van langdurige vochtigheid en winterse stormen.' },
+  { q: 'Hoe berg ik loungekussens op in de winter?', a: 'In een droge, vorstvrije ruimte: garage, schuur of berging. In een kussenzak of grote plastic doos. Kussens volledig droog laten voordat je ze opbergt — anders schimmelvorming. Nooit in een vochtige kelder.' },
+  { q: 'Hoe bescherm ik teak meubelen in de winter?', a: 'Teak kan buiten of binnen. Buiten: afdekken met een tuinhoes. Binnen bewaren is beter voor kleur en onderhoudsvraag. Behandel aan het begin van het nieuwe seizoen met teak-olie na een korte schoonmaakbeurt.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Winteropslag terrasmeubelen", "item": "https://www.terrasgigant.nl/terrasmeubelen-opbergen-winter" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Terrasmeubelen opbergen in de winter — per materiaal tips | Terrasgigant.nl"
+  description="Hoe berg je terrasmeubelen op in de winter? Aluminium, teak en polyrattan — per materiaal het juiste winteradvies inclusief hoestips."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Winteropslag terrasmeubelen</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Terrasmeubelen opbergen in de winter</h1>
+    <p class="text-slate-600 text-lg mb-10 max-w-2xl">Goede winteropslag verlengt de levensduur van je terrasmeubelen met jaren. Per materiaal het juiste advies.</p>
+
+    <!-- Overzicht per materiaal -->
+    <section class="mb-12">
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          {
+            mat: 'Aluminium', icon: '🔩',
+            buiten: true, buitenTip: 'Met tuinhoes — prima optie',
+            binnen: true, binnenTip: 'Niet noodzakelijk',
+            prioriteit: 'Kussens naar binnen — altijd!',
+            kleur: 'border-slate-200 bg-white',
+          },
+          {
+            mat: 'Teak hout', icon: '🌳',
+            buiten: true, buitenTip: 'Met hoes, liefst droog',
+            binnen: true, binnenTip: 'Voorkeur: droge ruimte',
+            prioriteit: 'Behandel begin nieuw seizoen met teak-olie',
+            kleur: 'border-amber-200 bg-amber-50',
+          },
+          {
+            mat: 'Polyrattan', icon: '🧺',
+            buiten: true, buitenTip: 'Met hoes, kussens weg',
+            binnen: false, binnenTip: 'Niet nodig bij kwalitatief rattan',
+            prioriteit: 'Kussens altijd droog opbergen',
+            kleur: 'border-green-200 bg-green-50',
+          },
+        ].map(({ mat, icon, buiten, buitenTip, binnenTip, prioriteit, kleur }) => (
+          <div class={`border rounded-2xl p-5 ${kleur}`}>
+            <div class="flex items-center gap-2 mb-4">
+              <span class="text-2xl">{icon}</span>
+              <span class="font-bold text-slate-900">{mat}</span>
+            </div>
+            <div class="space-y-2 text-sm mb-4">
+              <div class="flex items-start gap-2">
+                <span class={buiten ? 'text-green-500' : 'text-red-400'}>{buiten ? '✓' : '✗'}</span>
+                <div><strong>Buiten:</strong> {buitenTip}</div>
+              </div>
+              <div class="flex items-start gap-2">
+                <span class="text-green-500">✓</span>
+                <div><strong>Binnen:</strong> {binnenTip}</div>
+              </div>
+            </div>
+            <div class="bg-white rounded-xl px-3 py-2 text-xs text-slate-600 border border-slate-100">
+              ⚡ {prioriteit}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Stappenplan -->
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Winterklaar checklist (september/oktober)</h2>
+      <ol>
+        <li><strong>Schoonmaken:</strong> verwijder vuil, bladeren en insectennesten voordat je afdekt.</li>
+        <li><strong>Drogen:</strong> laat alles goed drogen na de laatste reinigingsbeurt.</li>
+        <li><strong>Kussens opbergen:</strong> in een droge kussenzak of -box in de berging.</li>
+        <li><strong>Meubels afdekken:</strong> met een passende tuinhoes. Let op: hoes moet ademend zijn om condensvorming te voorkomen.</li>
+        <li><strong>Parasol sluiten:</strong> volledig sluiten en met een hoes beschermen. Voet kan buiten blijven.</li>
+        <li><strong>Vergeet kleine accessoires niet:</strong> plantenpotten binnenzetten bij vorstgevoelige planten.</li>
+      </ol>
+
+      <h2>De beste tuinhoes kopen</h2>
+      <p>Een goede tuinhoes is ademend (waterafstotend van buiten, ventilerend van binnen), UV-bestendig en heeft bevestigingsriemen. Budget: €15–40 per losse set. Premium ademende hoezen: €40–80. Vermijd goedkope plastic zakken — die houden vocht vast.</p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen winteropslag</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/terrasmeubelen-onderhoud" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Onderhoudstips →</a>
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+        <a href="/beste-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste meubelen →</a>
+      </div>
+    </section>
+  </div>
+</Layout>

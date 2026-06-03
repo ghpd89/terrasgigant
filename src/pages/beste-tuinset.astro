@@ -1,0 +1,154 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  {
+    q: 'Welke tuinset is het beste voor buiten eten?',
+    a: 'Een aluminium tuinset met stapelbare stoelen is voor de meeste mensen de beste keuze. Makkelijk op te ruimen, roestvrij en onderhoudsloos. Populaire merken: Hartman, Royal Garden, Taste. Budget: €200–500, midrange: €500–1.000.',
+  },
+  {
+    q: 'Hoeveel personen past een tuinset voor 6 personen?',
+    a: 'Een tuinset voor 6 personen heeft een tafel van minimaal 160×90 cm. Plus 6 stoelen. Totale ruimte: reken op minimaal 3×3,5 meter inclusief loopruimte. Bij een parasol heb je extra ruimte nodig voor de voet.',
+  },
+  {
+    q: 'Welke tuintafel materiaal is het beste?',
+    a: 'Aluminium is onderhoudsloos, teak is het mooiste maar vraagt olie, keramiek of glas is makkelijk schoon maar kwetsbaar. Voor de meeste mensen is aluminium met een keramisch tafelblad de beste combinatie: stijlvol en onderhoudsloos.',
+  },
+  {
+    q: 'Kan een tuinset buiten staan bij regen?',
+    a: 'Aluminium en keramische tafels kunnen prima buiten staan bij regen. Teak kan ook maar kleurt dan grijs. Kussens altijd naar binnen bij regen — of koop tuinstoelen zonder kussens (stapelbare aluminium stoelen zijn prima zonder kussen).',
+  },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+        { "@type": "ListItem", "position": 2, "name": "Beste tuinset", "item": "https://www.terrasgigant.nl/beste-tuinset" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(({ q, a }) => ({
+        "@type": "Question",
+        "name": q,
+        "acceptedAnswer": { "@type": "Answer", "text": a }
+      }))
+    }
+  ]
+});
+---
+
+<Layout
+  title="Beste tuinset 2026 — tafel met stoelen voor buiten eten | Terrasgigant.nl"
+  description="De beste tuinsets voor buiten eten. Van bistroset voor 2 personen tot grote tuintafel voor 8 personen — vergeleken per budget en materiaal."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2 flex-wrap">
+      <a href="/" class="hover:text-green-600">Home</a>
+      <span>›</span>
+      <span class="text-slate-700">Beste tuinset</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Beste tuinset 2026</h1>
+    <p class="text-slate-600 text-lg mb-8 max-w-2xl">
+      Buiten eten is een van de grootste zomerse genoegens. De juiste tuinset maakt het verschil — van kleine bistroset tot grote eettafel voor de hele familie.
+    </p>
+
+    <section class="mb-12">
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          {
+            tag: '€149–399', tagColor: 'slate', label: 'Bistroset / Budget', type: '2–4 personen',
+            beschrijving: 'Voor klein balkon of terras. IKEA TÄRNÖ, Hartman Sophie bistroset of een simpele stalen set. Perfect voor ontbijt buiten of koffiedrinken. Klap- of stapelbaar = weinig ruimte nodig.',
+            bol: 'bistroset tuin 2 personen tafel stoelen', cb: 'bistroset tuinset 2 personen',
+          },
+          {
+            tag: 'Beste keuze', tagColor: 'green', label: 'Familie tuinset', type: '4–6 personen aluminium',
+            beschrijving: 'Hartman Sophie, Royal Garden Novas of Taste Cologne — aluminium frame, stapelbare stoelen en een tafel van 160+ cm. Roestvrij, makkelijk op te ruimen en jarenlang mooi.',
+            bol: 'tuinset aluminium 6 personen tafel stoelen', cb: 'tuinset aluminium 4 personen',
+          },
+          {
+            tag: 'Premium', tagColor: 'amber', label: 'Premium set', type: '6–8 personen + keramiek',
+            beschrijving: 'Gloster, Taste Treviso of Manutti — met keramisch tafelblad (krasvrij, vlekvrij) en zwaar aluminium frame. Zit comfortabeler, ziet er luxueuzer uit en gaat een leven lang mee.',
+            bol: 'tuinset keramiek tafelblad aluminium premium', cb: 'tuinset keramiek premium',
+          },
+        ].map(({ tag, tagColor, label, type, beschrijving, bol, cb }) => {
+          const bc = tagColor === 'green' ? 'border-green-400 bg-green-50' : tagColor === 'amber' ? 'border-amber-400 bg-amber-50' : 'border-slate-200 bg-white';
+          const tc = tagColor === 'green' ? 'text-green-700' : tagColor === 'amber' ? 'text-amber-700' : 'text-slate-500';
+          return (
+            <div class={`rounded-2xl border-2 p-5 flex flex-col ${bc}`}>
+              <div class={`text-xs font-bold uppercase tracking-wide mb-1 ${tc}`}>{tag}</div>
+              <div class="font-black text-slate-900 text-lg mb-0.5">{label}</div>
+              <div class="text-xs font-semibold text-slate-500 mb-2">{type}</div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4 flex-1">{beschrijving}</p>
+              <div class="space-y-2">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                  class="flex justify-between bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">
+                  <span>Bol.com</span><span>→</span>
+                </a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                  class="flex justify-between bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">
+                  <span>Coolblue</span><span>→</span>
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Tuintafelblad: aluminium, keramiek, teak of glas?</h2>
+      <p>
+        <strong>Aluminium tafelblad:</strong> lichtgewicht, onderhoudsloos, kan warm worden in zon. Beste keuze voor wie weinig wil onderhouden.<br/>
+        <strong>Keramisch tafelblad:</strong> krasvrij, hitte-bestendig (heet pannetje erop kan), makkelijk afnemen. Zwaarder maar de meest praktische keuze voor eters.<br/>
+        <strong>Teak:</strong> warm en naturel, maar vraagt onderhoud en vlekkt makkelijker.<br/>
+        <strong>Glas:</strong> stijlvol, maar fragiel en koelt snel af — minder ideaal voor koud weer.
+      </p>
+      <h2>Tuinstoelen: met of zonder kussen?</h2>
+      <p>
+        Stapelbare aluminium stoelen <strong>zonder kussen</strong> zijn ideaal voor wie stoelen makkelijk wil opruimen. Ze zijn regenvast en licht. Stoelen <em>met</em> kussen zitten comfortabeler maar vragen om opbergruimte voor de kussens. Kies kussenloze stoelen voor dagelijks gebruik en met kussen voor speciale gelegenheden.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen tuinset</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungeset →</a>
+        <a href="/loungeset-vs-tuinset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Loungeset vs tuinset →</a>
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Beste tuinset"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=tuinset+tafel+stoelen"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=tuinset+tuin"
+  />
+</Layout>

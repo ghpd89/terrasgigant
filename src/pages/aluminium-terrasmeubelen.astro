@@ -1,0 +1,182 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  {
+    q: 'Hoe lang gaan aluminium terrasmeubelen mee?',
+    a: 'Aluminium terrasmeubelen gaan gemiddeld 20–30 jaar mee. Poedergecoat aluminium is corrosiebestendig, lichtgewicht en vervormt niet door temperatuurschommelingen. Met een jaarlijkse schoonmaakbeurt blijven ze er nieuw uitzien.',
+  },
+  {
+    q: 'Zijn aluminium terrasmeubelen goed voor de winter?',
+    a: 'Aluminium kan prima buiten staan in de winter — het roest niet en vervormt niet door vorst. Goede gewoonte: afdekken met een tuinhoes (€15–50). Kussens altijd naar binnen halen.',
+  },
+  {
+    q: 'Welke aluminium terrasmeubelen zijn het beste?',
+    a: 'Top merken zijn Hartman, Royal Garden, Garden Impressions en Taste. Hartman staat bekend om de beste prijs-kwaliteitsverhouding (€600–1.200 voor een loungeset). Taste en Gloster zijn premium (€1.500+).',
+  },
+  {
+    q: 'Hoe maak je aluminium terrasmeubelen schoon?',
+    a: 'Spoel af met tuinslang of gebruik lauwwarm water met een paar druppels afwasmiddel. Vermijd schurende schoonmaakmiddelen — die beschadigen de poedercoating. Een microvezel doek werkt het best. Jaarlijks is voldoende.',
+  },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+        { "@type": "ListItem", "position": 2, "name": "Aluminium terrasmeubelen", "item": "https://www.terrasgigant.nl/aluminium-terrasmeubelen" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(({ q, a }) => ({
+        "@type": "Question",
+        "name": q,
+        "acceptedAnswer": { "@type": "Answer", "text": a }
+      }))
+    }
+  ]
+});
+---
+
+<Layout
+  title="Aluminium terrasmeubelen — voordelen, merken & onderhoud | Terrasgigant.nl"
+  description="Alles over aluminium terrasmeubelen: voordelen, beste merken, onderhoudstips en wat je kunt verwachten qua levensduur en prijs."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a>
+      <span>›</span>
+      <span class="text-slate-700">Aluminium terrasmeubelen</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+      Aluminium terrasmeubelen
+    </h1>
+    <p class="text-slate-600 text-lg mb-4 max-w-2xl">
+      Aluminium is veruit het meest populaire materiaal voor terrasmeubelen in Nederland — en niet zonder reden. We leggen uit waarom en welke merken het beste zijn.
+    </p>
+
+    <div class="flex flex-wrap gap-3 text-sm mb-10">
+      <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full">✓ Roestvrij</span>
+      <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full">✓ Onderhoudsloos</span>
+      <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full">✓ 20–30 jaar levensduur</span>
+      <span class="bg-slate-100 text-slate-700 px-3 py-1 rounded-full">🔩 Lichtgewicht</span>
+    </div>
+
+    <!-- Voordelen/nadelen -->
+    <section class="mb-10">
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="bg-green-50 border border-green-200 rounded-2xl p-6">
+          <h2 class="font-bold text-slate-900 mb-3">✓ Voordelen aluminium</h2>
+          <ul class="space-y-2 text-sm text-slate-700">
+            {[
+              'Volledig roestvrij — ook in zout-zeeklimaat',
+              'Lichtgewicht: makkelijk verplaatsen',
+              'Vrijwel geen onderhoud nodig',
+              'Poedercoating beschermt tegen krassen',
+              'Grote kleurkeuze door poedercoating',
+              'Vorst- en UV-bestendig',
+              'Recyclebaar en duurzaam materiaal',
+            ].map(v => (
+              <li class="flex gap-2"><span class="text-green-500 shrink-0">✓</span>{v}</li>
+            ))}
+          </ul>
+        </div>
+        <div class="bg-red-50 border border-red-200 rounded-2xl p-6">
+          <h2 class="font-bold text-slate-900 mb-3">✗ Nadelen aluminium</h2>
+          <ul class="space-y-2 text-sm text-slate-700">
+            {[
+              'Kan warm worden in direct zonlicht',
+              'Minder "warm" uitstraling dan hout',
+              'Goedkope aluminium kan deuken bij stoten',
+              'Kleur kan na 10+ jaar iets vervagen',
+            ].map(v => (
+              <li class="flex gap-2"><span class="text-red-400 shrink-0">✗</span>{v}</li>
+            ))}
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA blok -->
+    <div class="mb-10 bg-slate-900 text-white rounded-2xl p-6 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div class="flex-1">
+        <div class="font-bold text-lg mb-1">Aluminium terrasmeubelen kopen</div>
+        <div class="text-slate-400 text-sm">Vergelijk honderden sets van Hartman, Royal Garden en meer.</div>
+      </div>
+      <div class="flex gap-2 shrink-0">
+        <a href="https://www.bol.com/nl/nl/s/?searchtext=aluminium+terrasmeubelen+loungeset" target="_blank" rel="noopener nofollow"
+          class="bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors">Bol.com →</a>
+        <a href="https://www.coolblue.nl/zoeken?query=aluminium+terrasmeubelen" target="_blank" rel="noopener nofollow"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors">Coolblue →</a>
+      </div>
+    </div>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Aluminium dikte: waar op letten?</h2>
+      <p>
+        Niet alle aluminium is gelijk. Goedkope meubels gebruiken dunwandig aluminium (1–1,5 mm) dat makkelijker deukt. Premium meubels (Hartman, Royal Garden) gebruiken 2–3 mm profielen. Vraag bij twijfel naar de wanddikte of kijk of het in de specificaties staat.
+      </p>
+      <p>
+        <strong>Tip:</strong> til de stoel op. Een goede aluminium stoel weegt 4–6 kg. Te licht (onder 3 kg) of te zwaar (8+ kg) zijn beide tekens van lagere kwaliteit of goedkoop staal.
+      </p>
+
+      <h2>Beste merken aluminium terrasmeubelen</h2>
+      <p>
+        <strong>Hartman</strong> (Nederlandse fabrikant, prijs-kwaliteitsfavoriet), <strong>Royal Garden</strong> (breed aanbod, goede garantie), <strong>Garden Impressions</strong> (trendy ontwerpen), <strong>Taste</strong> (premium segment), <strong>Gloster</strong> (absolute top). Voor budget: <strong>Sunred</strong> en <strong>Keter</strong> bieden redelijke aluminium sets voor €300–500.
+      </p>
+
+      <h2>Aluminium terrasmeubelen onderhouden</h2>
+      <p>
+        Aluminium heeft nauwelijks onderhoud nodig. Dit is alles wat je hoeft te doen:
+      </p>
+      <ol>
+        <li>Begin seizoen: afspoelen met tuinslang of afnemen met vochtige doek</li>
+        <li>Tussentijds: vlekken afnemen met zeepwater</li>
+        <li>Einde seizoen: droog afdekken met een tuinhoes (afdekzeil)</li>
+        <li>Kussens altijd binnen bewaren in winter</li>
+      </ol>
+      <p>Dat is het. Echt.</p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen aluminium</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/aluminium-vs-teak" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium vs Teak →</a>
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungeset →</a>
+        <a href="/terrasmeubelen-onderhoud" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Onderhoudstips →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Aluminium terrasmeubelen"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=aluminium+terrasmeubelen"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=aluminium+terrasmeubelen"
+  />
+</Layout>

@@ -1,0 +1,115 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqItems = [
+  { q: 'Is teak of polyrattan duurzamer?', a: 'Teak is duurzamer: 25–50 jaar vs 10–15 jaar voor polyrattan. Teak vraagt echter onderhoud; polyrattan niet. Qua koolstofvoetafdruk: FSC-teak heeft voordeel over synthetisch polyrattan (plastic).' },
+  { q: 'Welk materiaal is mooier: teak of polyrattan?', a: 'Smaakafhankelijk. Teak heeft een warme, tijdloze uitstraling. Polyrattan ziet er moderner en speelser uit. Teak verhoogt de uitstraling van een klassieke tuin; polyrattan past beter bij een moderne of lounge-stijl.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Teak vs Polyrattan", "item": "https://www.terrasgigant.nl/teak-vs-polyrattan" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Teak vs Polyrattan terrasmeubelen — hout vs synthetisch | Terrasgigant.nl"
+  description="Teak of polyrattan terrasmeubelen? Vergelijk levensduur, uitstraling, onderhoud en duurzaamheid van beide materialen."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Teak vs Polyrattan</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Teak vs Polyrattan terrasmeubelen</h1>
+    <p class="text-slate-600 text-lg mb-10 max-w-2xl">Hout versus synthetisch — beide populaire keuzes voor de tuin. Welk materiaal is de beste keuze voor jou?</p>
+
+    <section class="mb-10 overflow-x-auto rounded-2xl border border-slate-200">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50">
+          <tr>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">Criterium</th>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">🌳 Teak</th>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">🧺 Polyrattan</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {[
+            ['Levensduur', '25–50 jaar', '10–15 jaar'],
+            ['Onderhoud', '1× per jaar oliën', 'Afspoelen'],
+            ['Uitstraling', 'Warm, klassiek, naturel', 'Modern, gevlochten'],
+            ['Prijs', '€€€ Duurder', '€€ Betaalbaarder'],
+            ['Gewicht', 'Zwaar', 'Licht'],
+            ['Duurzaamheid', 'FSC-hout beschikbaar', 'Plastic (fossiel)'],
+            ['Geschikt voor', 'Klassieke tuin, investering', 'Lounge-stijl, budget'],
+          ].map(([crit, teak, poly]) => (
+            <tr class="hover:bg-slate-50">
+              <td class="px-5 py-3 font-medium text-slate-700">{crit}</td>
+              <td class="px-5 py-3 text-slate-600">{teak}</td>
+              <td class="px-5 py-3 text-slate-600">{poly}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-10">
+      <div class="bg-amber-50 border-2 border-amber-300 rounded-2xl p-6">
+        <div class="font-bold text-slate-900 mb-2">🌳 Kies teak als je...</div>
+        <ul class="text-sm text-slate-600 space-y-1 mb-4">
+          <li>✓ Houdt van naturel, warm houtlook</li>
+          <li>✓ Bereid bent jaarlijks te onderhouden</li>
+          <li>✓ Voor de komende 30–50 jaar koopt</li>
+        </ul>
+        <a href="https://www.bol.com/nl/nl/s/?searchtext=teak+terrasmeubelen" target="_blank" rel="noopener nofollow"
+          class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">Teak op Bol.com →</a>
+      </div>
+      <div class="bg-green-50 border-2 border-green-300 rounded-2xl p-6">
+        <div class="font-bold text-slate-900 mb-2">🧺 Kies polyrattan als je...</div>
+        <ul class="text-sm text-slate-600 space-y-1 mb-4">
+          <li>✓ Geen onderhoud wil</li>
+          <li>✓ Een lounge-sfeer zoekt</li>
+          <li>✓ Budget-bewust bent</li>
+        </ul>
+        <a href="https://www.bol.com/nl/nl/s/?searchtext=polyrattan+loungeset" target="_blank" rel="noopener nofollow"
+          class="bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">Polyrattan op Bol.com →</a>
+      </div>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/teak-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Teak meubelen →</a>
+        <a href="/polyrattan-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Polyrattan meubelen →</a>
+        <a href="/aluminium-vs-teak" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium vs Teak →</a>
+      </div>
+    </section>
+  </div>
+</Layout>

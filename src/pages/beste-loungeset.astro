@@ -1,0 +1,173 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  {
+    q: 'Wat is een goede loungeset voor buiten?',
+    a: 'Een goede loungeset heeft een poedergecoat aluminium of polyrattan frame, kussens van minimaal 8 cm dik en UV-bestendige bekleding. Budget: Keter of Sunred voor €300–600. Midrange: Hartman of Royal Garden voor €700–1.200.',
+  },
+  {
+    q: 'Hoeveel personen past een 4-delige loungeset?',
+    a: 'Een standaard 4-delige loungeset bestaat uit een 2-zits bank, 2 fauteuils en een salontafel — voor 4 personen. Wil je meer, kies een 5- of 6-delig model met een extra 2-zits of hoekbank.',
+  },
+  {
+    q: 'Welke loungeset is het beste voor een klein terras?',
+    a: 'Voor terrassen tot 4m² kies je een 2-delige set (2 fauteuils + tafeltje) of een compacte 3-delige set. Merken als Keter Corfu en IKEA ÄPPLARÖ hebben compacte modellen. Let op het formaat bij aankoop.',
+  },
+  {
+    q: 'Kunnen loungekussens buiten blijven in de regen?',
+    a: 'Waterafstotende kussens (Olefin, Sunbrella) kunnen korte regen aan. Bij langdurige regen of nacht altijd binnenhalen of in een kussenzak. Sunbrella-stof is het beste: 100% waterbestendig, schimmelwerend en kleurvast.',
+  },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+        { "@type": "ListItem", "position": 2, "name": "Beste loungeset", "item": "https://www.terrasgigant.nl/beste-loungeset" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(({ q, a }) => ({
+        "@type": "Question",
+        "name": q,
+        "acceptedAnswer": { "@type": "Answer", "text": a }
+      }))
+    }
+  ]
+});
+---
+
+<Layout
+  title="Beste loungeset 2026 — top picks voor tuin en terras | Terrasgigant.nl"
+  description="Welke loungeset is de beste keuze voor je tuin? Van budget polyrattan tot premium aluminium — de beste loungesets vergeleken voor 2026."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2 flex-wrap">
+      <a href="/" class="hover:text-green-600">Home</a>
+      <span>›</span>
+      <span class="text-slate-700">Beste loungeset</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">
+      Beste loungeset 2026
+    </h1>
+    <p class="text-slate-600 text-lg mb-8 max-w-2xl">
+      Een loungeset is het hart van je terras. We vergeleken sets van €299 tot €2.500 — dit zijn de beste keuzes per budget.
+    </p>
+
+    <!-- Picks -->
+    <section class="mb-12">
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          {
+            tag: '€299–599', tagColor: 'slate', label: 'Budget keuze', type: 'Polyrattan 4-delig',
+            beschrijving: 'Keter Corfu, Sunred of Action eigen merk — voor wie een stijlvolle loungeset wil voor een vriendelijke prijs. Polyrattan frame, 8 cm kussens. Gaat 8–12 jaar mee.',
+            bol: 'loungeset polyrattan 4-delig budget', cb: 'loungeset polyrattan tuin',
+          },
+          {
+            tag: 'Beste keuze', tagColor: 'green', label: 'Midrange keuze', type: 'Aluminium 4–5 delig',
+            beschrijving: 'Hartman Aruba, Royal Garden Weston of Garden Impressions Bali — poedergecoat aluminium, Olefin kussens en een ontwerp dat 20+ jaar meegaat. Dit is de aankoop die je niet betreurt.',
+            bol: 'loungeset aluminium hartman 4-delig', cb: 'loungeset aluminium',
+          },
+          {
+            tag: 'Premium', tagColor: 'amber', label: 'Premium keuze', type: 'Aluminium + Sunbrella',
+            beschrijving: 'Gloster, Manutti of Taste Sunny Isle — voor wie het beste wil. Sunbrella-kussens (100% waterdicht, kleurvast 10+ jaar), zwaar gepoedercoat aluminium. Een investering voor de lange termijn.',
+            bol: 'loungeset aluminium premium sunbrella', cb: 'loungeset premium tuin',
+          },
+        ].map(({ tag, tagColor, label, type, beschrijving, bol, cb }) => {
+          const bc = tagColor === 'green' ? 'border-green-400 bg-green-50' : tagColor === 'amber' ? 'border-amber-400 bg-amber-50' : 'border-slate-200 bg-white';
+          const tc = tagColor === 'green' ? 'text-green-700' : tagColor === 'amber' ? 'text-amber-700' : 'text-slate-500';
+          return (
+            <div class={`rounded-2xl border-2 p-5 flex flex-col ${bc}`}>
+              <div class={`text-xs font-bold uppercase tracking-wide mb-1 ${tc}`}>{tag}</div>
+              <div class="font-black text-slate-900 text-lg mb-0.5">{label}</div>
+              <div class="text-xs font-semibold text-slate-500 mb-2">{type}</div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4 flex-1">{beschrijving}</p>
+              <div class="space-y-2">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                  class="flex justify-between bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">
+                  <span>Bol.com</span><span>→</span>
+                </a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                  class="flex justify-between bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">
+                  <span>Coolblue</span><span>→</span>
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Content -->
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Waar moet een goede loungeset aan voldoen?</h2>
+      <p>
+        Een loungeset koop je niet elk jaar — dus het loont om de juiste keuze te maken. De vijf belangrijkste punten:
+      </p>
+      <ol>
+        <li><strong>Frame materiaal:</strong> aluminium > polyrattan > staal. Aluminium roest nooit; staal kan roesten ondanks coating.</li>
+        <li><strong>Kussens:</strong> minimaal 8 cm dik. Kijk naar de stofkwaliteit: Sunbrella is het beste, Olefin is goed budget-alternatief.</li>
+        <li><strong>Formaat:</strong> meet je terras op. Een 4-delige set heeft gemiddeld 220×160 cm ruimte nodig inclusief looppad.</li>
+        <li><strong>Stabiliteit:</strong> controleer of poten breed genoeg zijn — goedkope sets wiebelen na een jaar.</li>
+        <li><strong>Kussenbewaring:</strong> koop altijd een kussenzak of -box erbij. Kussens binnenhalen = 5× langere levensduur.</li>
+      </ol>
+
+      <h2>Loungeset formaten: welk past op jouw terras?</h2>
+      <p>
+        <strong>2-delig (2 fauteuils + tafeltje):</strong> voor terrassen van 2–4m². Ideaal voor balkon of klein terras.<br/>
+        <strong>3-delig (bank + 2 fauteuils):</strong> voor terrassen van 4–8m². De meest verkochte configuratie.<br/>
+        <strong>4-delig (2-zits + 2 fauteuils + tafel):</strong> voor terrassen van 8–15m². Standaard gezinsset.<br/>
+        <strong>5–7 delig (hoekset of grote set):</strong> voor terrassen van 15m²+. Maximaal comfort.
+      </p>
+
+      <h2>Hoekloungeset of losse set?</h2>
+      <p>
+        Een hoekloungeset is ideaal als je een terrashoek volledig wil benutten — je benut de beschikbare ruimte efficiënter. Nadeel: je bent gebonden aan de configuratie. Een losse set (bank + fauteuils) is flexibeler te rangschikken. Kies een hoekset als je een vaste plek hebt; een losse set als je graag herschikt.
+      </p>
+    </section>
+
+    <!-- FAQ -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen loungeset</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-tuinset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste tuinset →</a>
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+        <a href="/loungeset-vs-tuinset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Loungeset vs tuinset →</a>
+        <a href="/terrasmeubelen-onderhoud" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Onderhoudstips →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Beste loungeset"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=loungeset+tuin"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=loungeset+tuin"
+  />
+</Layout>

@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqItems = [
+  { q: 'Is aluminium of polyrattan beter voor buiten?', a: 'Aluminium wint qua levensduur (20-30j vs 10-15j) en onderhoud. Polyrattan wint qua uitstraling voor loungestijl en is goedkoper. Voor de lange termijn is aluminium de betere investering.' },
+  { q: 'Welk materiaal is goedkoper: aluminium of polyrattan?', a: 'Polyrattan is op instapniveau goedkoper (€200–500 voor een 4-delige set). Kwalitatief aluminium begint rond €600. Voor langetermijn-kosten is aluminium goedkoper: langer mee, minder onderhoud.' },
+  { q: 'Kan polyrattan buiten in de regen?', a: 'Ja — polyrattan is waterbestendig. Kussens altijd binnenhalen. Het vlechtwerk zelf kan buiten blijven ook bij regen. Goedkope sets zijn minder waterbestendig; let op de kwaliteitsaanduiding bij aankoop.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Aluminium vs Polyrattan", "item": "https://www.terrasgigant.nl/aluminium-vs-polyrattan" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Aluminium vs Polyrattan terrasmeubelen — voor- en nadelen | Terrasgigant.nl"
+  description="Aluminium of polyrattan terrasmeubelen? Vergelijk prijs, levensduur, onderhoud en uitstraling om de beste keuze te maken."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Aluminium vs Polyrattan</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Aluminium vs Polyrattan terrasmeubelen</h1>
+    <p class="text-slate-600 text-lg mb-10 max-w-2xl">De twee populairste keuzes voor een loungeset. Welk materiaal past het beste bij jou?</p>
+
+    <section class="mb-10 overflow-x-auto rounded-2xl border border-slate-200">
+      <table class="w-full text-sm">
+        <thead class="bg-slate-50">
+          <tr>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">Criterium</th>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">🔩 Aluminium</th>
+            <th class="text-left px-5 py-3 font-semibold text-slate-700">🧺 Polyrattan</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-slate-100">
+          {[
+            ['Levensduur', '20–30 jaar', '10–15 jaar'],
+            ['Onderhoud', 'Minimaal', 'Afspoelen'],
+            ['Uitstraling', 'Modern/strak', 'Gevlochten/warm'],
+            ['Gewicht', 'Licht', 'Licht'],
+            ['Prijs (loungeset)', '€600–1.500', '€200–800'],
+            ['Kleurvast', 'Uitstekend (20+ jaar)', 'Matig (8–12 jaar)'],
+            ['Roestbestendig', '✓ Ja', '✓ Frame ja, weefsel anders'],
+          ].map(([crit, alu, poly]) => (
+            <tr class="hover:bg-slate-50">
+              <td class="px-5 py-3 font-medium text-slate-700">{crit}</td>
+              <td class="px-5 py-3 text-slate-600">{alu}</td>
+              <td class="px-5 py-3 text-slate-600">{poly}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+
+    <div class="grid sm:grid-cols-2 gap-4 mb-10">
+      <div class="bg-slate-50 border-2 border-slate-300 rounded-2xl p-6">
+        <div class="font-bold text-slate-900 mb-2">🔩 Kies aluminium als je...</div>
+        <ul class="text-sm text-slate-600 space-y-1">
+          <li>✓ Langdurig zonder onderhoud wil genieten</li>
+          <li>✓ Een modern/strak design wil</li>
+          <li>✓ Investeert voor de lange termijn</li>
+        </ul>
+        <a href="https://www.bol.com/nl/nl/s/?searchtext=aluminium+loungeset" target="_blank" rel="noopener nofollow"
+          class="inline-block mt-4 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">Aluminium op Bol.com →</a>
+      </div>
+      <div class="bg-green-50 border-2 border-green-300 rounded-2xl p-6">
+        <div class="font-bold text-slate-900 mb-2">🧺 Kies polyrattan als je...</div>
+        <ul class="text-sm text-slate-600 space-y-1">
+          <li>✓ De lounge-sfeer wil voor minder geld</li>
+          <li>✓ Binnen 5–10 jaar toch wil vervangen</li>
+          <li>✓ Gevlochten uitstraling aantrekkelijk vindt</li>
+        </ul>
+        <a href="https://www.bol.com/nl/nl/s/?searchtext=polyrattan+loungeset" target="_blank" rel="noopener nofollow"
+          class="inline-block mt-4 bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-4 py-2 rounded-lg transition-colors">Polyrattan op Bol.com →</a>
+      </div>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+        <a href="/polyrattan-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Polyrattan meubelen →</a>
+        <a href="/aluminium-vs-teak" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium vs Teak →</a>
+      </div>
+    </section>
+  </div>
+</Layout>

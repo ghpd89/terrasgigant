@@ -1,0 +1,113 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  { q: 'Welk ligbed is het beste voor de tuin?', a: 'Een aluminium ligbed met verstelbare rugleuning en dikke kussens is voor de meeste mensen de beste keuze. Merken als Hartman, Garden Impressions en Taste bieden uitstekende kwaliteit van €150–500.' },
+  { q: 'Welk materiaal is het beste voor een ligbed?', a: 'Aluminium: lichtgewicht, roestvrij, onderhoudsloos. Teak: mooi maar zwaar en vraagt onderhoud. Polyrattan: comfortabel door gebogen vorm. Voor thuis buiten is aluminium de praktische keuze.' },
+  { q: 'Kan een ligbed buiten blijven bij regen?', a: 'Het ligbed-frame (aluminium, teak) kan prima buiten in de regen. Het matras/kussen moet worden afgedekt of naar binnen gehaald. Sunbrella-matrassen zijn waterdicht en kunnen buiten staan.' },
+  { q: 'Wat is een sunbed en een ligbed?', a: 'Sunbed en ligbed zijn hetzelfde — een ligbed (ook: ligstoel of tuinligstoel) is een ligbed voor buiten gebruik, ook wel sunbed, zonnebed of ligstoel genoemd. Een loungebed is een bredere versie voor twee personen.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Beste ligbed", "item": "https://www.terrasgigant.nl/beste-ligbed" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Beste ligbed 2026 — zonnebed voor tuin en terras | Terrasgigant.nl"
+  description="Het beste ligbed voor de tuin kopen? Vergelijk aluminium, teak en polyrattan zonnebedden — van budget tot premium."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Beste ligbed</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Beste ligbed 2026</h1>
+    <p class="text-slate-600 text-lg mb-8 max-w-2xl">Een goed ligbed maakt zonnige dagen nog beter. Van betaalbare aluminium zonnebedden tot luxe teak loungebedden — dit zijn de beste keuzes.</p>
+
+    <section class="mb-12">
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          { tag: '€79–199', tagColor: 'slate', label: 'Budget ligbed', beschrijving: 'Aluminium frame, inklapbaar, basismatras. Merken als Siena of Suns. Prima voor occasioneel gebruik. Verstelbaar in 3–5 standen.', bol: 'ligbed tuin aluminium budget', cb: 'tuinligbed budget' },
+          { tag: 'Beste keuze', tagColor: 'green', label: 'Midrange ligbed', beschrijving: 'Hartman, Garden Impressions — dik matras, meerdere verstelstanden, roestvrij aluminium. 10+ jaar meegaat. Dit is wat de meeste kopers kiezen.', bol: 'ligbed tuin aluminium hartman 200', cb: 'ligbed tuin aluminium' },
+          { tag: 'Premium', tagColor: 'amber', label: 'Luxe loungebed', beschrijving: 'Gloster, Taste of Jati & Kebon teak. Dikke Sunbrella matrassen, breed en diep. Voor wie wil liggen alsof het een hotelstrand is.', bol: 'ligbed teak premium sunbrella', cb: 'ligbed teak premium' },
+        ].map(({ tag, tagColor, label, beschrijving, bol, cb }) => {
+          const bc = tagColor === 'green' ? 'border-green-400 bg-green-50' : tagColor === 'amber' ? 'border-amber-400 bg-amber-50' : 'border-slate-200 bg-white';
+          const tc = tagColor === 'green' ? 'text-green-700' : tagColor === 'amber' ? 'text-amber-700' : 'text-slate-500';
+          return (
+            <div class={`rounded-2xl border-2 p-5 flex flex-col ${bc}`}>
+              <div class={`text-xs font-bold uppercase tracking-wide mb-1 ${tc}`}>{tag}</div>
+              <div class="font-black text-slate-900 text-lg mb-2">{label}</div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4 flex-1">{beschrijving}</p>
+              <div class="space-y-2">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                  class="flex justify-between bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">
+                  <span>Bol.com</span><span>→</span>
+                </a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                  class="flex justify-between bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors">
+                  <span>Coolblue</span><span>→</span>
+                </a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Waar let je op bij een ligbed kopen?</h2>
+      <ul>
+        <li><strong>Frame:</strong> aluminium is het lichtst en roestvrij. Teak is mooier maar zwaarder.</li>
+        <li><strong>Matras:</strong> dikker = comfortabeler. Sunbrella-stof is waterdicht en UV-bestendig.</li>
+        <li><strong>Verstelstanden:</strong> minimaal 3 standen. Volledig plat liggen is essentieel.</li>
+        <li><strong>Wieltjes:</strong> handig voor makkelijk verplaatsen. Let op of ze aanwezig zijn.</li>
+        <li><strong>Afmeting:</strong> standaard is 190×55 cm. Extra breed (65–75 cm) is comfortabeler.</li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen ligbed</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungeset →</a>
+        <a href="/beste-parasol" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste parasol →</a>
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Beste ligbed tuin"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=ligbed+tuin"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=ligbed+tuin"
+  />
+</Layout>

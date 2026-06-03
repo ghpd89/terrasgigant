@@ -1,0 +1,124 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqItems = [
+  { q: 'Hoe richt ik een klein terras in?', a: 'Gebruik lichte kleuren om ruimte te creëren. Kies compacte meubels: een bistroset of 2-delige loungeset. Gebruik verticale ruimte: muurplanten, klimplanten of wandhaken. Vermijd grote parasols — een kleine knikarm parasol (180 cm) is voldoende.' },
+  { q: 'Welke planten staan mooi bij terrasmeubelen?', a: 'Lavendel (ook insectenwerend), olijfboom, buxus in pot, grassen (Stipa), geraniums en klimrozen. Combineer potten van verschillende hoogten voor diepte. Kruiden als rozemarijn en tijm zijn functioneel én decoratief.' },
+  { q: 'Hoe maak ik mijn terras gezellig in de avond?', a: 'Buitenverlichting maakt het verschil: sfeervolle LED-lichtjes in een slinger, staande lampen of ingebouwde vloerlampen. Kaarsjes in windlichten, een vuurkorf of terrasverwarmer verlengt het seizoen. Zachte kussens in warme kleuren maken de sfeer compleet.' },
+  { q: 'Welke stijl terrasmeubelen past bij mijn huis?', a: 'Modern/minimalistisch huis: antraciet aluminium. Klassiek of landelijk: teak of teakkleur aluminium. Mediterraan: lichte kleuren (wit, terracotta), polyrattan of ijzer. Scandinavisch: licht hout tones, strakke vormen, naturel kleuren.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Terras inrichten", "item": "https://www.terrasgigant.nl/terras-inrichten" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Terras inrichten 2026 — ideeën, stijlen en tips | Terrasgigant.nl"
+  description="Hoe richt je je terras optimaal in? Ideeën voor kleine en grote terrassen, stijltips, plantentips en verlichting voor een gezellig buitenverblijf."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Terras inrichten</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Terras inrichten</h1>
+    <p class="text-slate-600 text-lg mb-10 max-w-2xl">Van klein balkon tot ruime tuin — met de juiste aanpak maak je van elk terras een plek om van te genieten. Ideeën, stijltips en praktisch advies.</p>
+
+    <!-- Stijlen -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Terrasstijlen: welke past bij jou?</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[
+          { icon: '🖤', stijl: 'Modern / Minimalistisch', kenmerken: ['Antraciet of zwart aluminium', 'Strakke lijnen, weinig decoratie', 'Keramische tafels', 'Grafisch patroonwerk op vloer'], kleur: 'bg-slate-50 border-slate-200' },
+          { icon: '🌿', stijl: 'Naturel / Scandinavisch', kenmerken: ['Licht teakkleur aluminium', 'Naturel kussens (beige, olijf)', 'Veel planten in terracotta potten', 'Linnen textielen'], kleur: 'bg-green-50 border-green-200' },
+          { icon: '☀️', stijl: 'Mediterraan', kenmerken: ['Wit metaal of terracotta tinten', 'Kleurrijke kussens (blauw, geel)', 'Tegel-look vloer', 'Olijfboom in pot'], kleur: 'bg-orange-50 border-orange-200' },
+          { icon: '🌳', stijl: 'Klassiek / Landelijk', kenmerken: ['Teak hout of rotan', 'Bloemen en kruiden rondom', 'Bijpassende houten vloer', 'Romantische verlichting'], kleur: 'bg-amber-50 border-amber-200' },
+          { icon: '🏖️', stijl: 'Lounge / Resort', kenmerken: ['Diepe polyrattan loungestoelen', 'Veel zachte kussens', 'Zweefparasol', 'Vuurkorf voor sfeer'], kleur: 'bg-blue-50 border-blue-200' },
+          { icon: '🌱', stijl: 'Urban Jungle', kenmerken: ['Planten als hoofdelement', 'Bamboe of rotan accenten', 'Hangende potten', 'Groen doek of pergola'], kleur: 'bg-emerald-50 border-emerald-200' },
+        ].map(({ icon, stijl, kenmerken, kleur }) => (
+          <div class={`border rounded-2xl p-5 ${kleur}`}>
+            <div class="text-2xl mb-2">{icon}</div>
+            <div class="font-bold text-slate-900 mb-3">{stijl}</div>
+            <ul class="space-y-1">
+              {kenmerken.map(k => <li class="text-xs text-slate-600 flex gap-1.5"><span class="text-green-500 shrink-0">✓</span>{k}</li>)}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Zones -->
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Terras indelen in zones</h2>
+      <p>Op een terras van 15m²+ kun je meerdere zones creëren voor een professionele uitstraling:</p>
+      <ul>
+        <li><strong>Eetzone:</strong> tuinset op normale zithoogte, dicht bij de keuken of achterdeur</li>
+        <li><strong>Loungezone:</strong> lagere loungeset, meer naar achteren in de tuin</li>
+        <li><strong>Groene zone:</strong> plantenbakken, border of hoog gras als scheiding</li>
+        <li><strong>Verlichting:</strong> sfeerverlichting scheidt zones ook op donkere avonden</li>
+      </ul>
+      <p>Op een kleiner terras (tot 10m²): kies één functie en doe die goed. Een bistro-hoek of compacte loungeset is beter dan overvol.</p>
+
+      <h2>Verlichting: de vergeten dimensie</h2>
+      <p>Goede buitenverlichting maakt je terras 's avonds net zo aantrekkelijk als overdag. Opties:</p>
+      <ul>
+        <li><strong>LED-lichtslinger:</strong> €10–30, enorme sfeerwaarde, hangt gemakkelijk over pergola</li>
+        <li><strong>Buitenlamp op zonne-energie:</strong> geen snoer nodig, inprikken in de grond</li>
+        <li><strong>Terrasverwarmer:</strong> verlengt het seizoen met 2–3 maanden</li>
+        <li><strong>Vuurkorf:</strong> sfeer én warmte, gemiddeld €60–200</li>
+      </ul>
+    </section>
+
+    <!-- CTA blok -->
+    <div class="bg-slate-900 text-white rounded-2xl p-6 mb-12 flex flex-col sm:flex-row items-start sm:items-center gap-4">
+      <div class="flex-1">
+        <div class="font-bold text-lg mb-1">Terrasmeubelen zoeken?</div>
+        <div class="text-slate-400 text-sm">Bekijk onze beste picks of zoek direct.</div>
+      </div>
+      <div class="flex gap-2">
+        <a href="https://www.bol.com/nl/nl/s/?searchtext=terrasmeubelen+loungeset" target="_blank" rel="noopener nofollow"
+          class="bg-orange-500 hover:bg-orange-600 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors">Bol.com →</a>
+        <a href="https://www.coolblue.nl/zoeken?query=terrasmeubelen" target="_blank" rel="noopener nofollow"
+          class="bg-blue-600 hover:bg-blue-700 text-white font-bold text-sm px-5 py-2.5 rounded-xl transition-colors">Coolblue →</a>
+      </div>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen terras inrichten</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungeset →</a>
+        <a href="/kleine-tuin-meubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Kleine tuin →</a>
+        <a href="/beste-parasol" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste parasol →</a>
+      </div>
+    </section>
+  </div>
+</Layout>

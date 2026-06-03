@@ -1,0 +1,72 @@
+---
+interface Props {
+  label: string;
+  bolUrl: string;
+  coolblueUrl: string;
+}
+const { label, bolUrl, coolblueUrl } = Astro.props;
+---
+
+<div
+  id="sticky-buy-bar"
+  class="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-slate-200 shadow-xl translate-y-full transition-transform duration-300 ease-out"
+>
+  <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between gap-3">
+    <span class="text-sm font-semibold text-slate-700 hidden sm:block shrink-0 truncate max-w-xs">
+      {label} bekijken:
+    </span>
+    <div class="flex gap-2 w-full sm:w-auto">
+      <a
+        href={bolUrl}
+        target="_blank"
+        rel="noopener nofollow"
+        class="flex-1 sm:flex-none text-center bg-orange-500 hover:bg-orange-600 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-colors"
+      >
+        Bol.com →
+      </a>
+      <a
+        href={coolblueUrl}
+        target="_blank"
+        rel="noopener nofollow"
+        class="flex-1 sm:flex-none text-center bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-5 py-2.5 rounded-xl transition-colors"
+      >
+        Coolblue →
+      </a>
+      <button
+        id="sticky-close"
+        aria-label="Sluiten"
+        class="text-slate-400 hover:text-slate-600 px-2 transition-colors text-xl"
+      >
+        ✕
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const bar = document.getElementById('sticky-buy-bar');
+  const closeBtn = document.getElementById('sticky-close');
+  let visible = false;
+
+  const show = () => {
+    if (!visible) {
+      visible = true;
+      bar?.classList.remove('translate-y-full');
+    }
+  };
+  const hide = () => {
+    visible = false;
+    bar?.classList.add('translate-y-full');
+  };
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 500) show();
+  }, { passive: true });
+
+  closeBtn?.addEventListener('click', () => {
+    hide();
+    sessionStorage.setItem('stickyBarClosed', '1');
+  });
+
+  if (sessionStorage.getItem('stickyBarClosed')) hide();
+</script>

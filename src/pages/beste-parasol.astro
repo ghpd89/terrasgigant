@@ -1,0 +1,145 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  {
+    q: 'Welke parasol is het beste voor de tuin?',
+    a: 'Een zweefparasol van 3×3 meter met aluminium paal is voor de meeste tuinen de beste keuze. Merken als Hartman, Doppler of Garden Impressions bieden uitstekende kwaliteit voor €150–400. Budget-optie: een stokparasol van €50–120.',
+  },
+  {
+    q: 'Wat is het verschil tussen een zweefparasol en stokparasol?',
+    a: 'Een zweefparasol heeft een arm aan de zijkant — de poot staat buiten de schaduwzone, perfect voor loungeset of zwembad. Een stokparasol heeft de poot in het midden — werkt via een tafelgat. Zweefparasol geeft meer vrijheid maar kost meer.',
+  },
+  {
+    q: 'Hoe groot moet een parasol zijn voor een loungeset?',
+    a: 'Voor een 4-delige loungeset heb je een parasol van minimaal 3×3 meter (ronde of vierkante uitvoering) nodig. Zweefparasols van 3,5–4 meter geven extra comfortabele bescherming. Reken dat een parasol zo\'n 70% van z\'n diameter aan schaduw geeft.',
+  },
+  {
+    q: 'Kan een parasol buiten staan bij wind?',
+    a: 'De meeste parasols zijn tot Beaufort 3–4 geschikt. Bij wind altijd sluiten — een open parasol werkt als een zeil. Premium zweefparasols (Glatz, Doppler Expert) zijn stabielere constructies maar ook zij moeten dicht bij harde wind.',
+  },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+        { "@type": "ListItem", "position": 2, "name": "Beste parasol", "item": "https://www.terrasgigant.nl/beste-parasol" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": faqItems.map(({ q, a }) => ({
+        "@type": "Question",
+        "name": q,
+        "acceptedAnswer": { "@type": "Answer", "text": a }
+      }))
+    }
+  ]
+});
+---
+
+<Layout
+  title="Beste parasol 2026 — stok-, zweef- en kantelparasol vergeleken | Terrasgigant.nl"
+  description="Welke parasol is de beste keuze? Van budget stokparasol tot luxe zweefparasol — de beste tuinparasols per type en budget voor 2026."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a>
+      <span>›</span>
+      <span class="text-slate-700">Beste parasol</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Beste parasol 2026</h1>
+    <p class="text-slate-600 text-lg mb-8 max-w-2xl">
+      Een goede parasol is onmisbaar op een zonnige dag. We vergelijken stokparasols, zweefparasols en kantelparasols — voor elk budget en elk terras.
+    </p>
+
+    <!-- Type vergelijking -->
+    <section class="mb-10">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">Welk type parasol past bij jou?</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          { icon: '🌂', type: 'Stokparasol', voor: 'Tafel met parasolstandaard', prijs: '€39–150', pro: 'Goedkoop, eenvoudig', con: 'Poot in het midden', bol: 'stokparasol tuin', cb: 'stokparasol' },
+          { icon: '☂️', type: 'Kantelparasol', voor: 'Flexibele zonsbescherming', prijs: '€80–250', pro: 'Kantelbare kap, betaalbaar', con: 'Poot staat nog centraal', bol: 'kantelparasol tuin', cb: 'kantelparasol tuin' },
+          { icon: '🏖️', type: 'Zweefparasol', voor: 'Loungeset of zwembad', prijs: '€150–800', pro: 'Vrije ruimte eronder', con: 'Duurder, zwaardere voet', bol: 'zweefparasol 3x3 tuin', cb: 'zweefparasol tuin' },
+        ].map(({ icon, type, voor, prijs, pro, con, bol, cb }) => (
+          <div class="border border-slate-200 rounded-2xl p-5 bg-white">
+            <div class="text-3xl mb-2">{icon}</div>
+            <div class="font-bold text-slate-900 mb-1">{type}</div>
+            <div class="text-xs text-slate-500 mb-3">{voor} · {prijs}</div>
+            <div class="text-xs text-green-600 mb-1">✓ {pro}</div>
+            <div class="text-xs text-red-500 mb-4">✗ {con}</div>
+            <div class="space-y-1.5">
+              <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                class="flex justify-between bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-1.5 px-3 rounded-lg transition-colors">
+                <span>Bol.com</span><span>→</span>
+              </a>
+              <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                class="flex justify-between bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-1.5 px-3 rounded-lg transition-colors">
+                <span>Coolblue</span><span>→</span>
+              </a>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Zweefparasol kopen: waar op letten?</h2>
+      <p>
+        Een zweefparasol is de meest veelzijdige optie. Let op deze punten:
+      </p>
+      <ul>
+        <li><strong>Maat:</strong> 3×3 m is standaard voor een 4-delige loungeset. 3,5×3,5 m voor meer comfort.</li>
+        <li><strong>Paal:</strong> liefst aluminium of roestvrij staal. Vermijd gelakte stalen palen — die roesten na 2 jaar.</li>
+        <li><strong>Doek:</strong> Olefin of solution-dyed acrylic (Sunbrella-achtig). UV-bestendig en schimmelwerend.</li>
+        <li><strong>Voet:</strong> minimaal 60 kg bij een 3m parasol. Kies een graniet- of betonnen voet voor stabiliteit.</li>
+        <li><strong>Merk:</strong> Glatz (Zwitsers), Doppler (Oostenrijks) en Hartman zijn de beste merken.</li>
+      </ul>
+      <h2>Parasol opbergen in de winter</h2>
+      <p>
+        Goede parasols kunnen buiten overwinterd worden <em>mits gesloten en met een beschermhoes</em>. Het doek altijd droog opbergen om schimmelvorming te voorkomen. Premium parasols (Glatz, Doppler) zijn berekend op Nederlandse winters.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen parasol</h2>
+      <div class="space-y-3">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm sm:text-base">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungeset →</a>
+        <a href="/beste-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Alle beste meubelen →</a>
+        <a href="/terras-inrichten" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Terras inrichten →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Beste parasol tuin"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=parasol+tuin"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=parasol+tuin"
+  />
+</Layout>
