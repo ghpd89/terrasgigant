@@ -5,12 +5,21 @@ interface Props {
   title: string;
   description: string;
   canonical?: string;
+  ogImage?: string;
 }
 
-const { title, description, canonical } = Astro.props;
+const { title, description, canonical, ogImage } = Astro.props;
 const siteUrl = 'https://www.terrasgigant.nl';
 const canonicalUrl = canonical ?? siteUrl + Astro.url.pathname;
 const GA_ID = 'G-XXXXXXXXXX';
+const ogImg = ogImage ?? `${siteUrl}/og-image.svg`;
+
+const navLinks = [
+  { href: '/terrasmeubelen-overzicht', label: 'Overzicht' },
+  { href: '/terrasmeubelen-kopen-gids', label: 'Koopgids' },
+  { href: '/beste-loungeset', label: 'Loungesets' },
+  { href: '/terras-inrichten', label: 'Inspiratie' },
+];
 ---
 
 <!doctype html>
@@ -40,11 +49,11 @@ const GA_ID = 'G-XXXXXXXXXX';
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="nl_NL" />
     <meta property="og:site_name" content="Terrasgigant.nl" />
-    <meta property="og:image" content="https://www.terrasgigant.nl/og-image.svg" />
+    <meta property="og:image" content={ogImg} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://www.terrasgigant.nl/og-image.svg" />
+    <meta name="twitter:image" content={ogImg} />
 
     <!-- WebSite schema -->
     <script type="application/ld+json">
@@ -53,8 +62,13 @@ const GA_ID = 'G-XXXXXXXXXX';
         "@type": "WebSite",
         "name": "Terrasgigant.nl",
         "url": "https://www.terrasgigant.nl",
-        "description": "Alles over terrasmeubelen: loungesets, tuinsets, parasols en meer",
-        "inLanguage": "nl-NL"
+        "description": "Onafhankelijk advies over terrasmeubelen in Nederland",
+        "inLanguage": "nl-NL",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.terrasgigant.nl/terrasmeubelen-overzicht",
+          "query-input": "required name=search_term_string"
+        }
       }
     </script>
 
@@ -62,37 +76,66 @@ const GA_ID = 'G-XXXXXXXXXX';
   </head>
   <body class="bg-white text-slate-900 font-sans antialiased">
 
+    <!-- Seizoensbanners -->
+    <div class="bg-green-600 text-white text-xs text-center py-2 px-4 font-medium">
+      🌞 Zomerseizoen 2026 — gratis bezorging bij Bol.com &amp; Coolblue boven €50
+      <a href="/beste-terrasmeubelen" class="underline ml-2 opacity-80 hover:opacity-100">Bekijk beste picks →</a>
+    </div>
+
     <!-- Nav -->
-    <header class="border-b border-slate-200 bg-white sticky top-0 z-50">
+    <header id="site-header" class="border-b border-slate-200 bg-white/95 backdrop-blur sticky top-0 z-50 transition-shadow duration-200">
       <div class="max-w-5xl mx-auto px-4 h-14 flex items-center justify-between">
-        <a href="/" class="font-bold text-lg text-slate-900 tracking-tight">
-          🪑 Terrasgigant<span class="text-green-600">.nl</span>
+        <a href="/" class="flex items-center gap-2 font-black text-lg text-slate-900 tracking-tight hover:opacity-80 transition-opacity">
+          <span class="text-2xl leading-none">🪑</span>
+          <span>Terrasgigant<span class="text-green-600">.nl</span></span>
         </a>
-        <nav class="hidden sm:flex items-center gap-5 text-sm font-medium">
-          <a href="/terrasmeubelen-overzicht" class="text-slate-600 hover:text-slate-900 transition-colors">Overzicht</a>
-          <a href="/terrasmeubelen-kopen-gids" class="text-slate-600 hover:text-slate-900 transition-colors">Koopgids</a>
-          <a href="/beste-loungeset" class="text-slate-600 hover:text-slate-900 transition-colors">Loungesets</a>
-          <a href="/terras-inrichten" class="text-slate-600 hover:text-slate-900 transition-colors">Inspiratie</a>
-          <a href="/beste-terrasmeubelen" class="bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded-lg transition-colors">
+
+        <!-- Desktop nav -->
+        <nav class="hidden md:flex items-center gap-1 text-sm font-medium">
+          {navLinks.map(({ href, label }) => (
+            <a href={href} class="text-slate-600 hover:text-slate-900 hover:bg-slate-100 px-3 py-1.5 rounded-lg transition-all">
+              {label}
+            </a>
+          ))}
+          <a href="/beste-terrasmeubelen"
+            class="ml-2 bg-green-600 hover:bg-green-700 text-white px-4 py-1.5 rounded-lg transition-colors font-semibold text-sm shadow-sm">
             Beste keuze →
           </a>
         </nav>
-        <!-- Mobile menu button -->
-        <button id="mobile-menu-btn" class="sm:hidden text-slate-600 hover:text-slate-900 p-2">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+
+        <!-- Mobile menu btn -->
+        <button id="mobile-menu-btn" class="md:hidden flex items-center gap-1.5 text-slate-600 hover:text-slate-900 p-2 rounded-lg hover:bg-slate-100 transition-colors" aria-label="Menu openen">
+          <svg id="icon-menu" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="icon-close" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
           </svg>
         </button>
       </div>
-      <!-- Mobile menu -->
-      <div id="mobile-menu" class="hidden sm:hidden border-t border-slate-100 bg-white px-4 py-3 space-y-2">
-        <a href="/terrasmeubelen-overzicht" class="block text-sm text-slate-700 py-1.5">Overzicht</a>
-        <a href="/terrasmeubelen-kopen-gids" class="block text-sm text-slate-700 py-1.5">Koopgids</a>
-        <a href="/beste-loungeset" class="block text-sm text-slate-700 py-1.5">Beste loungeset</a>
-        <a href="/beste-tuinset" class="block text-sm text-slate-700 py-1.5">Beste tuinset</a>
-        <a href="/beste-parasol" class="block text-sm text-slate-700 py-1.5">Beste parasol</a>
-        <a href="/terras-inrichten" class="block text-sm text-slate-700 py-1.5">Terras inrichten</a>
-        <a href="/beste-terrasmeubelen" class="block text-sm font-semibold text-green-600 py-1.5">Beste terrasmeubelen →</a>
+
+      <!-- Mobile menu dropdown -->
+      <div id="mobile-menu" class="hidden md:hidden border-t border-slate-100 bg-white">
+        <div class="max-w-5xl mx-auto px-4 py-3 grid grid-cols-2 gap-1">
+          {navLinks.map(({ href, label }) => (
+            <a href={href} class="text-sm text-slate-700 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium">
+              {label}
+            </a>
+          ))}
+          <a href="/beste-loungeset" class="text-sm text-slate-700 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium">Loungeset</a>
+          <a href="/beste-tuinset" class="text-sm text-slate-700 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium">Tuinset</a>
+          <a href="/beste-parasol" class="text-sm text-slate-700 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium">Parasol</a>
+          <a href="/beste-ligbed" class="text-sm text-slate-700 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium">Ligbed</a>
+          <a href="/aluminium-terrasmeubelen" class="text-sm text-slate-700 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium">Aluminium</a>
+          <a href="/teak-terrasmeubelen" class="text-sm text-slate-700 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium">Teak hout</a>
+          <a href="/terrasmeubelen-onder-500-euro" class="text-sm text-slate-700 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium">Onder €500</a>
+          <a href="/kleine-tuin-meubelen" class="text-sm text-slate-700 px-3 py-2.5 rounded-lg hover:bg-slate-50 font-medium">Kleine tuin</a>
+        </div>
+        <div class="px-4 pb-3">
+          <a href="/beste-terrasmeubelen" class="block text-center bg-green-600 hover:bg-green-700 text-white font-bold text-sm py-3 rounded-xl transition-colors">
+            🏆 Beste terrasmeubelen 2026 →
+          </a>
+        </div>
       </div>
     </header>
 
@@ -101,47 +144,114 @@ const GA_ID = 'G-XXXXXXXXXX';
     </main>
 
     <!-- Footer -->
-    <footer class="mt-20 border-t border-slate-200 bg-slate-50 py-10">
-      <div class="max-w-5xl mx-auto px-4 text-sm text-slate-500">
-        <div class="flex flex-col sm:flex-row justify-between gap-8">
-          <div class="max-w-xs">
-            <strong class="text-slate-700 text-base">🪑 Terrasgigant.nl</strong>
-            <p class="mt-2 text-xs leading-relaxed">
-              Onafhankelijk advies over terrasmeubelen. Van loungeset tot parasol — wij helpen je de beste keuze te maken voor jouw tuin of terras.
+    <footer class="mt-20 border-t border-slate-200 bg-slate-950 text-slate-400 py-14">
+      <div class="max-w-5xl mx-auto px-4">
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-8 mb-10">
+          <!-- Brand -->
+          <div class="col-span-2 sm:col-span-1">
+            <div class="text-white font-black text-lg mb-2">🪑 Terrasgigant.nl</div>
+            <p class="text-xs leading-relaxed text-slate-500">
+              Onafhankelijk advies over terrasmeubelen in Nederland. Geen reclame, gewoon eerlijk advies.
             </p>
+            <div class="mt-4 flex gap-2">
+              <span class="bg-slate-800 text-slate-400 text-xs px-2 py-1 rounded-md">🇳🇱 NL</span>
+              <span class="bg-slate-800 text-slate-400 text-xs px-2 py-1 rounded-md">✓ Onafhankelijk</span>
+            </div>
           </div>
-          <div class="grid grid-cols-2 sm:grid-cols-3 gap-x-10 gap-y-1 text-xs">
-            <a href="/terrasmeubelen-overzicht" class="hover:text-green-600 py-0.5">Overzicht</a>
-            <a href="/terrasmeubelen-kopen-gids" class="hover:text-green-600 py-0.5">Koopgids</a>
-            <a href="/beste-terrasmeubelen" class="hover:text-green-600 py-0.5">Beste terrasmeubelen</a>
-            <a href="/beste-loungeset" class="hover:text-green-600 py-0.5">Beste loungeset</a>
-            <a href="/beste-tuinset" class="hover:text-green-600 py-0.5">Beste tuinset</a>
-            <a href="/beste-parasol" class="hover:text-green-600 py-0.5">Beste parasol</a>
-            <a href="/beste-ligbed" class="hover:text-green-600 py-0.5">Beste ligbed</a>
-            <a href="/beste-tuinstoel" class="hover:text-green-600 py-0.5">Beste tuinstoel</a>
-            <a href="/beste-tuinbank" class="hover:text-green-600 py-0.5">Beste tuinbank</a>
-            <a href="/aluminium-terrasmeubelen" class="hover:text-green-600 py-0.5">Aluminium</a>
-            <a href="/teak-terrasmeubelen" class="hover:text-green-600 py-0.5">Teak hout</a>
-            <a href="/polyrattan-terrasmeubelen" class="hover:text-green-600 py-0.5">Polyrattan</a>
-            <a href="/terras-inrichten" class="hover:text-green-600 py-0.5">Terras inrichten</a>
-            <a href="/terrasmeubelen-onderhoud" class="hover:text-green-600 py-0.5">Onderhoud</a>
-            <a href="/terrasmeubelen-opbergen-winter" class="hover:text-green-600 py-0.5">Winteropslag</a>
-            <a href="/terrasmeubelen-onder-500-euro" class="hover:text-green-600 py-0.5">Onder €500</a>
-            <a href="/kleine-tuin-meubelen" class="hover:text-green-600 py-0.5">Kleine tuin</a>
-            <a href="/aluminium-vs-teak" class="hover:text-green-600 py-0.5">Aluminium vs teak</a>
+
+          <!-- Categorieen -->
+          <div>
+            <div class="text-slate-300 font-semibold text-xs uppercase tracking-wider mb-3">Producten</div>
+            <ul class="space-y-2 text-xs">
+              {[
+                ['Beste loungeset', '/beste-loungeset'],
+                ['Beste tuinset', '/beste-tuinset'],
+                ['Beste parasol', '/beste-parasol'],
+                ['Beste ligbed', '/beste-ligbed'],
+                ['Beste tuinstoel', '/beste-tuinstoel'],
+                ['Loungeset 4-delig', '/loungeset-4-delig'],
+                ['Tuinset 6 personen', '/tuinset-voor-6-personen'],
+                ['Zweefparasol', '/zweefparasol'],
+              ].map(([l, h]) => (
+                <li><a href={h} class="hover:text-green-400 transition-colors">{l}</a></li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Materialen -->
+          <div>
+            <div class="text-slate-300 font-semibold text-xs uppercase tracking-wider mb-3">Materialen</div>
+            <ul class="space-y-2 text-xs">
+              {[
+                ['Aluminium', '/aluminium-terrasmeubelen'],
+                ['Teak hout', '/teak-terrasmeubelen'],
+                ['Polyrattan', '/polyrattan-terrasmeubelen'],
+                ['Kunststof', '/kunststof-terrasmeubelen'],
+                ['Aluminium vs Teak', '/aluminium-vs-teak'],
+                ['Aluminium vs Polyrattan', '/aluminium-vs-polyrattan'],
+                ['Teak vs Polyrattan', '/teak-vs-polyrattan'],
+                ['Loungeset vs Tuinset', '/loungeset-vs-tuinset'],
+              ].map(([l, h]) => (
+                <li><a href={h} class="hover:text-green-400 transition-colors">{l}</a></li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Gidsen -->
+          <div>
+            <div class="text-slate-300 font-semibold text-xs uppercase tracking-wider mb-3">Gidsen &amp; Tips</div>
+            <ul class="space-y-2 text-xs">
+              {[
+                ['Koopgids 2026', '/terrasmeubelen-kopen-gids'],
+                ['Terras inrichten', '/terras-inrichten'],
+                ['Terras aanleggen', '/terras-aanleggen'],
+                ['Onderhoud', '/terrasmeubelen-onderhoud'],
+                ['Winteropslag', '/terrasmeubelen-opbergen-winter'],
+                ['Beste meubelen 2026', '/terrasmeubelen-2026'],
+                ['Black Friday', '/terrasmeubelen-black-friday'],
+                ['Onder €500', '/terrasmeubelen-onder-500-euro'],
+                ['Kleine tuin', '/kleine-tuin-meubelen'],
+                ['Hartman meubelen', '/hartman-terrasmeubelen'],
+                ['Alle pagina\'s', '/terrasmeubelen-overzicht'],
+              ].map(([l, h]) => (
+                <li><a href={h} class="hover:text-green-400 transition-colors">{l}</a></li>
+              ))}
+            </ul>
           </div>
         </div>
-        <p class="mt-6 text-xs text-slate-400">
-          © {new Date().getFullYear()} Terrasgigant.nl — Prijzen en beschikbaarheid kunnen afwijken.
-          De site bevat mogelijk affiliate-links; bij aankoop ontvangen wij een kleine commissie.
-        </p>
+
+        <!-- Trust bar -->
+        <div class="border-t border-slate-800 pt-6 flex flex-wrap gap-4 text-xs text-slate-500 items-center">
+          <span class="flex items-center gap-1.5"><span class="text-green-500">✓</span> Onafhankelijk advies</span>
+          <span class="flex items-center gap-1.5"><span class="text-green-500">✓</span> Geen gesponsorde content</span>
+          <span class="flex items-center gap-1.5"><span class="text-green-500">✓</span> Actueel voor 2026</span>
+          <span class="flex items-center gap-1.5"><span class="text-green-500">✓</span> FSC-info meegewogen</span>
+          <span class="ml-auto">
+            © {new Date().getFullYear()} Terrasgigant.nl
+            <span class="mx-2 opacity-30">·</span>
+            De site bevat affiliate-links
+          </span>
+        </div>
       </div>
     </footer>
 
     <script>
+      // Mobile menu toggle
       const btn = document.getElementById('mobile-menu-btn');
       const menu = document.getElementById('mobile-menu');
-      btn?.addEventListener('click', () => menu?.classList.toggle('hidden'));
+      const iconMenu = document.getElementById('icon-menu');
+      const iconClose = document.getElementById('icon-close');
+      btn?.addEventListener('click', () => {
+        const open = menu?.classList.toggle('hidden');
+        iconMenu?.classList.toggle('hidden', !open);
+        iconClose?.classList.toggle('hidden', open);
+      });
+
+      // Sticky nav shadow on scroll
+      const header = document.getElementById('site-header');
+      window.addEventListener('scroll', () => {
+        header?.classList.toggle('shadow-md', window.scrollY > 10);
+      }, { passive: true });
     </script>
   </body>
 </html>

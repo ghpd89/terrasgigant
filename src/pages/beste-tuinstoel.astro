@@ -1,0 +1,167 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  { q: 'Welke tuinstoel is het beste?', a: 'De Hartman Sophie aluminium stapelstoel is dé meest aanbevolen tuinstoel in het midrange segment. Lichtgewicht, stapelbaar, roestvrij, 20+ jaar levensduur. In het premiumsegment: Fermob Luxembourg.' },
+  { q: 'Wat is de beste stof voor een tuinstoel?', a: 'Aluminium: beste prijs-kwaliteit, roestvrij, licht. Teak: warm, edel uiterlijk, jaarlijks onderhoud. Polyrattan (woven): comfortabeler zonder kussen, weersbestendig. Kunststof: goedkoopst, minder duurzaam.' },
+  { q: 'Kan een tuinstoel buiten blijven in de winter?', a: 'Aluminium en kunststof stoelen kunnen buiten blijven. Teak hout mag buiten maar wordt dan grijs — jaarlijks oliën houdt de kleur. Stalen stoelen moeten binnen of worden beschermd met hoes.' },
+  { q: 'Hoe zwaar moet een tuinstoel zijn?', a: 'Hoe zwaarder, hoe stabieler. Premium tuinstoelen wegen 3–5 kg (aluminium). Budget-stoelen van <2 kg zijn instabiel bij wind. Kies minimaal 2,5 kg voor stabiel buitengebruik.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Beste tuinstoel", "item": "https://www.terrasgigant.nl/beste-tuinstoel" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+
+const soorten = [
+  { icon: '🪑', naam: 'Stapelstoel', materiaal: 'Aluminium', omschrijving: 'Makkelijk op te slaan, lichtgewicht. De meest verkochte categorie. Ideaal met tuinset.', populair: true },
+  { icon: '🛋️', naam: 'Relaxstoel', materiaal: 'Aluminium/teak', omschrijving: 'Verstelbare rugleuning (3–7 standen). Meer comfort voor lange zitdagen. Zwaarder.', populair: false },
+  { icon: '🌿', naam: 'Gevlochten stoel', materiaal: 'Polyrattan/rotan', omschrijving: 'Comfortabel zonder kussen, weerbestendig synthetisch gevlochten. Stijlvol.', populair: false },
+  { icon: '🪵', naam: 'Houten stoel', materiaal: 'Teak/acacia', omschrijving: 'Tijdloos en warm. Meer onderhoud nodig. Ideaal in klassieke tuinstijl.', populair: false },
+  { icon: '⬛', naam: 'Schommelfauteuil', materiaal: 'Rattan/HDPE', omschrijving: 'Minder populair maar ideaal voor overdekt terras of veranda. Ontspannend.', populair: false },
+];
+---
+
+<Layout
+  title="Beste tuinstoel kopen 2026 — vergelijk aluminium, teak & polyrattan | Terrasgigant.nl"
+  description="De beste tuinstoel kopen? Vergelijk stapelstoelen, relaxstoelen en gevlochten modellen — eerlijk advies per materiaal en budget."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2 flex-wrap">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Beste tuinstoel</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Beste tuinstoel kopen</h1>
+    <p class="text-slate-600 text-lg mb-8 max-w-2xl">Van aluminium stapelstoel tot relaxstoel met 7 standen. Alle tuinstoeltypen vergeleken.</p>
+
+    <!-- Soorten tuinstoelen -->
+    <section class="mb-10">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">Welk type tuinstoel past bij jou?</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+        {soorten.map(({ icon, naam, materiaal, omschrijving, populair }) => (
+          <div class={`rounded-2xl border p-4 bg-white ${populair ? 'border-green-400 ring-1 ring-green-300' : 'border-slate-200'}`}>
+            {populair && <div class="text-xs font-bold text-green-700 uppercase tracking-wide mb-1">Meest populair</div>}
+            <div class="flex items-center gap-2 mb-1">
+              <span class="text-xl">{icon}</span>
+              <span class="font-bold text-slate-900">{naam}</span>
+            </div>
+            <div class="text-xs text-slate-400 mb-2">{materiaal}</div>
+            <p class="text-xs text-slate-600 leading-relaxed">{omschrijving}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Top picks -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Beste tuinstoelen per budget</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          {
+            tag: 'Onder €50/stoel', tagColor: 'slate', label: 'Budget',
+            beschrijving: 'IKEA TÄRNÖ stoel, Intratuin basis-stapelstoel of Action. Kunststof of goedkoop aluminium. 3–6 jaar voor normaal gebruik. Prima voor seizoensgebruik.',
+            bol: 'aluminium tuinstoel stapelstoel budget', cb: 'tuinstoel stapelstoel goedkoop'
+          },
+          {
+            tag: 'Beste keuze', tagColor: 'green', label: 'Hartman Sophie',
+            beschrijving: 'Hartman Sophie stapelstoel aluminium (~€89/stoel). 3mm aluminium frame, UV-stabiele kleur, stapelbaar, 5 kg. De benchmark voor de categorie. 20+ jaar levensduur.',
+            bol: 'hartman sophie tuinstoel aluminium stapelstoel', cb: 'tuinstoel aluminium hartman'
+          },
+          {
+            tag: 'Luxe', tagColor: 'amber', label: 'Fermob Luxembourg',
+            beschrijving: 'De iconische Franse designstoel (~€180/stoel). Staalgespoten, 30+ kleuren, stapelbaar, 5 jaar garantie. Tijdloze klassieke look. Staal = zwaarder maar ook robuuster.',
+            bol: 'fermob luxembourg tuinstoel', cb: 'fermob tuinstoel relaxstoel'
+          },
+        ].map(({ tag, tagColor, label, beschrijving, bol, cb }) => {
+          const bc = tagColor === 'green' ? 'border-green-400 bg-green-50' : tagColor === 'amber' ? 'border-amber-400 bg-amber-50' : 'border-slate-200 bg-white';
+          const tc = tagColor === 'green' ? 'text-green-700' : tagColor === 'amber' ? 'text-amber-700' : 'text-slate-500';
+          return (
+            <div class={`rounded-2xl border-2 p-5 flex flex-col ${bc}`}>
+              <div class={`text-xs font-bold uppercase tracking-wide mb-1 ${tc}`}>{tag}</div>
+              <div class="font-black text-slate-900 text-lg mb-2">{label}</div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4 flex-1">{beschrijving}</p>
+              <div class="space-y-2">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow" class="flex justify-between bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors"><span>Bol.com</span><span>→</span></a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow" class="flex justify-between bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors"><span>Coolblue</span><span>→</span></a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- Vergelijkingstabel -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-4">Materialen vergelijkt</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 border-b border-slate-200">
+            <th class="text-left px-4 py-3 font-semibold text-slate-700">Materiaal</th>
+            <th class="px-4 py-3 font-semibold text-slate-700">Onderhoud</th>
+            <th class="px-4 py-3 font-semibold text-slate-700">Gewicht</th>
+            <th class="px-4 py-3 font-semibold text-slate-700">Levensduur</th>
+            <th class="text-right px-4 py-3 font-semibold text-slate-700">Prijs/stoel</th>
+          </tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            {[
+              ['Aluminium', 'Minimaal', 'Licht (3–5 kg)', '20+ jaar', '€50–150'],
+              ['Teak', 'Jaarlijks oliën', 'Zwaar (5–8 kg)', '25+ jaar', '€80–200'],
+              ['Polyrattan', 'Minimaal', 'Licht (3–4 kg)', '10–15 jaar', '€40–100'],
+              ['Kunststof (HDPE)', 'Geen', 'Licht (2–4 kg)', '15–25 jaar', '€20–80'],
+              ['Staal', 'Beschermen', 'Zwaar (5–10 kg)', '10–20 jaar', '€60–200'],
+            ].map(([mat, ond, gew, lev, pri]) => (
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="px-4 py-3 font-semibold text-slate-900">{mat}</td>
+                <td class="px-4 py-3 text-slate-600">{ond}</td>
+                <td class="px-4 py-3 text-slate-600">{gew}</td>
+                <td class="px-4 py-3 text-slate-600">{lev}</td>
+                <td class="px-4 py-3 text-right font-semibold text-slate-900">{pri}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen tuinstoel</h2>
+      <div class="space-y-2">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-tuinset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste tuinset →</a>
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium →</a>
+        <a href="/teak-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Teak hout →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Beste tuinstoel"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=tuinstoel+aluminium+stapelstoel"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=tuinstoel+aluminium"
+  />
+</Layout>

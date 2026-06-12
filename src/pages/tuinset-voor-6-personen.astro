@@ -1,0 +1,123 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  { q: 'Hoe groot moet een tuintafel zijn voor 6 personen?', a: 'Voor 6 personen heb je een tafel nodig van minimaal 160×90 cm (rechthoekig) of 150 cm diameter (rond). Met 6 stoelen rondom heb je minimaal 3×3,5 meter terrasruimte nodig.' },
+  { q: 'Welke tuinset voor 6 personen is de beste keuze?', a: 'De Royal Garden Novas 6-delig (aluminium + keramiek) en de Hartman Sophie 6-delig zijn de meest aanbevolen sets voor 2026. Beide met aluminium frame, stapelbare stoelen en keramisch of aluminium tafelblad.' },
+  { q: 'Hoeveel kost een tuinset voor 6 personen?', a: 'Budget (staal/kunststof): €200–400. Midrange (aluminium): €400–800. Premium (aluminium + keramiek): €800–1.500. Koop nooit een stalen tafelset — staal roest na 2-3 jaar ondanks coating.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Beste tuinset", "item": "https://www.terrasgigant.nl/beste-tuinset" },
+      { "@type": "ListItem", "position": 3, "name": "Tuinset 6 personen", "item": "https://www.terrasgigant.nl/tuinset-voor-6-personen" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Tuinset 6 personen kopen 2026 — beste tafel met stoelen | Terrasgigant.nl"
+  description="De beste tuinset voor 6 personen. Vergelijk aluminium, keramiek en teak sets — van budget tot premium voor de complete gezinsset."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2 flex-wrap">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <a href="/beste-tuinset" class="hover:text-green-600">Beste tuinset</a><span>›</span>
+      <span class="text-slate-700">6 personen</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Tuinset voor 6 personen</h1>
+    <p class="text-slate-600 text-lg mb-8 max-w-2xl">
+      Voor gezinnen en wie graag gasten ontvangt. We vergelijken de beste tuinsets voor 6 personen per budget.
+    </p>
+
+    <!-- Ruimte check -->
+    <div class="mb-8 bg-blue-50 border border-blue-200 rounded-2xl p-5">
+      <h2 class="font-bold text-slate-900 mb-3">📐 Hoeveel ruimte heb je nodig?</h2>
+      <div class="grid sm:grid-cols-3 gap-3 text-center text-sm">
+        {[
+          { label: 'Tafelgrootte', val: '160×90 cm' },
+          { label: 'Met 6 stoelen', val: '≈ 280×220 cm' },
+          { label: 'Minimaal terras', val: '3 × 3,5 meter' },
+        ].map(({ label, val }) => (
+          <div class="bg-white rounded-xl p-3 border border-blue-100">
+            <div class="font-black text-slate-900">{val}</div>
+            <div class="text-xs text-slate-500 mt-0.5">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Picks -->
+    <section class="mb-12">
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          { tag: '€299–549', tagColor: 'slate', label: 'Budget', beschrijving: 'IKEA BONDHOLMEN, Action of Hartman Sophie bistro uitgebreid. Aluminium frame, kussenloze stoelen. 8–12 jaar mee.', bol: 'tuinset 6 personen aluminium budget', cb: 'tuinset 6 personen budget aluminium' },
+          { tag: 'Beste keuze', tagColor: 'green', label: 'Midrange', beschrijving: 'Royal Garden Novas 6p, Hartman Sophie 6-delig — aluminium frame, stapelbare stoelen, tafel 180cm. Roestvrij, 20+ jaar. Dit is wat de meeste kopers willen.', bol: 'tuinset 6 personen aluminium hartman royal garden', cb: 'tuinset 6 personen aluminium' },
+          { tag: 'Premium', tagColor: 'amber', label: 'Premium keramiek', beschrijving: 'Taste Treviso of Garden Impressions 6p keramiek — keramisch tafelblad (krasvrij + hitte-bestendig), premium aluminium stoelen. Toppunt van buitencomfort.', bol: 'tuinset 6 personen keramiek tafelblad premium', cb: 'tuinset keramiek 6 personen' },
+        ].map(({ tag, tagColor, label, beschrijving, bol, cb }) => {
+          const bc = tagColor === 'green' ? 'border-green-400 bg-green-50' : tagColor === 'amber' ? 'border-amber-400 bg-amber-50' : 'border-slate-200 bg-white';
+          const tc = tagColor === 'green' ? 'text-green-700' : tagColor === 'amber' ? 'text-amber-700' : 'text-slate-500';
+          return (
+            <div class={`rounded-2xl border-2 p-5 flex flex-col ${bc}`}>
+              <div class={`text-xs font-bold uppercase tracking-wide mb-1 ${tc}`}>{tag}</div>
+              <div class="font-black text-slate-900 text-lg mb-2">{label}</div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4 flex-1">{beschrijving}</p>
+              <div class="space-y-2">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow" class="flex justify-between bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors"><span>Bol.com</span><span>→</span></a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow" class="flex justify-between bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors"><span>Coolblue</span><span>→</span></a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Rechthoekige of ronde tafel voor 6 personen?</h2>
+      <p><strong>Rechthoekige tafel (160×90 cm)</strong> is de meest praktische keuze. Makkelijk uitbreidbaar met uitschuifblad. Iedereen zit goed — ook op de smalle kanten. Nadeel: neemt meer directe ruimte in.</p>
+      <p><strong>Ronde tafel (140–150 cm diameter)</strong> is gezelliger — iedereen kijkt iedereen aan. Nadeel: past maar met 6 personen als de stoelen echt niet te groot zijn. Neem minimaal 150 cm diameter.</p>
+      <h2>Stapelbare stoelen: ja of nee?</h2>
+      <p>Voor 6-persoons sets <strong>altijd stapelbare stoelen kiezen</strong>. 6 stoelen nemen enorm veel ruimte in als je ze niet kunt stapelen. De meeste kwaliteitsmerken (Hartman, Royal Garden) bieden stapelbare aluminium stoelen aan.</p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen tuinset 6 personen</h2>
+      <div class="space-y-2">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-tuinset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Alle tuinsets →</a>
+        <a href="/beste-parasol" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste parasol →</a>
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Tuinset 6 personen"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=tuinset+6+personen+aluminium"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=tuinset+6+personen"
+  />
+</Layout>

@@ -1,0 +1,126 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  { q: 'Wat is er in een 4-delige loungeset?', a: 'Een standaard 4-delige loungeset bestaat uit: 1 tweepersoons bank + 2 losse fauteuils + 1 salontafel. Dit is de meest gekochte configuratie voor een gemiddeld terras van 8–15m².' },
+  { q: 'Hoeveel ruimte heb je nodig voor een 4-delige loungeset?', a: 'Een 4-delige loungeset heeft gemiddeld 220×160 cm ruimte nodig. Tel daar 60–80 cm loopruimte rondom bij op. Je hebt dus minimaal een terras van 340×280 cm (≈ 9,5m²) nodig.' },
+  { q: 'Wat kost een goede 4-delige loungeset?', a: 'Budget (polyrattan): €299–499. Midrange (aluminium): €599–999. Premium: €1.000–2.000+. De midrange is de sweet spot: goede kwaliteit, 15–20 jaar levensduur.' },
+  { q: 'Is een 4-delige of 5-delige loungeset beter?', a: 'Een 4-delige set is compacter en goedkoper. Een 5-delige set heeft een extra fauteuil of een hogere tafel, maar vraagt meer ruimte. Kies op basis van je terrasmaat.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Loungeset", "item": "https://www.terrasgigant.nl/beste-loungeset" },
+      { "@type": "ListItem", "position": 3, "name": "4-delige loungeset", "item": "https://www.terrasgigant.nl/loungeset-4-delig" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="4-delige loungeset kopen 2026 — beste sets vergeleken | Terrasgigant.nl"
+  description="De beste 4-delige loungeset kopen? Van polyrattan budget tot aluminium premium — vergelijk de beste 4-delige loungesets voor 2026."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2 flex-wrap">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <a href="/beste-loungeset" class="hover:text-green-600">Beste loungeset</a><span>›</span>
+      <span class="text-slate-700">4-delig</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">4-delige loungeset kopen</h1>
+    <p class="text-slate-600 text-lg mb-4 max-w-2xl">De 4-delige loungeset is de meest populaire configuratie — groot genoeg voor een gezin, compact genoeg voor de meeste terrassen.</p>
+
+    <!-- Wat zit er in -->
+    <div class="mb-8 bg-green-50 border border-green-200 rounded-2xl p-5">
+      <div class="font-bold text-slate-900 mb-3">📦 Wat zit er in een 4-delige loungeset?</div>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+        {[
+          { stuk: '🛋️', naam: '2-zits bank', afm: '~130 cm breed' },
+          { stuk: '🪑', naam: '2× fauteuil', afm: '~70 cm breed' },
+          { stuk: '☕', naam: 'Salontafel', afm: '~80×50 cm' },
+          { stuk: '🧵', naam: '+ Kussens', afm: '8–12 cm dik' },
+        ].map(({ stuk, naam, afm }) => (
+          <div class="bg-white border border-green-100 rounded-xl p-3 text-center">
+            <div class="text-2xl mb-1">{stuk}</div>
+            <div class="font-semibold text-slate-800 text-xs">{naam}</div>
+            <div class="text-xs text-slate-500">{afm}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    <!-- Picks -->
+    <section class="mb-12">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">Beste 4-delige loungesets per budget</h2>
+      <div class="grid sm:grid-cols-3 gap-4">
+        {[
+          { tag: '€299–499', tagColor: 'slate', label: 'Budget', type: 'Polyrattan', beschrijving: 'Keter Corfu 4-delig of Sunred Logan — prima voor 6–10 jaar gebruik. Polyrattan frame + 7 cm kussens. De beste instapper.', bol: 'loungeset 4-delig polyrattan budget', cb: 'loungeset 4 delig polyrattan' },
+          { tag: 'Beste keuze', tagColor: 'green', label: 'Midrange', type: 'Aluminium', beschrijving: 'Hartman Aruba, Royal Garden of Garden Impressions — 2–3mm aluminium frame, Sunbrella-kussens. 20+ jaar mee. Dit is de aankoop die je niet betreurt.', bol: 'loungeset 4-delig aluminium hartman', cb: 'loungeset 4-delig aluminium' },
+          { tag: 'Premium', tagColor: 'amber', label: 'Premium', type: 'Aluminium + Sunbrella', beschrijving: 'Gloster, Manutti of Taste — maximale kwaliteit. Dikke kussens, zwaar frame, 5 jaar+ garantie. Eenmalig investeren en nooit meer omkijken.', bol: 'loungeset 4-delig aluminium premium luxe', cb: 'loungeset premium aluminium' },
+        ].map(({ tag, tagColor, label, type, beschrijving, bol, cb }) => {
+          const bc = tagColor === 'green' ? 'border-green-400 bg-green-50' : tagColor === 'amber' ? 'border-amber-400 bg-amber-50' : 'border-slate-200 bg-white';
+          const tc = tagColor === 'green' ? 'text-green-700' : tagColor === 'amber' ? 'text-amber-700' : 'text-slate-500';
+          return (
+            <div class={`rounded-2xl border-2 p-5 flex flex-col ${bc}`}>
+              <div class={`text-xs font-bold uppercase tracking-wide mb-1 ${tc}`}>{tag}</div>
+              <div class="font-black text-slate-900 text-lg mb-0.5">{label}</div>
+              <div class="text-xs font-semibold text-slate-500 mb-2">{type}</div>
+              <p class="text-xs text-slate-600 leading-relaxed mb-4 flex-1">{beschrijving}</p>
+              <div class="space-y-2">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow" class="flex justify-between bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors"><span>Bol.com</span><span>→</span></a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow" class="flex justify-between bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold py-2 px-3 rounded-lg transition-colors"><span>Coolblue</span><span>→</span></a>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>4-delig vs 5-delig: wat past bij jou?</h2>
+      <p>Een <strong>4-delige set</strong> is ideaal voor terrassen van 8–15m². Je hebt genoeg zitplaats voor 4 personen en de set is compact genoeg om er goed omheen te lopen. Populairste keuze voor de gemiddelde Nederlandse tuin.</p>
+      <p>Een <strong>5-delige set</strong> voegt een extra fauteuil toe (zit dan met 5–6 personen). Ideaal als je regelmatig gasten ontvangt. Vraagt minimaal 12–16m² terrasruimte.</p>
+      <h2>Op welk terras past een 4-delige loungeset?</h2>
+      <p>De meeste 4-delige sets zijn ~220×160 cm zonder looppad. Met loopruimte (60 cm rondom) heb je minimaal <strong>340×280 cm = 9,5m²</strong> nodig. Gebruik onze <a href="/#calculator">terras calculator</a> om te controleren of jouw terras groot genoeg is.</p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen 4-delige loungeset</h2>
+      <div class="space-y-2">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Alle loungesets →</a>
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+        <a href="/loungeset-vs-tuinset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Loungeset vs tuinset →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="4-delige loungeset"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=loungeset+4-delig+tuin"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=loungeset+4+delig"
+  />
+</Layout>

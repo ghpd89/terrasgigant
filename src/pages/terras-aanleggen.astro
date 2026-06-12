@@ -1,0 +1,168 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const faqItems = [
+  { q: 'Welke tegels zijn het beste voor een terras?', a: 'Keramische buitentegels of natuursteen (hardsteen, zandsteen) zijn het meest duurzaam. Kies keramiek op een vorstbestendig merk. Minimaal 2cm dik voor terrasgebruik. Antislip-afwerking (R11) is verplicht bij terrassen.' },
+  { q: 'Hoeveel kost een terras aanleggen?', a: 'Zelf aanleggen: €15–40 per m² (materialen). Laten aanleggen: €50–120 per m² inclusief arbeid. Een terras van 20m² kost zelf aangelegd €300–800, professioneel €1.000–2.400.' },
+  { q: 'Hoe groot moet een terras zijn?', a: 'Minimaal 12–15m² voor een loungeset + loopruimte. Een tuinset voor 6 personen + terras: minimaal 20m². Vuistregel: terras = meubeloppervlak × 1,5.' },
+  { q: 'Heb ik vergunning nodig voor een terras?', a: 'Meestal niet voor een normaal tuinterras op eigen grond. Uitzonderingen: als je het terras aanmerkelijk verhoogt (>30cm) of bijgebouw plaatst. Controleer altijd bij je gemeente.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Terras aanleggen", "item": "https://www.terrasgigant.nl/terras-aanleggen" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Terras aanleggen — stappenplan, materialen & kosten 2026 | Terrasgigant.nl"
+  description="Terras aanleggen in 2026? Compleet stappenplan, materiaalkeuze (tegels, hout, klinkers), kosten en tips voor het perfecte terras."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2 flex-wrap">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Terras aanleggen</span>
+    </nav>
+
+    <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-3">Terras aanleggen in 2026</h1>
+    <p class="text-slate-600 text-lg mb-8 max-w-2xl">Van planning tot klaar terras — compleet stappenplan voor het aanleggen van je tuinterras inclusief materiaaltips.</p>
+
+    <!-- Stappen -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Stappenplan terras aanleggen</h2>
+      <div class="space-y-4">
+        {[
+          {
+            nr: '01', titel: 'Maat en locatie bepalen',
+            omschrijving: 'Meet de gewenste terrasgrootte (tip: meubeloppervlak × 1,5). Kies een locatie die overwegend op het zuiden of westen ligt voor maximale zon. Houd rekening met schaduw van gebouwen en bomen.',
+            tip: 'Zet stokken in de grond en span touw om de contouren te markeren vóór je begint.',
+          },
+          {
+            nr: '02', titel: 'Materiaal kiezen',
+            omschrijving: 'Kies je terrasmateriaal op basis van stijl, budget en onderhoud. Keramische tegels zijn populairste keuze (duurzaam, weinig onderhoud). Composiet hout is stijlvoller. Betonklinkers zijn betaalbaar.',
+            tip: 'Kies altijd R11-antislip afwerking voor een veilig terras bij regen.',
+          },
+          {
+            nr: '03', titel: 'Grond afgraven en nivelleren',
+            omschrijving: 'Graaf 25–35 cm diep af voor tegels (5 cm zand + 20 cm fundering + 2–3 cm tegel). Verwijder wortels en onkruid. Gebruik onkruidfolie als preventie.',
+            tip: 'Huur een grondfrees of vibrotamper — handmatig aanstampen is onvoldoende voor een stabiel terras.',
+          },
+          {
+            nr: '04', titel: 'Fundering aanleggen',
+            omschrijving: 'Stort 15–20 cm gecrusht puin of granulaat als fundering. Stamp aan in lagen van 10 cm. Voeg dan 3–5 cm laag scherp zand toe als eindlaag. Controleer met waterpas.',
+            tip: 'Zorg voor lichte helling (1–2 cm per meter) weg van het huis voor afwatering.',
+          },
+          {
+            nr: '05', titel: 'Tegels leggen',
+            omschrijving: 'Begin bij een hoek of een rechte lijn. Leg tegels op het zandbed en klop ze vast met een rubberhamer. Houd 3–5mm voegen aan. Controleer regelmatig met waterpas.',
+            tip: 'Leg de eerste rij langs een gespannen touw voor een rechte start.',
+          },
+          {
+            nr: '06', titel: 'Voegen invullen en afwerking',
+            omschrijving: 'Vul de voegen met voegzand of voegmortel (duurzamer). Borstel het voegzand in, bevochtig en herhaal. Verwijder overtollig zand. Klaar!',
+            tip: 'Polymerzand (voegzand met polymeer) is duurzamer en remt onkruidgroei beter dan gewoon zand.',
+          },
+        ].map(({ nr, titel, omschrijving, tip }) => (
+          <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+            <div class="bg-slate-50 border-b border-slate-100 px-5 py-3 flex items-center gap-3">
+              <span class="w-8 h-8 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-black shrink-0">{nr}</span>
+              <div class="font-bold text-slate-900">{titel}</div>
+            </div>
+            <div class="p-5">
+              <p class="text-sm text-slate-600 leading-relaxed mb-3">{omschrijving}</p>
+              <div class="bg-green-50 border border-green-200 rounded-lg px-4 py-2.5 text-xs text-green-800">
+                <span class="font-semibold">💡 Pro-tip:</span> {tip}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Materialen vergelijk -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Terrasmateriaal vergelijken</h2>
+      <div class="overflow-x-auto rounded-2xl border border-slate-200">
+        <table class="w-full text-sm">
+          <thead><tr class="bg-slate-50 border-b border-slate-200">
+            <th class="text-left px-4 py-3 font-semibold text-slate-700">Materiaal</th>
+            <th class="px-4 py-3 font-semibold text-slate-700">Prijs/m²</th>
+            <th class="px-4 py-3 font-semibold text-slate-700">Onderhoud</th>
+            <th class="px-4 py-3 font-semibold text-slate-700">Levensduur</th>
+            <th class="text-right px-4 py-3 font-semibold text-slate-700">Score</th>
+          </tr></thead>
+          <tbody class="divide-y divide-slate-100">
+            {[
+              ['Keramische tegel', '€25–60', 'Minimaal', '30+ jaar', '9/10'],
+              ['Composiet hout', '€30–80', 'Jaarlijks reinigen', '25+ jaar', '8/10'],
+              ['Hardsteen / basalt', '€35–90', 'Impregneren', '50+ jaar', '9/10'],
+              ['Betontegel', '€10–25', 'Minimaal', '20–30 jaar', '7/10'],
+              ['Betonklinker', '€8–20', 'Minimaal', '25+ jaar', '7/10'],
+              ['Houten terras (teak)', '€40–100', 'Jaarlijks oliën', '20–30 jaar', '8/10'],
+            ].map(([mat, prijs, ond, lev, sc]) => (
+              <tr class="hover:bg-slate-50 transition-colors">
+                <td class="px-4 py-3 font-semibold text-slate-900">{mat}</td>
+                <td class="px-4 py-3 text-center text-slate-700">{prijs}</td>
+                <td class="px-4 py-3 text-center text-slate-600">{ond}</td>
+                <td class="px-4 py-3 text-center text-slate-600">{lev}</td>
+                <td class="px-4 py-3 text-right font-bold text-green-700">{sc}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Kosten terras aanleggen</h2>
+      <p><strong>Zelf aanleggen:</strong> €15–40 per m² voor materialen. Voor een gemiddeld terras van 20m² komt je uit op €300–800 aan materiaalkosten (tegels + fundering + voegzand + huur gereedschap).</p>
+      <p><strong>Professioneel laten aanleggen:</strong> €50–120 per m² inclusief arbeid. Een hoveniersbedrijf vraagt €40–80 per uur. Professionele aanleg van 20m²: €1.000–2.400.</p>
+      <p><strong>Besparen?</strong> Leg zelf aan — het is goed te doen als je praktisch aangelegd bent en een weekend beschikbaar hebt. Huur een vibrotamper (€50/dag) voor een stabiele fundering.</p>
+      <h2>Welk formaat tegels kiezen?</h2>
+      <p>Grote tegels (60×60 of 80×80 cm) maken een terras optisch groter en hebben minder voegen (minder onkruid). Kleinere tegels (30×30 of 45×45) zijn zwaarder te leggen maar minder duur. In 2026 zijn <strong>keramische 60×60 cm tegels in antraciet</strong> de populairste keuze.</p>
+    </section>
+
+    <!-- CTA meubelen -->
+    <div class="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6">
+      <div class="font-bold text-slate-900 mb-2">🪑 Terras klaar? Nu meubels uitzoeken</div>
+      <p class="text-sm text-slate-600 mb-4">Nu je terras klaar is, is het tijd voor de meubels. Gebruik onze terrasgrootte-calculator om te bepalen wat past.</p>
+      <div class="flex flex-wrap gap-2">
+        <a href="/beste-loungeset" class="bg-green-600 hover:bg-green-700 text-white font-bold px-4 py-2 rounded-xl text-sm transition-colors">Beste loungesets →</a>
+        <a href="/beste-tuinset" class="bg-white border border-green-300 hover:bg-green-50 text-green-700 font-bold px-4 py-2 rounded-xl text-sm transition-colors">Beste tuinsets →</a>
+      </div>
+    </div>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen terras aanleggen</h2>
+      <div class="space-y-2">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/terras-inrichten" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Terras inrichten →</a>
+        <a href="/kleine-tuin-meubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Kleine tuin →</a>
+        <a href="/terrasmeubelen-kopen-gids" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Koopgids meubelen →</a>
+      </div>
+    </section>
+  </div>
+</Layout>

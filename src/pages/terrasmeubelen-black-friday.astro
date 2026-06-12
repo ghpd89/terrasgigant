@@ -1,0 +1,158 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  { q: 'Wanneer is Black Friday 2026?', a: 'Black Friday 2026 valt op 27 november. Bol.com en Coolblue starten de aanbiedingen doorgaans al op Black Week (23–27 november). Verwacht ook Cyber Monday op 30 november.' },
+  { q: 'Zijn Black Friday deals op terrasmeubelen echt goedkoper?', a: 'Ja — kortingen van 20–50% zijn gebruikelijk op tuinsets en loungesets. Beste deals: resterende zomerstock. Let op: niet elke "deal" is echt goedkoper — controleer de prijs via prijs.nl of Camelcamelcamel.' },
+  { q: 'Welke terrasmeubelen zijn het meest in de aanbieding op Black Friday?', a: 'Loungesets en tuinsets verkopen het beste en hebben de meeste kortingen. Parasols zijn zomers product — minder deals in november. Kussens en hoezen hebben ook flinke kortingen.' },
+  { q: 'Is het slim om terrasmeubelen te kopen met Black Friday?', a: 'Ja, als je al weet wat je wilt. Black Friday is het beste moment voor premium sets (Hartman, Royal Garden). Wacht NIET op november als je dit seizoen nog wil genieten — koop dan in maart-april.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Black Friday terrasmeubelen", "item": "https://www.terrasgigant.nl/terrasmeubelen-black-friday" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Terrasmeubelen Black Friday 2026 — beste deals & aanbiedingen | Terrasgigant.nl"
+  description="Black Friday terrasmeubelen 2026: de beste deals bij Bol.com en Coolblue. Tips om echt te besparen op loungesets, tuinsets en meer."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2 flex-wrap">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Black Friday terrasmeubelen</span>
+    </nav>
+
+    <!-- Hero -->
+    <div class="relative bg-gradient-to-br from-slate-950 to-slate-800 text-white rounded-3xl overflow-hidden mb-10 p-8">
+      <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(circle at 1px 1px, white 1px, transparent 0); background-size: 32px 32px;"></div>
+      <div class="relative">
+        <div class="inline-flex items-center gap-2 bg-yellow-500/20 border border-yellow-500/40 text-yellow-300 rounded-full px-3 py-1 text-xs font-bold uppercase tracking-wide mb-4">
+          🏷️ Black Friday 2026 — 27 november
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">Terrasmeubelen Black Friday</h1>
+        <p class="text-slate-300 max-w-lg mb-5">Kortingen tot 50% op loungesets, tuinsets en parasols. Wij houden de beste deals bij.</p>
+        <div class="flex flex-wrap gap-2">
+          <a href="https://www.bol.com/nl/nl/s/?searchtext=terrasmeubelen+loungeset&sort=price" target="_blank" rel="noopener nofollow"
+             class="bg-orange-500 hover:bg-orange-400 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-colors">
+            Aanbiedingen Bol.com →
+          </a>
+          <a href="https://www.coolblue.nl/zoeken?query=terrasmeubelen&sort=price" target="_blank" rel="noopener nofollow"
+             class="bg-blue-600 hover:bg-blue-500 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-colors">
+            Aanbiedingen Coolblue →
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aanbieding kalender -->
+    <section class="mb-10">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Black Friday kalender terrasmeubelen</h2>
+      <div class="grid sm:grid-cols-4 gap-3">
+        {[
+          { datum: '23 nov', label: 'Black Week start', tip: 'Eerste deals online. Controleer wensenlijst-prijzen.', kleur: 'bg-slate-50 border-slate-200' },
+          { datum: '25–26 nov', label: 'Pre-deals', tip: 'Grootste aanbiedingen op populaire sets. Beperkte voorraad.', kleur: 'bg-amber-50 border-amber-200' },
+          { datum: '27 nov', label: '🖤 Black Friday', tip: 'Beste dag voor premium merken. Snel zijn is belangrijk.', kleur: 'bg-slate-900 border-slate-700 text-white' },
+          { datum: '30 nov', label: 'Cyber Monday', tip: 'Laatste kans voor resterende voorraad. Minder keuze maar laagste prijzen.', kleur: 'bg-blue-50 border-blue-200' },
+        ].map(({ datum, label, tip, kleur }) => (
+          <div class={`rounded-2xl border-2 p-4 ${kleur}`}>
+            <div class={`text-xs font-bold uppercase tracking-wide mb-1 ${kleur.includes('slate-900') ? 'text-yellow-400' : 'text-slate-500'}`}>{datum}</div>
+            <div class={`font-bold mb-1 ${kleur.includes('slate-900') ? 'text-white' : 'text-slate-900'}`}>{label}</div>
+            <p class={`text-xs leading-relaxed ${kleur.includes('slate-900') ? 'text-slate-400' : 'text-slate-600'}`}>{tip}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Verwachte deals -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Verwachte Black Friday deals 2026</h2>
+      <div class="space-y-3">
+        {[
+          { cat: 'Loungesets aluminium', korting: '-20 tot -40%', bol: 'loungeset aluminium hartman aanbieding', cb: 'loungeset aluminium deal', why: 'Grootste kortingen op populairste categorie. Hartman Sophie en Royal Garden tot 35% korting historisch gezien.' },
+          { cat: 'Tuinsets 4–6 personen', korting: '-25 tot -45%', bol: 'tuinset aluminium aanbieding sale', cb: 'tuinset aanbieding sale', why: 'Winterstock uitruimen = zware kortingen. Keramiek-tafelsets zijn populairste Black Friday aankoop.' },
+          { cat: 'Zweefparasols', korting: '-15 tot -30%', bol: 'zweefparasol aanbieding sale', cb: 'zweefparasol sale korting', why: 'Minder deals dan meubelen (seizoensproduct) maar Doppler Expert altijd in aanbieding.' },
+          { cat: 'Kussens & hoezen', korting: '-30 tot -50%', bol: 'tuin kussens hoezen aanbieding', cb: 'buitenkussens sale', why: 'Beste deals van het jaar op accessoires. Ideaal moment voor vervangende kussens of hoezen.' },
+        ].map(({ cat, korting, bol, cb, why }) => (
+          <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+            <div class="bg-slate-50 px-5 py-3 flex items-center justify-between border-b border-slate-100">
+              <div class="font-bold text-slate-900 text-sm">{cat}</div>
+              <div class="text-xs bg-yellow-100 text-yellow-800 px-2 py-0.5 rounded-full font-bold">{korting}</div>
+            </div>
+            <div class="p-5 flex flex-col sm:flex-row gap-4 items-start">
+              <p class="text-xs text-slate-600 leading-relaxed flex-1">{why}</p>
+              <div class="flex gap-2 shrink-0">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                   class="bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors">Bol →</a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                   class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors">CB →</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Tips -->
+    <section class="mb-12 bg-green-50 border border-green-200 rounded-2xl p-6">
+      <h2 class="text-xl font-bold text-slate-900 mb-4">💡 Tips om écht te besparen</h2>
+      <div class="grid sm:grid-cols-2 gap-3">
+        {[
+          { nr: '1', tip: 'Controleer prijshistorie', omschrijving: 'Gebruik prijs.nl of Google Shopping om te controleren of de "deal" echt goedkoper is. Niet elke Black Friday prijs is de laagste.' },
+          { nr: '2', tip: 'Wensenlijst vooraf', omschrijving: 'Maak je wensenlijst bij Bol.com vóór Black Friday. Je ziet dan direct wanneer een item in prijs daalt.' },
+          { nr: '3', tip: 'Controleer retourbeleid', omschrijving: 'Bol.com en Coolblue hebben verlengd retourbeleid rondom Black Friday. Controleer de specifieke periode — soms tot 31 december.' },
+          { nr: '4', tip: 'Completeer de set', omschrijving: 'Koop kussens, hoezen en accessoires met Black Friday — die zijn proportioneel het meest afgeprijsd.' },
+        ].map(({ nr, tip, omschrijving }) => (
+          <div class="bg-white rounded-xl p-4 border border-green-100">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="w-6 h-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold shrink-0">{nr}</span>
+              <span class="font-bold text-slate-900 text-sm">{tip}</span>
+            </div>
+            <p class="text-xs text-slate-600 leading-relaxed">{omschrijving}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen Black Friday</h2>
+      <div class="space-y-2">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste terrasmeubelen →</a>
+        <a href="/terrasmeubelen-onder-500-euro" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Onder €500 →</a>
+        <a href="/terrasmeubelen-kopen-gids" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Koopgids →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Black Friday deals terrasmeubelen"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=terrasmeubelen+loungeset&sort=price"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=terrasmeubelen&sort=price"
+  />
+</Layout>

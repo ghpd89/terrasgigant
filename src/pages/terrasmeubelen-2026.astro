@@ -1,0 +1,156 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  { q: 'Wat zijn de terrasmeubelen trends van 2026?', a: 'De grote trends van 2026: antraciet/donkergrijs aluminium, modulaire loungesets (zelf configureren), keramische tafelbladen, en milieuvriendelijke materialen. Rechte strakke vormen vervangen de ronde polyrattan-look van de afgelopen jaren.' },
+  { q: 'Welke terrasmeubelen zijn de beste koop in 2026?', a: 'Beste prijs-kwaliteit 2026: Hartman Aruba (aluminium loungeset, €899), Royal Garden Novas tuinset (aluminium, €549), Doppler Expert zweefparasol (€349). Deze sets combineren actueel design met jarenlange betrouwbaarheid.' },
+  { q: 'Zijn terrasmeubelen in 2026 goedkoper of duurder dan vorig jaar?', a: 'Door verbeterde aanvoerketens zijn de meeste aluminium sets in 2026 vergelijkbaar geprijsd als 2025. Premium sets (Hartman, Royal Garden) zijn licht gedaald door meer concurrentie. Budget-merken als Keter zijn gedaald door lagere grondstofprijzen.' },
+];
+
+const structuredData = JSON.stringify({
+  "@context": "https://schema.org",
+  "@graph": [
+    { "@type": "BreadcrumbList", "itemListElement": [
+      { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+      { "@type": "ListItem", "position": 2, "name": "Terrasmeubelen 2026", "item": "https://www.terrasgigant.nl/terrasmeubelen-2026" }
+    ]},
+    { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+  ]
+});
+---
+
+<Layout
+  title="Terrasmeubelen 2026 — beste meubelen, trends & top picks | Terrasgigant.nl"
+  description="De beste terrasmeubelen van 2026. Actuele trends, top picks per budget en eerlijk advies over wat dit jaar de beste aankoop is."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={structuredData} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Terrasmeubelen 2026</span>
+    </nav>
+
+    <!-- Hero banner -->
+    <div class="relative bg-gradient-to-br from-slate-900 to-green-950 text-white rounded-2xl overflow-hidden mb-10 p-8">
+      <div class="absolute top-0 right-0 w-48 h-48 bg-green-400/10 rounded-full blur-3xl"></div>
+      <div class="relative">
+        <div class="inline-flex items-center gap-2 bg-green-500/20 border border-green-500/30 text-green-300 rounded-full px-3 py-1 text-xs font-semibold mb-4">
+          📅 Bijgewerkt juni 2026
+        </div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold mb-3">Terrasmeubelen 2026</h1>
+        <p class="text-slate-300 max-w-lg mb-5">Wat zijn de trends, welke sets bieden de beste prijs-kwaliteit en wat koopt Nederland het meest?</p>
+        <div class="flex flex-wrap gap-2">
+          <a href="/beste-terrasmeubelen" class="bg-green-600 hover:bg-green-500 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-colors">Beste picks →</a>
+          <a href="/terrasmeubelen-kopen-gids" class="bg-white/10 hover:bg-white/20 text-white font-medium px-5 py-2.5 rounded-xl text-sm transition-colors">Koopgids</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trends 2026 -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Trends terrasmeubelen 2026</h2>
+      <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {[
+          { icon: '⬛', trend: 'Antraciet & donkergrijs', omschrijving: 'De dominante kleur van 2026 is antraciet. Matje, donkere aluminium frames met lichtgrijze kussens zijn op elk terras te zien.' },
+          { icon: '🧩', trend: 'Modulaire sets', omschrijving: 'Zelf configureren wordt populairder: koop een basiselement en breidt uit. Merken als Hartman en Royal Garden bieden modulaire systemen.' },
+          { icon: '🪨', trend: 'Keramische tafelbladen', omschrijving: 'Keramiek vervangt glas en aluminium tafelbladen. Krasvrij, hitte-bestendig en makkelijk schoon — keramiek is the new black.' },
+          { icon: '♻️', trend: 'Duurzame materialen', omschrijving: 'FSC-gecertificeerd hout en gerecycled aluminium winnen terrein. Consumenten zijn bewuster en merken spelen daarop in.' },
+          { icon: '📐', trend: 'Strakke rechte vormen', omschrijving: 'De organische ronde polyrattan-look maakt plaats voor rechte, strakke designs. Architectonisch en tijdloos.' },
+          { icon: '🛋️', trend: 'Deep Seating', omschrijving: 'Diepere zitplaatsen (60+ cm) met hogere rugkussens voor maximaal comfort. Loungeset voelt meer als binnenmeubilair.' },
+        ].map(({ icon, trend, omschrijving }) => (
+          <div class="border border-slate-200 rounded-2xl p-5 bg-white">
+            <div class="text-2xl mb-2">{icon}</div>
+            <div class="font-bold text-slate-900 mb-1">{trend}</div>
+            <p class="text-xs text-slate-600 leading-relaxed">{omschrijving}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Top picks 2026 -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-2">Top picks 2026</h2>
+      <p class="text-slate-500 text-sm mb-5">Onze aanbevelingen per categorie voor het seizoen 2026</p>
+      <div class="space-y-3">
+        {[
+          { cat: 'Beste loungeset', pick: 'Hartman Aruba loungeset antraciet', prijs: '~€899', bol: 'hartman aruba loungeset antraciet', cb: 'hartman loungeset', why: 'Nieuw voor 2026: verbeterd frame (3mm aluminium), Sunbrella kussens standaard, 5 jaar garantie. De referentie in het middensegment.' },
+          { cat: 'Beste tuinset', pick: 'Royal Garden Novas 6p keramiek', prijs: '~€649', bol: 'royal garden tuinset keramiek aluminium', cb: 'tuinset keramiek aluminium 6 personen', why: 'Keramisch tafelblad + aluminium frame. Makkelijk schoon, krasvrij tafelblad, stapelbare stoelen. Populairste keuze op Bol.com in 2026.' },
+          { cat: 'Beste parasol', pick: 'Doppler Expert zweefparasol 3,5m', prijs: '~€349', bol: 'doppler zweefparasol expert', cb: 'zweefparasol doppler', why: 'Nieuw Twist-systeem in 2026: makkelijker openen/sluiten. UV50+ doek, aluminium paal. Winnaar van onze zweefparasoltest.' },
+          { cat: 'Beste budget set', pick: 'Keter Corfu 4-delig + Keter Westwood tafel', prijs: '~€379', bol: 'keter corfu loungeset 4-delig 2026', cb: 'keter loungeset polyrattan', why: 'Vernieuwd voor 2026 met verbeterde kussens (7cm) en robuuster frame. De beste instapper voor prijs-bewuste kopers.' },
+        ].map(({ cat, pick, prijs, bol, cb, why }) => (
+          <div class="border border-slate-200 rounded-2xl overflow-hidden bg-white">
+            <div class="bg-slate-50 px-5 py-3 flex items-center justify-between border-b border-slate-100">
+              <div class="font-bold text-slate-900 text-sm">{cat}</div>
+              <div class="text-xs bg-green-100 text-green-700 px-2 py-0.5 rounded-full font-semibold">{prijs}</div>
+            </div>
+            <div class="p-5 flex flex-col sm:flex-row gap-4 items-start">
+              <div class="flex-1">
+                <div class="font-semibold text-slate-800 mb-1 text-sm">🏆 {pick}</div>
+                <p class="text-xs text-slate-600 leading-relaxed">{why}</p>
+              </div>
+              <div class="flex gap-2 shrink-0">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                  class="bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors">Bol →</a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                  class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors">CB →</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Wanneer kopen -->
+    <section class="mb-12 bg-amber-50 border border-amber-200 rounded-2xl p-6">
+      <h2 class="text-xl font-bold text-slate-900 mb-3">⏰ Wanneer koop je terrasmeubelen in 2026?</h2>
+      <div class="grid sm:grid-cols-4 gap-3 text-center text-xs">
+        {[
+          { maand: 'Jan–Feb', tip: '❌ Weinig keuze, beschikbaarheid laag' },
+          { maand: 'Mrt–Apr', tip: '✓ Beste keuze, nieuw seizoen' },
+          { maand: 'Mei–Jun', tip: '⚠️ Populair maar duurder' },
+          { maand: 'Aug–Okt', tip: '🏆 Beste prijs — uitverkoop tot 50%' },
+        ].map(({ maand, tip }) => (
+          <div class="bg-white rounded-xl p-3 border border-amber-100">
+            <div class="font-bold text-slate-800 mb-1">{maand}</div>
+            <div class="text-slate-600 leading-tight">{tip}</div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen</h2>
+      <div class="space-y-2">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0">
+                <span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span>
+              </span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste meubelen →</a>
+        <a href="/terrasmeubelen-kopen-gids" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Koopgids →</a>
+        <a href="/aluminium-vs-teak" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Materialen vergelijken →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Terrasmeubelen 2026"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=terrasmeubelen+2026+loungeset"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=terrasmeubelen+loungeset"
+  />
+</Layout>

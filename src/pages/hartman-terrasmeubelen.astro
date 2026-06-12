@@ -1,0 +1,131 @@
+---
+import Layout from '../layouts/Layout.astro';
+import StickyBuyBar from '../components/StickyBuyBar.astro';
+
+const faqItems = [
+  { q: 'Zijn Hartman terrasmeubelen goed?', a: 'Ja — Hartman is een van de beste merken in het midden/premium segment. Het merk staat bekend om duurzaam 2–3mm aluminium frame, UV-stabiele kleuren en goede kussenkwaliteit. Veel producten worden gedekt door 5 jaar garantie op het frame.' },
+  { q: 'Waar worden Hartman meubelen gemaakt?', a: 'Hartman is een Nederlands merk (opgericht in 1977) met productie in Azië. Het merk heeft strikte kwaliteitscontroles. Dit is vergelijkbaar met alle andere Europese tuinmeubelmerken in het middensegment.' },
+  { q: 'Hoeveel kost een Hartman loungeset?', a: 'Hartman loungesets kosten €599–1.800 afhankelijk van de serie. De Sophie serie (meest populair) kost €799–1.199. De Aruba serie is nieuwer en premium: €999–1.499.' },
+  { q: 'Welke Hartman serie is de beste keuze?', a: 'Voor de meeste kopers: Hartman Sophie (aluminium, stapelbaar, goede kussens, populairste serie). Voor premium: Hartman Aruba (3mm frame, Sunbrella kussens). Budget: Hartman Cagri of Heritage.' },
+];
+
+const series = [
+  { naam: 'Sophie', niveau: 'Beste keuze', prijs: '€799–1.199', omschrijving: 'Meest populaire Hartman-serie. 2mm aluminium, stapelbare stoelen, 5cm kussens. Verkrijgbaar in antraciet, wit, taupe. De referentie in het middensegment.', bol: 'hartman sophie loungeset', cb: 'hartman sophie loungeset aluminium' },
+  { naam: 'Aruba', niveau: 'Premium', prijs: '€999–1.499', omschrijving: 'Nieuwere topser. 3mm frame, Sunbrella-kussens standaard, modulair uitbreidbaar. Diep zitvlak (55cm) en hogere rugleuning. Ideaal voor wie écht comfort wil.', bol: 'hartman aruba loungeset aluminium', cb: 'hartman aruba loungeset' },
+  { naam: 'Heritage', niveau: 'Budget', prijs: '€599–899', omschrijving: 'Instaplijn van Hartman. Iets dunner frame, standaard kussens. Prima kwaliteit voor de prijs, maar minder duurzaam dan Sophie. Goed voor seizoensgebruik.', bol: 'hartman heritage tuinset loungeset', cb: 'hartman heritage tuinset' },
+  { naam: 'Sophie Tuinset', niveau: 'Tuinset lijn', prijs: '€549–899', omschrijving: 'Sophie-lijn uitgebreid naar tuinsets. Stapelbare stoelen, aluminium tafel. 4- en 6-persoons beschikbaar. Populaire combinatie voor gezinnen.', bol: 'hartman sophie tuinset aluminium', cb: 'hartman sophie tuinset stapelstoel' },
+];
+---
+
+<Layout
+  title="Hartman terrasmeubelen — alle series vergeleken 2026 | Terrasgigant.nl"
+  description="Hartman terrasmeubelen kopen? Vergelijk Sophie, Aruba en Heritage series — eerlijk advies over kwaliteit, prijs en welke serie bij jou past."
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        { "@type": "BreadcrumbList", "itemListElement": [
+          { "@type": "ListItem", "position": 1, "name": "Home", "item": "https://www.terrasgigant.nl" },
+          { "@type": "ListItem", "position": 2, "name": "Hartman terrasmeubelen", "item": "https://www.terrasgigant.nl/hartman-terrasmeubelen" }
+        ]},
+        { "@type": "FAQPage", "mainEntity": faqItems.map(({ q, a }) => ({ "@type": "Question", "name": q, "acceptedAnswer": { "@type": "Answer", "text": a } })) }
+      ]
+    })} />
+  </Fragment>
+
+  <div class="max-w-5xl mx-auto px-4 py-10">
+    <nav class="text-sm text-slate-500 mb-6 flex gap-2 flex-wrap">
+      <a href="/" class="hover:text-green-600">Home</a><span>›</span>
+      <span class="text-slate-700">Hartman terrasmeubelen</span>
+    </nav>
+
+    <!-- Merk header -->
+    <div class="flex items-start gap-5 mb-8">
+      <div class="w-16 h-16 rounded-2xl bg-slate-900 flex items-center justify-center text-white font-black text-xl shrink-0">H</div>
+      <div>
+        <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mb-2">Hartman terrasmeubelen</h1>
+        <p class="text-slate-600 text-lg max-w-2xl">Nederlands merk, opgericht 1977. Een van de meest verkochte tuinmeubel­merken bij Bol.com en Coolblue.</p>
+      </div>
+    </div>
+
+    <!-- Beoordelings-samenvatting -->
+    <div class="mb-10 grid sm:grid-cols-4 gap-3">
+      {[
+        { label: 'Kwaliteit', score: '9.0', kleur: 'text-green-600' },
+        { label: 'Prijs-kwaliteit', score: '8.5', kleur: 'text-green-600' },
+        { label: 'Designaanbod', score: '8.0', kleur: 'text-green-500' },
+        { label: 'Garantie', score: '9.0', kleur: 'text-green-600' },
+      ].map(({ label, score, kleur }) => (
+        <div class="bg-white border border-slate-200 rounded-2xl p-4 text-center">
+          <div class={`text-2xl font-black mb-1 ${kleur}`}>{score}</div>
+          <div class="text-xs text-slate-500 font-medium">{label}</div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Series -->
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Hartman series vergeleken</h2>
+      <div class="space-y-3">
+        {series.map(({ naam, niveau, prijs, omschrijving, bol, cb }) => (
+          <div class={`border rounded-2xl overflow-hidden bg-white ${niveau === 'Beste keuze' ? 'border-green-400' : 'border-slate-200'}`}>
+            <div class={`px-5 py-3 flex items-center justify-between border-b ${niveau === 'Beste keuze' ? 'bg-green-50 border-green-200' : 'bg-slate-50 border-slate-100'}`}>
+              <div class="flex items-center gap-3">
+                <div class="font-bold text-slate-900">Hartman {naam}</div>
+                {niveau === 'Beste keuze' && <span class="text-xs bg-green-600 text-white px-2 py-0.5 rounded-full font-bold">Aanbevolen</span>}
+                {niveau === 'Premium' && <span class="text-xs bg-amber-500 text-white px-2 py-0.5 rounded-full font-bold">Premium</span>}
+              </div>
+              <div class="text-sm font-bold text-slate-700">{prijs}</div>
+            </div>
+            <div class="p-5 flex flex-col sm:flex-row gap-4 items-start">
+              <p class="text-sm text-slate-600 leading-relaxed flex-1">{omschrijving}</p>
+              <div class="flex gap-2 shrink-0">
+                <a href={`https://www.bol.com/nl/nl/s/?searchtext=${bol}`} target="_blank" rel="noopener nofollow"
+                   class="bg-orange-500 hover:bg-orange-600 text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors">Bol →</a>
+                <a href={`https://www.coolblue.nl/zoeken?query=${cb}`} target="_blank" rel="noopener nofollow"
+                   class="bg-blue-600 hover:bg-blue-700 text-white text-xs font-bold px-3 py-2 rounded-lg transition-colors">CB →</a>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <section class="mb-12 prose prose-slate max-w-none">
+      <h2>Is Hartman het geld waard?</h2>
+      <p>Hartman positioneert zich als een midrange-premium merk. De kwaliteit rechtvaardigt de hogere prijs in verhouding tot budget-merken. Specifiek voor de <strong>Sophie-lijn</strong>: dit is de standaard voor wat een goede tuinset moet zijn — stevig aluminium, kleurecht en stapelbaar.</p>
+      <p>De <strong>Aruba-lijn</strong> is nieuwer en iets duurder, maar met betere kussens (Sunbrella) en een dikker frame. Voor wie de Sophie serie te basic vindt.</p>
+      <p><strong>Alternatieven</strong>: Royal Garden (vergelijkbare kwaliteit, soms goedkoper), Garden Impressions (soortgelijk niveau), Taste (iets hoger segment).</p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen Hartman</h2>
+      <div class="space-y-2">
+        {faqItems.map(({ q, a }) => (
+          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
+              <span class="pr-4 text-sm">{q}</span>
+              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0"><span class="group-open:hidden">+</span><span class="hidden group-open:inline">−</span></span>
+            </summary>
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">{a}</div>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <section class="border-t border-slate-200 pt-8">
+      <div class="flex flex-wrap gap-3">
+        <a href="/beste-loungeset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste loungesets →</a>
+        <a href="/beste-tuinset" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Beste tuinsets →</a>
+        <a href="/aluminium-terrasmeubelen" class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2 text-sm font-medium text-slate-700 transition-colors">Aluminium meubelen →</a>
+      </div>
+    </section>
+  </div>
+
+  <StickyBuyBar
+    label="Hartman terrasmeubelen"
+    bolUrl="https://www.bol.com/nl/nl/s/?searchtext=hartman+loungeset+tuinset"
+    coolblueUrl="https://www.coolblue.nl/zoeken?query=hartman+tuinmeubelen"
+  />
+</Layout>

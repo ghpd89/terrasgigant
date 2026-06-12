@@ -3,273 +3,371 @@ import Layout from '../layouts/Layout.astro';
 import { MEUBEL_TYPEN, MATERIALEN } from '../data/terrasData';
 
 const populaireTypes = MEUBEL_TYPEN.filter(t => t.populair);
+
+// Kleurthema per meubeltype
+const typeKleuren: Record<string, { bg: string; accent: string; dot: string }> = {
+  loungeset:  { bg: 'from-blue-700 to-blue-900',    accent: 'bg-blue-500/20',   dot: 'bg-blue-400' },
+  tuinset:    { bg: 'from-amber-700 to-amber-900',   accent: 'bg-amber-500/20',  dot: 'bg-amber-400' },
+  parasol:    { bg: 'from-orange-700 to-orange-900', accent: 'bg-orange-500/20', dot: 'bg-orange-400' },
+  ligbed:     { bg: 'from-cyan-700 to-cyan-900',     accent: 'bg-cyan-500/20',   dot: 'bg-cyan-400' },
+  tuinstoel:  { bg: 'from-violet-700 to-violet-900', accent: 'bg-violet-500/20', dot: 'bg-violet-400' },
+  tuinbank:   { bg: 'from-rose-700 to-rose-900',     accent: 'bg-rose-500/20',   dot: 'bg-rose-400' },
+};
 ---
 
 <Layout
-  title="Terrasmeubelen kopen 2026 — loungesets, tuinsets & meer | Terrasgigant.nl"
-  description="Onafhankelijk advies over terrasmeubelen. Vergelijk loungesets, tuinsets, parasols en meer. Vind de beste terrasmeubelen voor jouw tuin of balkon."
+  title="Terrasmeubelen kopen 2026 — loungesets, tuinsets & parasols | Terrasgigant.nl"
+  description="Onafhankelijk advies over terrasmeubelen. Vergelijk loungesets, tuinsets, parasols en materialen. Calculator: hoeveel meubelen passen op jouw terras?"
 >
-  <!-- Hero -->
-  <section class="relative bg-gradient-to-br from-slate-900 via-green-950 to-slate-900 text-white overflow-hidden">
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-      <div class="absolute top-10 left-1/4 w-96 h-96 bg-green-400 rounded-full blur-3xl opacity-10"></div>
-      <div class="absolute bottom-0 right-1/4 w-64 h-64 bg-emerald-300 rounded-full blur-3xl opacity-10"></div>
+  <!-- ═══ HERO ═══ -->
+  <section class="relative bg-slate-950 text-white overflow-hidden">
+    <!-- Decoratief raster patroon -->
+    <div class="absolute inset-0 opacity-[0.04]"
+      style="background-image: linear-gradient(#fff 1px,transparent 1px),linear-gradient(90deg,#fff 1px,transparent 1px);background-size:40px 40px">
     </div>
+    <!-- Glow blobs -->
+    <div class="absolute -top-32 left-1/3 w-[500px] h-[500px] bg-green-600 rounded-full blur-[120px] opacity-20 pointer-events-none"></div>
+    <div class="absolute top-20 right-0 w-[300px] h-[300px] bg-emerald-400 rounded-full blur-[100px] opacity-10 pointer-events-none"></div>
 
-    <div class="relative max-w-5xl mx-auto px-4 pt-16 pb-14">
-      <div class="max-w-2xl">
-        <div class="inline-flex items-center gap-2 bg-green-500/15 border border-green-500/25 text-green-300 rounded-full px-4 py-1.5 text-sm font-medium mb-6">
-          <span>🪑</span> Onafhankelijk terrasadvies
+    <div class="relative max-w-5xl mx-auto px-4 pt-14 pb-16">
+      <div class="max-w-xl">
+        <!-- Badge -->
+        <div class="inline-flex items-center gap-2 bg-green-500/15 border border-green-500/25 text-green-300 rounded-full px-4 py-1.5 text-xs font-semibold mb-6 uppercase tracking-wide">
+          <span class="w-1.5 h-1.5 bg-green-400 rounded-full animate-pulse"></span>
+          Bijgewerkt voor zomerseizoen 2026
         </div>
 
-        <h1 class="text-4xl sm:text-5xl font-black leading-[1.1] mb-5 tracking-tight">
-          De perfecte<br/>terrasmeubelen<br/>
-          <span class="text-green-400">voor jouw tuin.</span>
+        <h1 class="text-4xl sm:text-5xl font-black leading-[1.08] mb-5 tracking-tight">
+          Terrasmeubelen<br/>kopen zonder<br/>
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-300">gedoe.</span>
         </h1>
-        <p class="text-slate-300 text-base sm:text-lg max-w-lg mb-8">
-          Van loungeset tot parasol — wij vergelijken materialen, stijlen en prijsklassen zodat jij de beste keuze maakt. Geen reclame, gewoon eerlijk advies.
+        <p class="text-slate-400 text-base sm:text-lg max-w-md mb-8 leading-relaxed">
+          Van loungeset tot parasol — wij vergelijken materialen en prijzen zodat jij direct de beste keuze maakt.
         </p>
-        <div class="flex flex-wrap gap-3">
-          <a href="/beste-terrasmeubelen" class="bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-colors text-sm">
-            Beste terrasmeubelen →
+
+        <div class="flex flex-wrap gap-3 mb-10">
+          <a href="/beste-terrasmeubelen"
+            class="inline-flex items-center gap-2 bg-green-600 hover:bg-green-500 text-white font-bold px-6 py-3 rounded-xl transition-all shadow-lg shadow-green-900/40 text-sm">
+            🏆 Beste picks 2026
           </a>
-          <a href="/terrasmeubelen-kopen-gids" class="bg-white/10 hover:bg-white/20 text-white font-medium px-6 py-3 rounded-xl transition-colors text-sm">
-            Koopgids lezen
+          <a href="#calculator"
+            class="inline-flex items-center gap-2 bg-white/8 hover:bg-white/15 border border-white/10 text-white font-medium px-6 py-3 rounded-xl transition-all text-sm">
+            📐 Bereken mijn terras
           </a>
+        </div>
+
+        <!-- Social proof bar -->
+        <div class="flex flex-wrap gap-5 text-xs text-slate-500">
+          <span class="flex items-center gap-1.5"><span class="text-green-400 text-base">✓</span> Onderhoudsloos aluminium</span>
+          <span class="flex items-center gap-1.5"><span class="text-green-400 text-base">✓</span> Van €39 tot premium</span>
+          <span class="flex items-center gap-1.5"><span class="text-green-400 text-base">✓</span> Onafhankelijk advies</span>
         </div>
       </div>
 
-      <div class="mt-12 grid grid-cols-3 gap-4 max-w-md">
-        <div class="text-center">
-          <div class="text-2xl font-black text-green-400">25+</div>
-          <div class="text-xs text-slate-400 mt-0.5">pagina's advies</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl font-black text-green-400">4</div>
-          <div class="text-xs text-slate-400 mt-0.5">materialen vergeleken</div>
-        </div>
-        <div class="text-center">
-          <div class="text-2xl font-black text-green-400">€39–</div>
-          <div class="text-xs text-slate-400 mt-0.5">alle budgetten</div>
+      <!-- Hero stats — floating cards -->
+      <div class="mt-12 grid grid-cols-3 sm:grid-cols-3 gap-3 max-w-xs sm:max-w-sm">
+        {[
+          { n: '20+', label: 'pagina\'s advies' },
+          { n: '4', label: 'materialen vergeleken' },
+          { n: '€39–', label: 'alle budgetten' },
+        ].map(({ n, label }) => (
+          <div class="bg-white/5 border border-white/8 rounded-xl p-3 text-center">
+            <div class="text-xl font-black text-green-400">{n}</div>
+            <div class="text-xs text-slate-500 mt-0.5 leading-tight">{label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ CALCULATOR ═══ -->
+  <section id="calculator" class="bg-gradient-to-b from-slate-950 to-white pb-0">
+    <div class="max-w-5xl mx-auto px-4 pb-8 -mb-6">
+      <div class="bg-white rounded-2xl border border-slate-200 shadow-xl shadow-slate-200/60 p-6 sm:p-8">
+        <div class="flex items-start gap-4">
+          <div class="shrink-0 w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center text-xl">📐</div>
+          <div class="flex-1 min-w-0">
+            <h2 class="text-lg font-bold text-slate-900 mb-0.5">Hoeveel meubelen passen op mijn terras?</h2>
+            <p class="text-slate-500 text-sm mb-5">Vul de afmetingen in — je krijgt direct een persoonlijk advies.</p>
+
+            <div class="grid sm:grid-cols-3 gap-3 mb-4">
+              {[
+                { id: 'terras-breedte', label: 'Breedte (m)', val: '4', min: '1', max: '20' },
+                { id: 'terras-diepte', label: 'Diepte (m)', val: '3', min: '1', max: '20' },
+              ].map(({ id, label, val, min, max }) => (
+                <div>
+                  <label class="block text-xs font-semibold text-slate-600 mb-1.5">{label}</label>
+                  <input id={id} type="number" value={val} min={min} max={max} step="0.5"
+                    class="w-full border-2 border-slate-200 focus:border-green-400 rounded-xl px-3 py-2.5 text-sm font-medium focus:outline-none transition-colors bg-slate-50 focus:bg-white" />
+                </div>
+              ))}
+              <div>
+                <label class="block text-xs font-semibold text-slate-600 mb-1.5">Gebruik</label>
+                <select id="terras-gebruik"
+                  class="w-full border-2 border-slate-200 focus:border-green-400 rounded-xl px-3 py-2.5 text-sm font-medium focus:outline-none transition-colors bg-slate-50 focus:bg-white">
+                  <option value="lounge">🛋️ Ontspannen</option>
+                  <option value="eten">🍽️ Buiten eten</option>
+                  <option value="gemengd">🏡 Gemengd gebruik</option>
+                </select>
+              </div>
+            </div>
+
+            <div id="calculator-resultaat" class="bg-green-50 border border-green-200 rounded-xl px-5 py-4">
+              <div class="flex items-center gap-2 font-bold text-slate-900 mb-1 text-sm">
+                <span>📊</span> Advies voor jouw terras:
+              </div>
+              <div id="resultaat-tekst" class="text-slate-600 text-sm leading-relaxed"></div>
+              <div id="resultaat-link" class="mt-2"></div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="max-w-5xl mx-auto px-4">
+  <div class="max-w-5xl mx-auto px-4 pt-14">
 
-    <!-- Terras-calculator -->
-    <section id="calculator" class="mt-10 bg-green-50 border border-green-200 rounded-2xl p-6 sm:p-8">
-      <div class="flex items-start gap-4">
-        <span class="text-3xl shrink-0">📐</span>
-        <div class="flex-1">
-          <h2 class="text-xl font-bold text-slate-900 mb-1">Hoeveel terrasmeubelen passen er op mijn terras?</h2>
-          <p class="text-slate-600 text-sm mb-5">Vul de afmetingen van je terras in en zie welke opstelling past.</p>
+    <!-- ═══ POPULAIRE TYPES ═══ -->
+    <section class="mb-14">
+      <div class="flex items-baseline justify-between mb-5">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Populaire terrasmeubelen</h2>
+          <p class="text-slate-500 text-sm mt-0.5">Klik op een type voor ons complete advies en beste picks</p>
+        </div>
+        <a href="/terrasmeubelen-overzicht" class="text-sm text-green-600 hover:text-green-700 font-semibold flex items-center gap-1">
+          Alles <span>→</span>
+        </a>
+      </div>
 
-          <div class="grid sm:grid-cols-3 gap-4 mb-5">
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Breedte terras (m)</label>
-              <input id="terras-breedte" type="number" value="4" min="1" max="20" step="0.5"
-                class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-green-400" />
+      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        {populaireTypes.map(type => {
+          const k = typeKleuren[type.id] ?? typeKleuren.loungeset;
+          return (
+            <a href={`/${type.slug}`}
+              class="group relative flex flex-col rounded-2xl overflow-hidden border border-slate-200 bg-white hover:border-transparent hover:shadow-xl hover:shadow-slate-200/80 transition-all duration-300">
+              <!-- Thumbnail -->
+              <div class={`w-full aspect-video bg-gradient-to-br ${k.bg} flex items-center justify-center relative overflow-hidden`}>
+                <div class={`absolute inset-0 ${k.accent}`}></div>
+                <!-- Decoratieve cirkels -->
+                <div class="absolute -right-8 -top-8 w-24 h-24 bg-white/5 rounded-full"></div>
+                <div class="absolute -left-4 -bottom-4 w-16 h-16 bg-white/5 rounded-full"></div>
+                <span class="relative text-5xl sm:text-4xl drop-shadow-lg group-hover:scale-110 transition-transform duration-300">
+                  {type.icon}
+                </span>
+              </div>
+              <!-- Info -->
+              <div class="p-4 flex-1 flex flex-col">
+                <div class="flex items-center justify-between mb-1">
+                  <div class="font-bold text-slate-900 text-sm group-hover:text-green-700 transition-colors">{type.naam}</div>
+                  <span class={`w-2 h-2 rounded-full ${k.dot}`}></span>
+                </div>
+                <div class="text-xs text-slate-500 mb-2">vanaf €{type.prijsVanaf}</div>
+                <p class="text-xs text-slate-500 leading-relaxed line-clamp-2 flex-1">{type.beschrijving}</p>
+                <div class="mt-3 text-xs font-semibold text-green-600 group-hover:text-green-700 flex items-center gap-1">
+                  Bekijk advies <span class="group-hover:translate-x-0.5 transition-transform">→</span>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- ═══ MATERIALEN VISUAL ═══ -->
+    <section class="mb-14">
+      <div class="flex items-baseline justify-between mb-5">
+        <div>
+          <h2 class="text-2xl font-bold text-slate-900">Welk materiaal kies je?</h2>
+          <p class="text-slate-500 text-sm mt-0.5">Elk materiaal heeft z'n eigen karakter — vind het juiste match</p>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {MATERIALEN.map(mat => (
+          <a href={`/${mat.slug}`}
+            class="group relative border-2 border-slate-100 hover:border-green-300 rounded-2xl p-5 bg-white hover:shadow-lg transition-all duration-200 overflow-hidden">
+            <!-- Achtergrond accent -->
+            <div class="absolute top-0 right-0 w-20 h-20 bg-green-50 rounded-bl-[40px] -translate-y-2 translate-x-2 group-hover:bg-green-100 transition-colors"></div>
+
+            <div class="relative">
+              <div class="text-3xl mb-3">{mat.icon}</div>
+              <div class="font-bold text-slate-900 group-hover:text-green-700 transition-colors text-base mb-1">{mat.naam}</div>
+              <div class="text-xs text-slate-400 mb-3 flex gap-2 flex-wrap">
+                <span class="bg-slate-100 px-2 py-0.5 rounded-full">{mat.levensduur}</span>
+                <span class="bg-slate-100 px-2 py-0.5 rounded-full">{mat.prijsklasse}</span>
+              </div>
+              <ul class="space-y-1.5">
+                {mat.voordelen.slice(0, 3).map(v => (
+                  <li class="text-xs text-slate-600 flex gap-2">
+                    <span class="text-green-500 shrink-0 font-bold">✓</span>
+                    <span>{v}</span>
+                  </li>
+                ))}
+              </ul>
+              <div class="mt-3 text-xs font-semibold text-green-600 group-hover:text-green-700 flex items-center gap-1">
+                Meer info <span class="group-hover:translate-x-0.5 transition-transform">→</span>
+              </div>
             </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Diepte terras (m)</label>
-              <input id="terras-diepte" type="number" value="3" min="1" max="20" step="0.5"
-                class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-green-400" />
-            </div>
-            <div>
-              <label class="block text-xs font-semibold text-slate-700 mb-1">Gebruik</label>
-              <select id="terras-gebruik" class="w-full border border-slate-200 rounded-lg px-3 py-2 text-sm focus:outline-none focus:border-green-400">
-                <option value="lounge">Ontspannen (lounge)</option>
-                <option value="eten">Buiten eten (dining)</option>
-                <option value="gemengd">Gemengd</option>
-              </select>
-            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- ═══ EERLIJK ADVIES ═══ -->
+    <div class="mb-14">
+      <div class="relative bg-gradient-to-r from-amber-50 to-orange-50 border border-amber-200 rounded-2xl px-6 py-5 overflow-hidden">
+        <div class="absolute right-4 top-1/2 -translate-y-1/2 text-7xl opacity-10 select-none">💡</div>
+        <div class="relative flex gap-4">
+          <div class="shrink-0 w-10 h-10 bg-amber-100 rounded-xl flex items-center justify-center text-xl">💡</div>
+          <div>
+            <div class="font-bold text-slate-900 mb-1">Eerlijk advies van ons</div>
+            <p class="text-slate-700 text-sm leading-relaxed">
+              <strong>Aluminium</strong> is voor 90% van de kopers de verstandigste keuze: roestvrij, onderhoudsloos en 20+ jaar mee.
+              <strong>Teak</strong> is mooier maar vraagt jaarlijks onderhoud. <strong>Polyrattan</strong> is ideaal voor de lounge-look op een lager budget. Twijfel je? Kies aluminium — je hebt er geen spijt van.
+            </p>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <div id="calculator-resultaat" class="bg-white border border-green-200 rounded-xl px-5 py-4 text-sm">
-            <div class="font-bold text-slate-900 mb-2">📊 Advies voor jouw terras:</div>
-            <div id="resultaat-tekst" class="text-slate-600 leading-relaxed"></div>
-          </div>
+    <!-- ═══ BESTE KEUZE PER SITUATIE ═══ -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-slate-900 mb-2">Beste keuze per situatie</h2>
+      <p class="text-slate-500 text-sm mb-6">Kies jouw situatie en ga direct naar het juiste advies</p>
+
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
+        {[
+          { href: '/beste-terrasmeubelen', icon: '🏆', title: 'Beste terrasmeubelen 2026', sub: 'Top picks per categorie en budget', hot: true },
+          { href: '/beste-loungeset', icon: '🛋️', title: 'Beste loungeset', sub: 'Van compact tot grote hoekset' },
+          { href: '/beste-tuinset', icon: '🍽️', title: 'Beste tuinset', sub: 'Complete sets voor buiten eten' },
+          { href: '/beste-parasol', icon: '☂️', title: 'Beste parasol', sub: 'Zweef-, kantel- en stokparasols' },
+          { href: '/beste-ligbed', icon: '🏖️', title: 'Beste ligbed', sub: 'Zonnebedden voor tuin of terras' },
+          { href: '/kleine-tuin-meubelen', icon: '🌿', title: 'Kleine tuin / balkon', sub: 'Compact maar stijlvol inrichten' },
+          { href: '/terrasmeubelen-onder-500-euro', icon: '💶', title: 'Budget: onder €500', sub: 'Goede kwaliteit voor minder' },
+          { href: '/aluminium-terrasmeubelen', icon: '🔩', title: 'Aluminium meubelen', sub: 'Onderhoudsloos, 20-30 jaar mee' },
+          { href: '/teak-terrasmeubelen', icon: '🌳', title: 'Teak terrasmeubelen', sub: 'Klassieke uitstraling, 50 jaar mee' },
+          { href: '/terrasmeubelen-2026', icon: '📅', title: 'Terrasmeubelen 2026', sub: 'Trends en beste keuzes dit jaar' },
+          { href: '/loungeset-4-delig', icon: '4️⃣', title: 'Loungeset 4-delig', sub: 'De meest gekochte configuratie' },
+          { href: '/tuinset-voor-6-personen', icon: '👨‍👩‍👧‍👦', title: 'Tuinset 6 personen', sub: 'Grote tafel voor de hele familie' },
+        ].map(({ href, icon, title, sub, hot }) => (
+          <a href={href}
+            class={`group relative flex items-start gap-3 border rounded-2xl px-4 py-4 transition-all hover:shadow-md ${hot ? 'border-green-300 bg-green-50 hover:border-green-400' : 'border-slate-200 bg-white hover:border-green-300'}`}>
+            {hot && <div class="absolute top-2 right-2 text-xs bg-green-600 text-white px-1.5 py-0.5 rounded-full font-bold">⭐</div>}
+            <span class="text-2xl shrink-0">{icon}</span>
+            <div>
+              <div class={`font-bold text-sm group-hover:text-green-700 transition-colors ${hot ? 'text-green-900' : 'text-slate-900'}`}>{title}</div>
+              <div class="text-xs text-slate-500 mt-0.5">{sub}</div>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- ═══ HOE HET WERKT ═══ -->
+    <section class="mb-14">
+      <div class="bg-slate-950 rounded-3xl p-8 text-white overflow-hidden relative">
+        <div class="absolute top-0 right-0 w-64 h-64 bg-green-600/10 rounded-full blur-3xl"></div>
+        <h2 class="text-xl font-bold mb-2 relative">Hoe Terrasgigant werkt</h2>
+        <p class="text-slate-400 text-sm mb-8 relative">Wij nemen het zoekwerk uit handen — in 3 stappen naar jouw ideale terras</p>
+        <div class="relative grid sm:grid-cols-3 gap-6">
+          {[
+            { stap: '1', icon: '📐', titel: 'Meet je terras', tekst: 'Vul breedte en diepte in de calculator in. Je krijgt direct passend advies.' },
+            { stap: '2', icon: '🔍', titel: 'Vergelijk materialen', tekst: 'Lees onze onafhankelijke vergelijking van aluminium, teak en polyrattan.' },
+            { stap: '3', icon: '🛒', titel: 'Koop bij beste prijs', tekst: 'Klik door naar Bol.com of Coolblue voor de beste prijs met bezorggarantie.' },
+          ].map(({ stap, icon, titel, tekst }) => (
+            <div class="flex gap-4">
+              <div class="shrink-0">
+                <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center text-xs font-black">{stap}</div>
+              </div>
+              <div>
+                <div class="text-xl mb-1">{icon}</div>
+                <div class="font-bold mb-1 text-sm">{titel}</div>
+                <div class="text-slate-400 text-xs leading-relaxed">{tekst}</div>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
 
-    <!-- Populaire meubeltypen -->
-    <section class="mt-14">
-      <div class="flex items-baseline justify-between mb-5">
-        <h2 class="text-2xl font-bold text-slate-900">Populaire terrasmeubelen</h2>
-        <a href="/terrasmeubelen-overzicht" class="text-sm text-green-600 hover:underline font-medium">Alles bekijken →</a>
-      </div>
-
-      <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
-        {populaireTypes.map(type => (
-          <a
-            href={`/${type.slug}`}
-            class="group flex flex-col rounded-2xl border border-slate-200 bg-white overflow-hidden hover:border-green-400 hover:shadow-lg transition-all duration-200"
-          >
-            <div class="w-full aspect-video bg-gradient-to-br from-green-800 to-green-950 flex items-center justify-center relative overflow-hidden">
-              <div class="absolute inset-0 bg-gradient-to-br from-green-400/10 via-transparent to-transparent group-hover:from-green-400/20 transition-all"></div>
-              <span class="text-5xl sm:text-4xl">{type.icon}</span>
-            </div>
-            <div class="p-4">
-              <div class="font-bold text-slate-900 text-sm group-hover:text-green-700 transition-colors">{type.naam}</div>
-              <div class="text-xs text-slate-400 mt-0.5">vanaf €{type.prijsVanaf}</div>
-              <div class="text-xs text-slate-500 mt-1 leading-relaxed line-clamp-2">{type.beschrijving}</div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <!-- Materialen grid -->
-    <section class="mt-14">
-      <h2 class="text-2xl font-bold text-slate-900 mb-5">Welk materiaal kies je?</h2>
-      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {MATERIALEN.map(mat => (
-          <a
-            href={`/${mat.slug}`}
-            class="group border border-slate-200 rounded-2xl p-5 bg-white hover:border-green-400 hover:shadow-md transition-all"
-          >
-            <div class="text-3xl mb-3">{mat.icon}</div>
-            <div class="font-bold text-slate-900 group-hover:text-green-700 transition-colors">{mat.naam}</div>
-            <div class="text-xs text-slate-500 mt-1 mb-3">{mat.levensduur} · {mat.prijsklasse}</div>
-            <ul class="space-y-1">
-              {mat.voordelen.slice(0, 3).map(v => (
-                <li class="text-xs text-slate-600 flex gap-1.5">
-                  <span class="text-green-500 shrink-0">✓</span>{v}
-                </li>
-              ))}
-            </ul>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <!-- Eerlijk advies -->
-    <div class="mt-10 bg-amber-50 border border-amber-200 rounded-2xl px-6 py-5 flex gap-4">
-      <span class="text-2xl shrink-0">💡</span>
-      <div>
-        <div class="font-bold text-slate-900 mb-1">Eerlijk advies</div>
-        <p class="text-slate-600 text-sm leading-relaxed">
-          Aluminium is voor 90% van de kopers de beste keuze: onderhoudsloos, roestvrij en tegenwoordig ook stijlvol. Teak is mooier maar vraagt elk jaar onderhoud. Polyrattan is ideaal als je een lounge-look wil voor een lagere prijs.
-        </p>
-      </div>
-    </div>
-
-    <!-- Beste keuze per situatie -->
-    <section class="mt-14">
-      <h2 class="text-2xl font-bold text-slate-900 mb-5">Beste keuze per situatie</h2>
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-        {[
-          { href: '/beste-terrasmeubelen', icon: '🏆', title: 'Beste terrasmeubelen 2026', sub: 'Top picks per categorie en budget' },
-          { href: '/beste-loungeset', icon: '🛋️', title: 'Beste loungeset', sub: 'Van budget tot premium loungeset' },
-          { href: '/beste-tuinset', icon: '🍽️', title: 'Beste tuinset', sub: 'Complete sets voor buiten eten' },
-          { href: '/beste-parasol', icon: '☂️', title: 'Beste parasol', sub: 'Zweef-, kantel- en marktparasols' },
-          { href: '/beste-ligbed', icon: '🏖️', title: 'Beste ligbed', sub: 'Zonnebedden voor tuin of terras' },
-          { href: '/kleine-tuin-meubelen', icon: '🌿', title: 'Kleine tuin / balkon', sub: 'Compact maar stijlvol' },
-          { href: '/terrasmeubelen-onder-500-euro', icon: '💶', title: 'Budget: onder €500', sub: 'Mooie sets voor elk budget' },
-          { href: '/aluminium-terrasmeubelen', icon: '🔩', title: 'Aluminium meubelen', sub: 'Onderhoudsloos en duurzaam' },
-          { href: '/teak-terrasmeubelen', icon: '🌳', title: 'Teak terrasmeubelen', sub: 'Klassieke uitstraling, lang mee' },
-        ].map(({ href, icon, title, sub }) => (
-          <a href={href}
-            class="group flex items-start gap-3 border border-slate-200 bg-white hover:border-green-400 hover:shadow-sm rounded-2xl px-4 py-4 transition-all">
-            <span class="text-2xl shrink-0">{icon}</span>
-            <div>
-              <div class="font-bold text-slate-900 text-sm group-hover:text-green-700 transition-colors">{title}</div>
-              <div class="text-xs text-slate-400 mt-0.5">{sub}</div>
-            </div>
-          </a>
-        ))}
-      </div>
-    </section>
-
-    <!-- Info blokken -->
-    <section class="mt-14 grid sm:grid-cols-2 gap-5">
-      <div class="bg-green-50 rounded-2xl p-6 border border-green-100">
-        <div class="text-2xl mb-3">🌦️</div>
-        <h2 class="text-lg font-bold text-slate-900 mb-2">Welke meubelen overleven het Nederlandse weer?</h2>
-        <p class="text-slate-600 text-sm leading-relaxed">
-          Nederland is nat en winderig — niet elk materiaal overleeft dat zonder onderhoud. <strong>Aluminium</strong> is de winnaar: roestvrij, lichtgewicht en compleet weersbestendig. Teak houdt ook stand maar heeft jaarlijks olie nodig. Polyrattan scoort goed qua weerbestendigheid, maar de kleur vervaagt na verloop van jaren.
-        </p>
-        <a href="/terrasmeubelen-onderhoud" class="inline-block mt-4 text-green-600 font-semibold text-sm hover:underline">
-          Onderhoudstips →
-        </a>
-      </div>
-
-      <div class="bg-slate-50 rounded-2xl p-6 border border-slate-200">
-        <div class="text-2xl mb-3">📦</div>
-        <h2 class="text-lg font-bold text-slate-900 mb-2">Wat doe je met terrasmeubelen in de winter?</h2>
-        <p class="text-slate-600 text-sm leading-relaxed">
-          Aluminium en polyrattan kunnen buiten blijven staan (beschermd met een hoes). Teak kan ook, maar liefst droog bewaren. Kussens <strong>altijd</strong> binnenhalen — vochtigheid en schimmel zijn de vijand. Lees onze winteropslaggids voor per-materiaal advies.
-        </p>
-        <a href="/terrasmeubelen-opbergen-winter" class="inline-block mt-4 text-green-600 font-semibold text-sm hover:underline">
-          Winteropslag tips →
-        </a>
-      </div>
-    </section>
-
-    <!-- Vergelijkingen -->
-    <section class="mt-14">
-      <h2 class="text-2xl font-bold text-slate-900 mb-5">Materiaalvergelijkingen</h2>
+    <!-- ═══ VERGELIJKINGEN ═══ -->
+    <section class="mb-14">
+      <h2 class="text-2xl font-bold text-slate-900 mb-2">Materiaalvergelijkingen</h2>
+      <p class="text-slate-500 text-sm mb-6">Welk materiaal past het beste bij jou? Lees onze objectieve vergelijkingen</p>
       <div class="grid sm:grid-cols-2 gap-3">
         {[
-          { href: '/aluminium-vs-teak', title: 'Aluminium vs Teak', sub: 'Welk materiaal is duurzamer en mooier?' },
-          { href: '/aluminium-vs-polyrattan', title: 'Aluminium vs Polyrattan', sub: 'Vergelijk prijs, gewicht en onderhoud' },
-          { href: '/loungeset-vs-tuinset', title: 'Loungeset of tuinset?', sub: 'Wat past beter bij jouw gebruik?' },
-          { href: '/teak-vs-polyrattan', title: 'Teak vs Polyrattan', sub: 'Hout versus synthetisch — wie wint?' },
-        ].map(({ href, title, sub }) => (
+          { href: '/aluminium-vs-teak', a: 'Aluminium', b: 'Teak', win: 'aluminium', icon: '🔩🌳', sub: 'Onderhoud vs uitstraling — wie wint?' },
+          { href: '/aluminium-vs-polyrattan', a: 'Aluminium', b: 'Polyrattan', win: 'beide', icon: '🔩🧺', sub: 'Prijs, gewicht en levensduur vergeleken' },
+          { href: '/loungeset-vs-tuinset', a: 'Loungeset', b: 'Tuinset', win: 'afhankelijk', icon: '🛋️🍽️', sub: 'Relaxen of eten — wat past bij jou?' },
+          { href: '/teak-vs-polyrattan', a: 'Teak', b: 'Polyrattan', win: 'teak', icon: '🌳🧺', sub: 'Hout versus synthetisch — objectief beoordeeld' },
+        ].map(({ href, a, b, icon, sub }) => (
           <a href={href}
-            class="group flex items-center justify-between border border-slate-200 bg-white hover:border-green-400 hover:shadow-sm rounded-2xl px-5 py-4 transition-all">
-            <div>
-              <div class="font-bold text-slate-900 group-hover:text-green-700 transition-colors">{title}</div>
-              <div class="text-xs text-slate-400 mt-0.5">{sub}</div>
+            class="group flex items-center justify-between border border-slate-200 bg-white hover:border-green-300 hover:shadow-md rounded-2xl px-5 py-4 transition-all">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">{icon}</span>
+              <div>
+                <div class="font-bold text-slate-900 group-hover:text-green-700 transition-colors text-sm">{a} vs {b}</div>
+                <div class="text-xs text-slate-500 mt-0.5">{sub}</div>
+              </div>
             </div>
-            <span class="text-slate-300 group-hover:text-green-500 text-xl transition-colors">→</span>
+            <span class="text-slate-300 group-hover:text-green-500 text-xl shrink-0 transition-colors group-hover:translate-x-0.5 duration-200">→</span>
           </a>
         ))}
       </div>
     </section>
 
-    <!-- FAQ -->
-    <section class="mt-14 mb-12">
-      <h2 class="text-2xl font-bold text-slate-900 mb-5">Veelgestelde vragen terrasmeubelen</h2>
-      <div class="space-y-3">
+    <!-- ═══ INFO BLOKKEN ═══ -->
+    <section class="mb-14 grid sm:grid-cols-2 gap-5">
+      <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-2xl p-6 border border-green-100">
+        <div class="w-10 h-10 bg-green-100 rounded-xl flex items-center justify-center text-xl mb-4">🌦️</div>
+        <h2 class="text-lg font-bold text-slate-900 mb-2">Welke meubelen overleven het Nederlandse weer?</h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Nederland is nat en winderig. <strong>Aluminium</strong> is de winnaar: roestvrij en vorstbestendig. Teak houdt ook stand met onderhoud. Polyrattan kan goed maar vervaagt na jaren.
+        </p>
+        <a href="/terrasmeubelen-onderhoud" class="inline-flex items-center gap-1 mt-4 text-green-700 font-semibold text-sm hover:underline">
+          Onderhoudstips <span>→</span>
+        </a>
+      </div>
+
+      <div class="bg-gradient-to-br from-slate-50 to-slate-100 rounded-2xl p-6 border border-slate-200">
+        <div class="w-10 h-10 bg-slate-200 rounded-xl flex items-center justify-center text-xl mb-4">❄️</div>
+        <h2 class="text-lg font-bold text-slate-900 mb-2">Terrasmeubelen in de winter</h2>
+        <p class="text-slate-600 text-sm leading-relaxed">
+          Aluminium en polyrattan kunnen buiten met een hoes. Teak bewaar je liefst droog. Kussens <strong>altijd</strong> naar binnen — vochtigheid is de vijand van loungekussens.
+        </p>
+        <a href="/terrasmeubelen-opbergen-winter" class="inline-flex items-center gap-1 mt-4 text-green-700 font-semibold text-sm hover:underline">
+          Winteropslag gids <span>→</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ═══ FAQ ═══ -->
+    <section class="mb-14">
+      <div class="flex items-baseline gap-3 mb-6">
+        <h2 class="text-2xl font-bold text-slate-900">Veelgestelde vragen</h2>
+        <span class="text-xs bg-slate-100 text-slate-500 px-2.5 py-1 rounded-full font-medium">6 vragen</span>
+      </div>
+      <div class="space-y-2">
         {[
-          {
-            q: 'Welke terrasmeubelen zijn het meest duurzaam?',
-            a: 'Aluminium terrasmeubelen gaan het langst mee (20-30 jaar) en vereisen vrijwel geen onderhoud. Teak hout kan nog langer mee (tot 50 jaar) maar vraagt jaarlijkse oliebehandeling. Beide zijn uitstekende langetermijninvesteringen.',
-          },
-          {
-            q: 'Wat is een goede loungeset voor het terras?',
-            a: 'Een goede loungeset heeft een stevig aluminium of polyrattan frame, dikke kussens (minimaal 8 cm) en is UV-bestendig. Budget: €300–600 voor een 4-delige set. Premium: €800–2000 voor merken als Hartman, Royal Garden of Taste.',
-          },
-          {
-            q: 'Mogen terrasmeubelen buiten blijven in de winter?',
-            a: 'Aluminium en polyrattan kunnen met een beschermhoes buiten staan. Teak ook, maar bewaar het bij voorkeur droog. Kussens altijd naar binnen — vocht en schimmel zijn lastig te verwijderen. Een tuinhoes kost €15–50 en verlengt de levensduur flink.',
-          },
-          {
-            q: 'Hoeveel terrasmeubelen passen op een terras van 3x3 meter?',
-            a: 'Op 9m² past comfortabel een bistroset (tafel + 2 stoelen) of een compacte loungeset van 3-delig. Voor een 4-delige loungeset heb je minimaal 3x4 meter nodig. Houd altijd 60-80 cm loopruimte aan rondom meubels.',
-          },
-          {
-            q: 'Wat is het verschil tussen een loungeset en een tuinset?',
-            a: 'Een loungeset is laag en gericht op ontspannen — lage tafels en diepe, zachte zitplaatsen. Een tuinset is een eettafel met stoelen op normale zithoogte, vergelijkbaar met je eetkamer maar dan buiten. Loungeset is voor relaxen, tuinset voor eten.',
-          },
-          {
-            q: 'Welke terrasmeubelen zijn goed voor een klein balkon?',
-            a: 'Kies voor inklapbare of stapelbare meubels: een bistroset (60x60 cm tafel + 2 stoelen) of een wall-mounted klaptafel. Materiaal: aluminium of kunststof is het lichtste en makkelijkst op te slaan. Budget bistroset: €60–150.',
-          },
-        ].map(({ q, a }) => (
-          <details class="group border border-slate-200 rounded-xl bg-white overflow-hidden">
-            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors">
-              <span class="pr-4 text-sm sm:text-base">{q}</span>
-              <span class="text-slate-300 group-open:text-green-500 text-xl leading-none shrink-0 transition-colors">
+          { q: 'Welke terrasmeubelen zijn het meest duurzaam?', a: 'Aluminium gaat 20-30 jaar mee en vereist vrijwel geen onderhoud. Teak kan tot 50 jaar met onderhoud. Beide zijn uitstekende langetermijninvesteringen. Polyrattan gaat 10-15 jaar mee.' },
+          { q: 'Wat is een goede loungeset voor het terras?', a: 'Een goede loungeset heeft een poedergecoat aluminium of polyrattan frame, kussens van minimaal 8 cm dik en UV-bestendige bekleding. Budget: €300-600. Midrange: Hartman of Royal Garden voor €700-1.200.' },
+          { q: 'Mogen terrasmeubelen buiten blijven in de winter?', a: 'Aluminium en polyrattan kunnen met een beschermhoes buiten staan. Teak ook, maar bewaar het bij voorkeur droog. Kussens altijd naar binnen — vocht en schimmel zijn lastig te verwijderen.' },
+          { q: 'Hoeveel terrasmeubelen passen op een terras van 3×3 meter?', a: 'Op 9m² past comfortabel een bistroset of een compacte 3-delige loungeset. Voor een 4-delige set heb je minimaal 3×4 meter nodig. Houd 60-80 cm loopruimte rondom.' },
+          { q: 'Wat is het verschil tussen een loungeset en een tuinset?', a: 'Een loungeset is laag (30-40 cm) en gericht op ontspannen. Een tuinset is op eethoogte (45-50 cm) voor buiten eten. Lounge is voor relaxen, tuinset voor maaltijden.' },
+          { q: 'Welke terrasmeubelen zijn goed voor een klein balkon?', a: 'Kies inklapbare of stapelbare meubels: een bistroset (60×60 cm tafel + 2 stoelen) of een compacte 2-delige loungeset. Budget bistroset: €60-150.' },
+        ].map(({ q, a }, i) => (
+          <details class="group border border-slate-200 hover:border-green-200 rounded-xl bg-white overflow-hidden transition-colors">
+            <summary class="flex items-center justify-between px-5 py-4 font-semibold text-slate-900 cursor-pointer list-none hover:bg-slate-50 transition-colors gap-4">
+              <div class="flex items-center gap-3">
+                <span class="shrink-0 text-xs font-black text-slate-400 w-5">Q{i + 1}</span>
+                <span class="text-sm sm:text-base">{q}</span>
+              </div>
+              <span class="shrink-0 w-6 h-6 rounded-full border border-slate-200 group-open:border-green-300 group-open:bg-green-50 flex items-center justify-center text-slate-400 group-open:text-green-600 transition-all text-xs font-bold">
                 <span class="group-open:hidden">+</span>
-                <span class="hidden group-open:inline">−</span>
+                <span class="hidden group-open:block">−</span>
               </span>
             </summary>
-            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100">
+            <div class="px-5 pb-4 pt-0 text-slate-600 text-sm leading-relaxed border-t border-slate-100 ml-8">
               {a}
             </div>
           </details>
@@ -282,45 +380,37 @@ const populaireTypes = MEUBEL_TYPEN.filter(t => t.populair);
 
 <script>
   function berekenAdvies() {
-    const breedteEl = document.getElementById('terras-breedte') as HTMLInputElement;
-    const diepteEl = document.getElementById('terras-diepte') as HTMLInputElement;
-    const gebruikEl = document.getElementById('terras-gebruik') as HTMLSelectElement;
-    const breedte = parseFloat(breedteEl?.value || '4');
-    const diepte = parseFloat(diepteEl?.value || '3');
-    const gebruik = gebruikEl?.value;
-    const oppervlak = breedte * diepte;
-    const resultaat = document.getElementById('resultaat-tekst');
-    if (!resultaat) return;
+    const b = parseFloat((document.getElementById('terras-breedte') as HTMLInputElement)?.value || '4');
+    const d = parseFloat((document.getElementById('terras-diepte') as HTMLInputElement)?.value || '3');
+    const g = (document.getElementById('terras-gebruik') as HTMLSelectElement)?.value;
+    const opp = +(b * d).toFixed(1);
+    const el = document.getElementById('resultaat-tekst');
+    const linkEl = document.getElementById('resultaat-link');
+    if (!el) return;
 
     let tekst = '';
-    if (gebruik === 'lounge') {
-      if (oppervlak < 6) {
-        tekst = `Op ${oppervlak}m² past een <strong>compacte loungeset van 2–3 delig</strong> (bijv. 2 fauteuils + salontafel). Houd 60 cm loopruimte aan rondom.`;
-      } else if (oppervlak < 12) {
-        tekst = `Op ${oppervlak}m² past een <strong>4-delige loungeset</strong> comfortabel — 2-zits bank + 2 fauteuils + salontafel. Ideaal formaat voor de meeste terrassen.`;
-      } else {
-        tekst = `Ruim ${oppervlak}m²! Je kunt een <strong>complete loungeset van 5–8 delig</strong> neerzetten én nog ruimte overhouden voor een parasol of planten.`;
-      }
-    } else if (gebruik === 'eten') {
-      if (oppervlak < 8) {
-        tekst = `Op ${oppervlak}m² past een <strong>bistroset (2 personen)</strong> of een kleine tuintafel voor 4 personen. Kies een ronde tafel — dat bespaart ruimte in de hoeken.`;
-      } else if (oppervlak < 15) {
-        tekst = `Op ${oppervlak}m² past een <strong>tuinset voor 4–6 personen</strong> comfortabel. Een ovale of rechthoekige tafel van 160–180 cm is ideaal.`;
-      } else {
-        tekst = `Ruim ${oppervlak}m² — je hebt genoeg ruimte voor een <strong>tuinset voor 6–8 personen</strong> én een aparte lounge-hoek of ligbedden.`;
-      }
+    let link = '';
+    if (g === 'lounge') {
+      if (opp < 6)       { tekst = `Op <strong>${opp}m²</strong>: een <strong>compacte 2-3 delige loungeset</strong> of 2 fauteuils met tafeltje. Houd 60 cm loopruimte aan.`; link = '/kleine-tuin-meubelen'; }
+      else if (opp < 12) { tekst = `Op <strong>${opp}m²</strong>: een <strong>4-delige loungeset</strong> (2-zits + 2 fauteuils + tafel) past comfortabel. Dit is de ideale tuinmaat.`; link = '/beste-loungeset'; }
+      else               { tekst = `Ruim <strong>${opp}m²</strong>! Je kunt een <strong>5-8 delige loungeset of hoekset</strong> neerzetten én nog ruimte overhouden voor een parasol.`; link = '/loungeset-4-delig'; }
+    } else if (g === 'eten') {
+      if (opp < 8)       { tekst = `Op <strong>${opp}m²</strong>: een <strong>bistroset voor 2 personen</strong> of een kleine ronde tafel voor 4. Kies compact stapelbaar meubilair.`; link = '/beste-tuinset'; }
+      else if (opp < 15) { tekst = `Op <strong>${opp}m²</strong>: een <strong>tuinset voor 4-6 personen</strong> past goed. Kies een tafel van 160-180 cm voor optimaal comfort.`; link = '/beste-tuinset'; }
+      else               { tekst = `Ruim <strong>${opp}m²</strong>: je hebt plek voor een <strong>tuinset voor 6-8 personen</strong> én een aparte lounge-hoek of ligbedden.`; link = '/tuinset-voor-6-personen'; }
     } else {
-      if (oppervlak < 12) {
-        tekst = `Op ${oppervlak}m² is slim kiezen het devies: een <strong>3-delige loungeset + klaptafel</strong> geeft flexibiliteit voor zowel relaxen als eten.`;
-      } else {
-        tekst = `Op ${oppervlak}m² past zowel een <strong>4-delige loungeset als een tuinset voor 4 personen</strong>. Verdeel het terras in zones: lounge- en eetgedeelte.`;
-      }
+      if (opp < 12)      { tekst = `Op <strong>${opp}m²</strong>: kies een <strong>3-delige loungeset + klaptafel</strong> voor flexibel gebruik — loungen én eten buiten.`; link = '/loungeset-vs-tuinset'; }
+      else               { tekst = `Op <strong>${opp}m²</strong>: je hebt ruimte voor zowel een <strong>4-delige loungeset als een tuinset</strong>. Maak twee zones: eten én relaxen.`; link = '/terras-inrichten'; }
     }
-    resultaat.innerHTML = tekst;
+    el.innerHTML = tekst;
+    if (linkEl && link) {
+      linkEl.innerHTML = `<a href="${link}" class="text-xs text-green-700 font-semibold hover:underline flex items-center gap-1">Bekijk passend advies →</a>`;
+    }
   }
 
-  document.getElementById('terras-breedte')?.addEventListener('input', berekenAdvies);
-  document.getElementById('terras-diepte')?.addEventListener('input', berekenAdvies);
-  document.getElementById('terras-gebruik')?.addEventListener('change', berekenAdvies);
+  ['terras-breedte','terras-diepte','terras-gebruik'].forEach(id => {
+    document.getElementById(id)?.addEventListener('input', berekenAdvies);
+    document.getElementById(id)?.addEventListener('change', berekenAdvies);
+  });
   berekenAdvies();
 </script>

@@ -98,23 +98,69 @@ const structuredData = JSON.stringify({
 
     <!-- Snelkoppelingen -->
     <section class="mb-10">
-      <h2 class="text-2xl font-bold text-slate-900 mb-5">Snelkoppelingen</h2>
-      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-3">
-        {[
-          { href: '/beste-terrasmeubelen', label: '🏆 Beste picks 2026' },
-          { href: '/terrasmeubelen-kopen-gids', label: '📖 Koopgids' },
-          { href: '/terras-inrichten', label: '🌿 Terras inrichten' },
-          { href: '/terrasmeubelen-onderhoud', label: '🧹 Onderhoud' },
-          { href: '/terrasmeubelen-opbergen-winter', label: '❄️ Winteropslag' },
-          { href: '/terrasmeubelen-onder-500-euro', label: '💶 Onder €500' },
-          { href: '/aluminium-vs-teak', label: '⚡ Aluminium vs Teak' },
-          { href: '/loungeset-vs-tuinset', label: '🛋️ Lounge vs Tuinset' },
-          { href: '/kleine-tuin-meubelen', label: '🌿 Kleine tuin' },
-        ].map(({ href, label }) => (
-          <a href={href} class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-3 text-sm font-medium text-slate-700 hover:text-green-700 transition-all">
-            {label}
-          </a>
-        ))}
+      <h2 class="text-2xl font-bold text-slate-900 mb-5">Alle pagina's</h2>
+
+      <div class="mb-6">
+        <div class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-2">Producten & Categorieën</div>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-2">
+          {[
+            { href: '/beste-terrasmeubelen', label: '🏆 Beste picks 2026' },
+            { href: '/beste-loungeset', label: '🛋️ Beste loungeset' },
+            { href: '/beste-tuinset', label: '🍽️ Beste tuinset' },
+            { href: '/beste-parasol', label: '☂️ Beste parasol' },
+            { href: '/beste-ligbed', label: '🏖️ Beste ligbed' },
+            { href: '/beste-tuinstoel', label: '🪑 Beste tuinstoel' },
+            { href: '/loungeset-4-delig', label: '4-delige loungeset' },
+            { href: '/tuinset-voor-6-personen', label: 'Tuinset 6 personen' },
+            { href: '/zweefparasol', label: 'Zweefparasol' },
+          ].map(({ href, label }) => (
+            <a href={href} class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-green-700 transition-all">
+              {label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-2">Materialen</div>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-2">
+          {[
+            { href: '/aluminium-terrasmeubelen', label: 'Aluminium meubelen' },
+            { href: '/teak-terrasmeubelen', label: 'Teak hout' },
+            { href: '/polyrattan-terrasmeubelen', label: 'Polyrattan' },
+            { href: '/kunststof-terrasmeubelen', label: 'Kunststof / HDPE' },
+            { href: '/aluminium-vs-teak', label: 'Aluminium vs Teak' },
+            { href: '/aluminium-vs-polyrattan', label: 'Aluminium vs Polyrattan' },
+            { href: '/teak-vs-polyrattan', label: 'Teak vs Polyrattan' },
+            { href: '/loungeset-vs-tuinset', label: 'Lounge vs Tuinset' },
+          ].map(({ href, label }) => (
+            <a href={href} class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-green-700 transition-all">
+              {label}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <div class="mb-6">
+        <div class="text-xs font-bold uppercase tracking-wide text-slate-400 mb-2">Gidsen, Tips & Artikelen</div>
+        <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-2">
+          {[
+            { href: '/terrasmeubelen-kopen-gids', label: '📖 Koopgids 2026' },
+            { href: '/terras-inrichten', label: '🌿 Terras inrichten' },
+            { href: '/terrasmeubelen-onderhoud', label: '🧹 Onderhoud' },
+            { href: '/terrasmeubelen-opbergen-winter', label: '❄️ Winteropslag' },
+            { href: '/terras-aanleggen', label: '🏗️ Terras aanleggen' },
+            { href: '/terrasmeubelen-2026', label: '📅 Trends 2026' },
+            { href: '/terrasmeubelen-onder-500-euro', label: '💶 Onder €500' },
+            { href: '/kleine-tuin-meubelen', label: '🌿 Kleine tuin' },
+            { href: '/terrasmeubelen-black-friday', label: '🏷️ Black Friday' },
+            { href: '/hartman-terrasmeubelen', label: '🔖 Merk: Hartman' },
+          ].map(({ href, label }) => (
+            <a href={href} class="border border-slate-200 bg-white hover:border-green-400 rounded-xl px-4 py-2.5 text-sm font-medium text-slate-700 hover:text-green-700 transition-all">
+              {label}
+            </a>
+          ))}
+        </div>
       </div>
     </section>
   </div>
